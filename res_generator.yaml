@@ -1,0 +1,20 @@
+words:
+  assets_directory: assets/tr/
+  class_directory: lib/common/words/
+  class_file: words.dart
+  class_name: Words
+  supported_locales: [ 'uz-UZ' ]
+  translated_locales: [ 'uz-UZ' ]
+  target_locale: 'uz-UZ'
+
+icons:
+  assets_directory: assets/icons/
+  class_directory: lib/common/widgets/
+  class_file: app_icons.dart
+  class_name: AppIcons
+
+images:
+  assets_directory: assets/images/
+  class_directory: lib/common/widgets/
+  class_file: app_images.dart
+  class_name: AppImages
