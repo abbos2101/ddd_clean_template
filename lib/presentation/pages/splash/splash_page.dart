@@ -1,10 +1,11 @@
 import 'package:auto_route/annotations.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ddd_clean_template/application/device_info/device_info_cubit.dart';
 import 'package:ddd_clean_template/common/widgets/app_images.dart';
 import 'package:ddd_clean_template/common/words/words.dart';
+import 'package:ddd_clean_template/presentation/routes/app_router.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 @RoutePage()
@@ -18,7 +19,10 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    // Future.delayed(const Duration(seconds: 2)).then((value) {});
+    Future.microtask(() {
+      // router.pushAndPopUntil(const DemoRoute(), predicate: (_) => false);
+      router.push(const DemoRoute());
+    });
     super.initState();
   }
 

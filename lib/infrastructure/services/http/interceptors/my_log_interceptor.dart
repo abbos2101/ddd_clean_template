@@ -24,8 +24,7 @@ class MyLogInterceptor extends Interceptor {
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     if (kDebugMode) {
       var log =
-          "${response.statusCode}"
-          // "${response.extra['@fromNetwork@'] != false ? response.statusCode : 304}"
+          "${response.extra['@fromNetwork@'] != false ? response.statusCode : 304}"
           " | ${response.requestOptions.method}"
           " | ${response.requestOptions.path}";
       if (response.requestOptions.queryParameters.isNotEmpty) {

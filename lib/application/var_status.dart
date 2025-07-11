@@ -80,4 +80,25 @@ class VarStatus {
     if (isSuccess) return 'success';
     return 'initial';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is VarStatus &&
+        other.isInitial == isInitial &&
+        other.isSuccess == isSuccess &&
+        other.isLoading == isLoading &&
+        other.isFail == isFail &&
+        other.error == error;
+  }
+
+  @override
+  int get hashCode {
+    return isInitial.hashCode ^
+        isSuccess.hashCode ^
+        isLoading.hashCode ^
+        isFail.hashCode ^
+        error.hashCode;
+  }
 }

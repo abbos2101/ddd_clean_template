@@ -9,9 +9,9 @@ skipFiles: [
   '/.',
 ]
 includePaths: [
-    lib/presentation/pages/demo,
-    lib/infrastructure,
-    lib/domain,
-    lib/application/providers,
-    lib/presentation/pages/demo,
+  lib/domain/facades/fake_facade.dart,
+  lib/application/var_status.dart,
+  lib/presentation/pages/demo/demo_cubit.dart,
+  lib/presentation/pages/demo/demo_state.dart,
+  test/presentation/pages/demo/demo_cubit_test.dart,
 ]
