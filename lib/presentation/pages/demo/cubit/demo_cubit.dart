@@ -7,7 +7,6 @@ import 'package:injectable/injectable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 part 'demo_cubit.freezed.dart';
-
 part 'demo_state.dart';
 
 @Injectable()
@@ -20,7 +19,7 @@ class DemoCubit extends Cubit<DemoState> {
     RefreshController controller, {
     bool clearCache = true,
   }) async {
-    emit(state.copyWith(skip: 0, quotes: []));
+    emit(state.copyWith(skip: 0, quotes: [], enableNext: true));
     if (clearCache) await _facade.clearAllCache();
     await nextQuotes(controller);
   }
@@ -39,6 +38,7 @@ class DemoCubit extends Cubit<DemoState> {
         emit(
           state.copyWith(
             quotesStatus: VarStatus.success(),
+            enableNext: r.length < 30 ? false : true,
             quotes: [...state.quotes, ...r],
             skip: state.skip + r.length,
           ),

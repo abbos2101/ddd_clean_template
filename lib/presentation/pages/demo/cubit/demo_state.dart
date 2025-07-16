@@ -4,6 +4,7 @@ part of 'demo_cubit.dart';
 abstract class DemoState with _$DemoState {
   const factory DemoState.initial({
     @Default(0) int skip,
+    @Default(true) enableNext,
     @Default(VarStatus()) VarStatus quotesStatus,
     @Default([]) List<QuoteModel> quotes,
   }) = _Initial;

@@ -1,5 +1,25 @@
 import 'package:flutter/material.dart';
 
+// AppColors.of(context).success
+// AppColors.light.border
+// AppColors.withBrightness(Brightness.light).error
+
+// Global access
+class AppColors {
+  const AppColors._();
+
+  static const AppColorScheme light = LightColorScheme._();
+  static const AppColorScheme dark = DarkColorScheme._();
+
+  static AppColorScheme of(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark ? dark : light;
+  }
+
+  static AppColorScheme withBrightness(Brightness brightness) {
+    return brightness == Brightness.dark ? dark : light;
+  }
+}
+
 mixin AppColorScheme {
   // Standard Material colors
   Color get primary;
@@ -26,6 +46,8 @@ mixin AppColorScheme {
   Color get info;
 
   // UI element colors
+  Color get scaffoldBackground;
+
   Color get border;
 
   Color get divider;
@@ -72,6 +94,9 @@ class LightColorScheme implements AppColorScheme {
 
   @override
   Color get info => const Color(0xFF0088CC);
+
+  @override
+  Color get scaffoldBackground => const Color(0xFFFAFAFA);
 
   @override
   Color get border => const Color(0xFFE0E0E0);
@@ -126,6 +151,9 @@ class DarkColorScheme implements AppColorScheme {
   Color get info => const Color(0xFF5DADE2);
 
   @override
+  Color get scaffoldBackground => const Color(0xFF1E1E1E);
+
+  @override
   Color get border => const Color(0xFF404040);
 
   @override
@@ -140,23 +168,3 @@ class DarkColorScheme implements AppColorScheme {
   @override
   Color get disabled => const Color(0xFF616161);
 }
-
-// Global access
-class AppColors {
-  const AppColors._();
-
-  static const AppColorScheme light = LightColorScheme._();
-  static const AppColorScheme dark = DarkColorScheme._();
-
-  static AppColorScheme of(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.dark ? dark : light;
-  }
-
-  static AppColorScheme withBrightness(Brightness brightness) {
-    return brightness == Brightness.dark ? dark : light;
-  }
-}
-
-// AppColors.of(context).success
-// AppColors.light.border
-// AppColors.withBrightness(Brightness.light).error

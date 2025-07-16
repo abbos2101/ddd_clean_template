@@ -1,11 +1,13 @@
+import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 
 import '../words/words.dart';
-import 'feedback_helpers.dart';
+import 'feedback_helper.dart';
 
-class ErrorHandler {
+class ErrorHelper {
+  const ErrorHelper._();
+
   static String errorMsg(dynamic e) {
     if (e is DioException) {
       if (e.response != null) {
@@ -29,10 +31,10 @@ class ErrorHandler {
     return '$e';
   }
 
-  static void showError(String str) {
-    showSnackBar(
+  static void showError(dynamic e) {
+    FeedbackHelper.showSnackBar(
       router.navigatorKey.currentContext!,
-      message: str,
+      message: errorMsg(e),
       type: SnackBarType.error,
     );
     if (kDebugMode) print(StackTrace.current);

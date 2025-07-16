@@ -28,20 +28,23 @@ class AppTheme {
         onSurfaceVariant: colorScheme.hint,
         outlineVariant: colorScheme.divider,
       ),
+      scaffoldBackgroundColor: colorScheme.scaffoldBackground,
       shadowColor: colorScheme.shadow,
       hintColor: colorScheme.hint,
       dividerColor: colorScheme.divider,
       disabledColor: colorScheme.disabled,
 
-      appBarTheme: const AppBarTheme(surfaceTintColor: Colors.transparent),
+      appBarTheme: _appBarTheme(colorScheme),
     );
+  }
+
+  static AppBarTheme _appBarTheme(AppColorScheme colorScheme) {
+    return const AppBarTheme(surfaceTintColor: Colors.transparent);
   }
 }
 
 extension AppThemeExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
-
-  TextTheme get textTheme => Theme.of(this).textTheme;
 
   AppColorScheme get appColors => AppColors.of(this);
 

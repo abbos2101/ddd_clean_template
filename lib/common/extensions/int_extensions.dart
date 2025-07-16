@@ -3,8 +3,8 @@ extension Convert on int {
     // 1234 -> 1,234
     // 12345 -> 12,345
 
-    final String numStr = toString();
-    final StringBuffer buffer = StringBuffer();
+    final numStr = toString();
+    final buffer = StringBuffer();
 
     for (int i = 0; i < numStr.length; i++) {
       if (i > 0 && (numStr.length - i) % 3 == 0) {

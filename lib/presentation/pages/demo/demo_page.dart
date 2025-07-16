@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'demo_cubit.dart';
+import 'cubit/demo_cubit.dart';
 
 @RoutePage()
 class DemoPage extends StatefulWidget {
