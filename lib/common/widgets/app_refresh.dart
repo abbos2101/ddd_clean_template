@@ -9,8 +9,8 @@ class AppRefresh extends StatelessWidget {
   final ScrollPhysics? physics;
   final bool enabledRefresh;
   final bool enabledNext;
-  final Function(RefreshController controller)? onNext;
-  final Function(RefreshController controller)? onRefresh;
+  final Function()? onNext;
+  final Function()? onRefresh;
 
   const AppRefresh({
     super.key,
@@ -42,8 +42,8 @@ class AppRefresh extends StatelessWidget {
           ),
       enablePullDown: enabledRefresh,
       enablePullUp: enabledNext,
-      onRefresh: () => onRefresh?.call(controller),
-      onLoading: () => onNext?.call(controller),
+      onRefresh: onRefresh,
+      onLoading: onNext,
       child: child,
     );
   }

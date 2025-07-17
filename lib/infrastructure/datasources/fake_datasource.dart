@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ddd_clean_template/domain/facades/fake_facade.dart';
 import 'package:ddd_clean_template/domain/models/quote_model.dart';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../services/http/http_service.dart';
@@ -24,7 +25,11 @@ class FakeDatasource implements FakeFacade {
     final queryParameters = {'skip': '$skip'};
 
     try {
-      final response = await client.get(path, queryParameters: queryParameters);
+      final response = await client.get(
+        path,
+        options: Options(headers: {}),
+        queryParameters: queryParameters,
+      );
 
       final result = response.data['quotes']
           .map<QuoteModel>((e) => QuoteModel.fromJson(e))

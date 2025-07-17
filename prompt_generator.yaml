@@ -1,16 +1,15 @@
-needYaml: true
+needYaml: false
 copyToClipboard: true
 savedFile: ""
 skipFiles: [
+  '/.',
+  '.html',
+  '.htm',
   '.freezed.dart',
   '.g.dart',
   '.res.dart',
   '.config.dart',
-  '/.',
 ]
 includePaths: [
-  lib/infrastructure/services/http,
-  lib/infrastructure/services/di_module.dart,
-  lib/domain,
-  lib/infrastructure/datasources,
+  lib/presentation/pages/demo,
 ]
