@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -35,6 +37,14 @@ class AppTheme {
       disabledColor: colorScheme.disabled,
 
       appBarTheme: _appBarTheme(colorScheme),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
+          overlayColor: Platform.isAndroid ? null : Colors.transparent,
+          elevation: 2,
+        ),
+      ),
     );
   }
 

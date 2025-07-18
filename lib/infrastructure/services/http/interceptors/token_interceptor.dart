@@ -33,6 +33,6 @@ class TokenInterceptor extends Interceptor {
 
   Future<void> _handleUnauthorized() async {
     await _cache.clear();
-    router.pushAndPopUntil(const AuthRoute(), predicate: (_) => false);
+    // router.pushAndPopUntil(const AuthRoute(), predicate: (_) => false);
   }
 }

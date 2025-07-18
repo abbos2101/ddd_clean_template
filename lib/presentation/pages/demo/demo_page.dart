@@ -1,7 +1,10 @@
 import 'package:auto_route/annotations.dart';
+import 'package:ddd_clean_template/application/theme/theme_cubit.dart';
+import 'package:ddd_clean_template/common/theme/themes.dart';
 import 'package:ddd_clean_template/common/widgets/app_refresh.dart';
 import 'package:ddd_clean_template/di.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cubit/demo_cubit.dart';
@@ -26,23 +29,51 @@ class DemoPage extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 }
 
-                return AppRefresh(
-                  controller: cbt.refreshController,
-                  enabledNext: true,
-                  enabledRefresh: true,
-                  onRefresh: cbt.refresh,
-                  onNext: cbt.nextQuotes,
-                  child: ListView.separated(
-                    itemCount: state.quotes.length,
-                    separatorBuilder: (_, _) => const Divider(height: 12),
-                    itemBuilder: (_, i) {
-                      final model = state.quotes[i];
-                      return ListTile(
-                        title: Text(model.quote),
-                        subtitle: Text(model.author),
-                      );
-                    },
-                  ),
+                return Column(
+                  children: [
+                    Row(
+                      spacing: 12,
+                      children: [
+                        const SizedBox(width: 4),
+                        OutlinedButton(
+                          onPressed: () {
+                            HapticFeedback.heavyImpact();
+                          },
+                          child: const Text('Delete'),
+                        ),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              context.read<ThemeCubit>().toggle();
+                            },
+                            child: Text('Theme-dark: ${context.isDark}'),
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                      ],
+                    ),
+                    Expanded(
+                      child: AppRefresh(
+                        controller: cbt.refreshController,
+                        enabledNext: true,
+                        enabledRefresh: true,
+                        onRefresh: cbt.refresh,
+                        onNext: cbt.nextQuotes,
+                        child: ListView.separated(
+                          itemCount: state.quotes.length,
+                          separatorBuilder: (_, _) => const Divider(height: 12),
+                          itemBuilder: (_, i) {
+                            final model = state.quotes[i];
+                            return ListTile(
+                              onTap: () {},
+                              title: Text(model.quote),
+                              subtitle: Text(model.author),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               },
             ),
