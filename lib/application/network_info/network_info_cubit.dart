@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
+import 'package:ddd_clean_template/common/theme/colors.dart';
+import 'package:ddd_clean_template/common/words/words.dart';
+import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:ddd_clean_template/common/words/words.dart';
 
 part 'network_info_cubit.freezed.dart';
-
 part 'network_info_state.dart';
 
 @Injectable()
@@ -38,14 +38,17 @@ class NetworkInfoCubit extends Cubit<NetworkInfoState> {
   }
 
   void _showMessage(bool isConnected) {
+    final context = router.navigatorKey.currentState?.context;
+    if (context == null) return;
+
+    final colors = AppColors.of(context);
+
     Fluttertoast.showToast(
       msg: isConnected ? Words.hasInternet.str : Words.noInternet.str,
-      toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.TOP,
-      backgroundColor: const Color(0xFF111827),
-      textColor: isConnected
-          ? const Color(0xFF01DCBA)
-          : const Color(0xFFF43F5E),
+      toastLength: Toast.LENGTH_SHORT,
+      backgroundColor: colors.divider,
+      textColor: isConnected ? colors.success : colors.error,
       fontSize: 16.0,
     );
   }

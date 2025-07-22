@@ -16,10 +16,7 @@ class DemoCubit extends Cubit<DemoState> {
   final textController = TextEditingController();
   final refreshController = RefreshController();
 
-  DemoCubit(this._facade)
-      : super(
-    const DemoState.initial(),
-  ) {
+  DemoCubit(this._facade) : super(const DemoState.initial()) {
     textController.addListener(nextQuotes);
   }
 

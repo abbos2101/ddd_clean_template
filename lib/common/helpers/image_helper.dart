@@ -9,8 +9,9 @@ import 'package:path_provider/path_provider.dart';
 class ImageHelper {
   const ImageHelper._();
 
-  static Future<String?> pickImage(
-      {ImageSource source = ImageSource.camera}) async {
+  static Future<String?> pickImage({
+    ImageSource source = ImageSource.camera,
+  }) async {
     try {
       final file = await ImagePicker().pickImage(
         source: source,
@@ -33,9 +34,7 @@ class ImageHelper {
   static Future<String?> _fixAndCompressImage(File originalFile) async {
     try {
       final directory = await getTemporaryDirectory();
-      final timestamp = DateTime
-          .now()
-          .millisecondsSinceEpoch;
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
       final fileName = 'fixed_compressed_$timestamp.jpg';
       final targetPath = path.join(directory.path, fileName);
 
@@ -81,9 +80,7 @@ class ImageHelper {
       );
 
       final directory = await getTemporaryDirectory();
-      final timestamp = DateTime
-          .now()
-          .millisecondsSinceEpoch;
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
       final fileName = 'fallback_$timestamp.jpg';
       final targetPath = path.join(directory.path, fileName);
 
@@ -100,9 +97,7 @@ class ImageHelper {
   static Future<String?> _furtherCompress(File file) async {
     try {
       final directory = await getTemporaryDirectory();
-      final timestamp = DateTime
-          .now()
-          .millisecondsSinceEpoch;
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
       final fileName = 'ultra_compressed_$timestamp.jpg';
       final targetPath = path.join(directory.path, fileName);
 

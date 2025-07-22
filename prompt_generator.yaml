@@ -11,5 +11,9 @@ skipFiles: [
   '.config.dart',
 ]
 includePaths: [
-  lib/presentation/pages/demo,
+  lib/application/var_status.dart,
+  lib/application/network_info,
+  lib/application/theme,
+  lib/common/theme,
+  lib/main.dart,
 ]
