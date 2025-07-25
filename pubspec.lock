@@ -17,14 +17,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.4.5"
-  analyzer_plugin:
-    dependency: transitive
-    description:
-      name: analyzer_plugin
-      sha256: ee188b6df6c85f1441497c7171c84f1392affadc0384f71089cb10a3bc508cef
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.13.1"
   animated_flip_counter:
     dependency: "direct main"
     description:
@@ -193,14 +185,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.4"
-  ci:
-    dependency: transitive
-    description:
-      name: ci
-      sha256: "145d095ce05cddac4d797a158bc4cf3b6016d1fe63d8c3d2fbd7212590adca13"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.0"
   cli_config:
     dependency: transitive
     description:
@@ -209,14 +193,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
-  cli_util:
-    dependency: transitive
-    description:
-      name: cli_util
-      sha256: ff6785f7e9e3c38ac98b2fb035701789de90154024a75b6cb926445e83197d1c
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.2"
   clock:
     dependency: transitive
     description:
@@ -297,30 +273,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
-  custom_lint:
-    dependency: "direct dev"
-    description:
-      name: custom_lint
-      sha256: "409c485fd14f544af1da965d5a0d160ee57cd58b63eeaa7280a4f28cf5bda7f1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.7.5"
-  custom_lint_core:
-    dependency: transitive
-    description:
-      name: custom_lint_core
-      sha256: "31110af3dde9d29fb10828ca33f1dce24d2798477b167675543ce3d208dee8be"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.7.5"
-  custom_lint_visitor:
-    dependency: transitive
-    description:
-      name: custom_lint_visitor
-      sha256: cba5b6d7a6217312472bf4468cdf68c949488aed7ffb0eab792cd0b6c435054d
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0+7.4.5"
   dart_style:
     dependency: transitive
     description:

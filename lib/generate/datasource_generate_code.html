@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cURL to Flutter Code Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .input-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .input-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-section h2::before {
+            content: "⚙️";
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            transform: scale(1.2);
+        }
+
+        .checkbox-group input[type="checkbox"]:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .checkbox-group input[type="checkbox"]:disabled + label {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .convert-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+        }
+
+        .convert-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .output-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .output-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .output-section h2::before {
+            content: "📋";
+            font-size: 1.5rem;
+        }
+
+        .code-blocks {
+            margin-bottom: 30px;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .code-header {
+            background: #2d2d2d;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #404040;
+        }
+
+        .code-title {
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .code-content {
+            padding: 15px;
+            color: #d4d4d4;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .templates-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .templates-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .templates-section h2::before {
+            content: "📄";
+            font-size: 1.5rem;
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .syntax-highlight {
+            color: #9cdcfe;
+        }
+
+        .syntax-keyword {
+            color: #569cd6;
+        }
+
+        .syntax-string {
+            color: #ce9178;
+        }
+
+        .syntax-comment {
+            color: #6a9955;
+        }
+
+        .syntax-decorator {
+            color: #dcdcaa;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .templates-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>cURL to Flutter Code Generator</h1>
+            <p>cURL so'rovingizni Flutter facade va datasource kodlariga aylantiring</p>
+        </div>
+
+        <div class="main-content">
+            <div class="input-section">
+                <h2>Input Ma'lumotlari</h2>
+                
+                <div class="form-group">
+                    <label for="curl-input">cURL So'rovi:</label>
+                    <textarea id="curl-input" placeholder="curl -X GET 'https://api.example.com/users' -H 'Authorization: Bearer token'" oninput="checkCacheOption()"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="model-name">Model Nomi:</label>
+                    <input type="text" id="model-name" placeholder="User" value="UserModel">
+                </div>
+
+                <div class="form-group">
+                    <label for="return-type">Return Type:</label>
+                    <select id="return-type">
+                        <option value="dynamic">dynamic</option>
+                        <option value="model">Model</option>
+                        <option value="list">List&lt;Model&gt;</option>
+                        <option value="pagination">Pagination&lt;Model&gt;</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="function-name">Funksiya nomi:</label>
+                    <input type="text" id="function-name" placeholder="getData">
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="enabled-cache">
+                        <label for="enabled-cache">Cache yoqilsin</label>
+                    </div>
+                </div>
+
+                <button class="convert-btn" onclick="generateCode()">
+                    Kod Generatsiya Qilish
+                </button>
+            </div>
+
+            <div class="output-section">
+                <h2>Generatsiya Qilingan Kodlar</h2>
+                <div class="code-blocks">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Datasource Function</span>
+                            <button class="copy-btn" onclick="copyCode('datasource-code')">Copy</button>
+                        </div>
+                        <div class="code-content" id="datasource-code">
+                            <span class="syntax-comment">// Datasource kodi bu yerda ko'rsatiladi</span><br>
+                            <span class="syntax-decorator">@override</span><br><span class="syntax-keyword">Future</span>&lt;<span class="syntax-highlight">Either</span>&lt;<span class="syntax-highlight">dynamic</span>, <span class="syntax-highlight">dynamic</span>&gt;&gt; getData() <span class="syntax-keyword">async</span> {}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="templates-section">
+            <h2>Template Klasslar</h2>
+            <div class="templates-grid">
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Facade Template</span>
+                        <button class="copy-btn" onclick="copyCode('facade-template')">Copy</button>
+                    </div>
+                    <div class="code-content" id="facade-template">
+                        <span class="syntax-keyword">abstract class</span> <span class="syntax-highlight">TemplateFacade</span> {}
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">Datasource Template</span>
+                        <button class="copy-btn" onclick="copyCode('datasource-template')">Copy</button>
+                    </div>
+                    <div class="code-content" id="datasource-template">
+                        <span class="syntax-decorator">@Injectable(as: TemplateFacade)</span><br>
+                        <span class="syntax-keyword">class</span> <span class="syntax-highlight">TemplateDatasource</span> <span class="syntax-keyword">implements</span> <span class="syntax-highlight">TemplateFacade</span> {<br>
+                        &nbsp;&nbsp;<span class="syntax-keyword">final</span> <span class="syntax-highlight">HttpService</span> _http;<br><br>
+                        &nbsp;&nbsp;<span class="syntax-keyword">const</span> <span class="syntax-highlight">TemplateDatasource</span>(<span class="syntax-keyword">this</span>._http);<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // cURL input o'zgarganda cache checkbox holatini va funksiya nomini tekshirish
+        function checkCacheOption() {
+            var curlInput = document.getElementById('curl-input').value;
+            var cacheCheckbox = document.getElementById('enabled-cache');
+            
+            // cURL dan HTTP method ni aniqlash
+            var method = extractHttpMethod(curlInput);
+            
+            if (method === 'GET') {
+                cacheCheckbox.disabled = false;
+                cacheCheckbox.checked = true;
+            } else {
+                cacheCheckbox.disabled = true;
+                cacheCheckbox.checked = false;
+            }
+            
+            // Funksiya nomini avtomatik generatsiya qilish
+            var functionName = generateFunctionName(curlInput);
+            if (functionName) {
+                document.getElementById('function-name').value = functionName;
+            }
+        }
+
+        // Funksiya nomini avtomatik generatsiya qilish
+        function generateFunctionName(curlString) {
+            if (!curlString || curlString.trim() === '') {
+                return '';
+            }
+            
+            // URL ni ajratib olish
+            var urlMatch = curlString.match(/['"]([^'"]*?)['"]|(\S+)/);
+            if (!urlMatch) return '';
+            
+            var url = urlMatch[1] || urlMatch[2];
+            if (!url.startsWith('http')) {
+                // URL ni to'liq shakli uchun qidirish
+                var fullUrlMatch = curlString.match(/https?:\/\/[^\s'"]+/);
+                if (fullUrlMatch) {
+                    url = fullUrlMatch[0];
+                } else {
+                    return '';
+                }
+            }
+            
+            try {
+                var urlObj = new URL(url);
+                var pathname = urlObj.pathname;
+                var method = extractHttpMethod(curlString).toLowerCase();
+                
+                // Path dan so'nggi qismini olish
+                var pathSegments = pathname.split('/').filter(function(segment) {
+                    return segment && segment.trim() !== '';
+                });
+                
+                if (pathSegments.length === 0) return '';
+                
+                var lastSegment = pathSegments[pathSegments.length - 1];
+                var functionName = '';
+                
+                // Agar so'nggi segment raqam bo'lsa
+                if (/^\d+$/.test(lastSegment)) {
+                    if (pathSegments.length > 1) {
+                        var previousSegment = pathSegments[pathSegments.length - 2];
+                        functionName = toCamelCase(previousSegment) + 'ById';
+                    } else {
+                        functionName = 'getById';
+                    }
+                } else {
+                    // String segment - asl registrni saqlaymiz
+                    functionName = preserveCamelCase(lastSegment);
+                }
+                
+                // Method prefix qo'shish
+                var methodPrefix = method.charAt(0).toUpperCase() + method.slice(1);
+                
+                // Agar funksiya nomi method bilan boshlanmasa, methoddi qo'shish
+                if (!functionName.toLowerCase().startsWith(method.toLowerCase())) {
+                    // Funksiya nomining birinchi harfini kichik qilamiz
+                    functionName = functionName.charAt(0).toLowerCase() + functionName.slice(1);
+                    functionName = method + functionName.charAt(0).toUpperCase() + functionName.slice(1);
+                }
+                
+                return functionName;
+                
+            } catch (e) {
+                return '';
+            }
+        }
+        
+        // String ni camelCase ga o'tkazish
+        function toCamelCase(str) {
+            return str
+                .replace(/[-_]/g, ' ')
+                .replace(/[^\w\s]/g, '')
+                .split(' ')
+                .map(function(word, index) {
+                    if (index === 0) {
+                        return word.toLowerCase();
+                    }
+                    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                })
+                .join('');
+        }
+        
+        // Mavjud camelCase registrini saqlab qolish
+        function preserveCamelCase(str) {
+            // URLdagi path nomlarida original CamelCase registrini saqlaymiz
+            
+            // Agar string Get, Post, Put kabi metodlar bilan boshlansa, ularni ajratib olamiz
+            var methodMatch = /^(Get|Post|Put|Delete|Patch)(.+)$/.exec(str);
+            if (methodMatch) {
+                // Method qismini kichik harflar bilan, qolgan qismini o'zgartirmasdan qoldiramiz
+                return methodMatch[1].toLowerCase() + methodMatch[2];
+            }
+            
+            // Aks holda, birinchi harfni kichkina qilamiz, qolganini o'zgartirmaymiz
+            return str.charAt(0).toLowerCase() + str.slice(1);
+        }
+
+        // cURL dan HTTP method ni ajratib olish
+        function extractHttpMethod(curlString) {
+            if (!curlString || curlString.trim() === '') {
+                return 'GET'; // Default GET
+            }
+            
+            // -X yoki --request parametrini qidirish
+            var methodMatch = curlString.match(/-X\s+([A-Z]+)|--request\s+([A-Z]+)/i);
+            if (methodMatch) {
+                return (methodMatch[1] || methodMatch[2]).toUpperCase();
+            }
+            
+            // -d, --data parametri bo'lsa POST deb hisoblaymiz
+            if (curlString.match(/-d\s|--data\s|--data-raw\s/)) {
+                return 'POST';
+            }
+            
+            // Default GET
+            return 'GET';
+        }
+
+        // URL ni olish
+        function extractUrl(curlString) {
+            if (!curlString) return null;
+            
+            // URL ni qidiramiz
+            var urlMatch = curlString.match(/['"]([^'"]*?)['"]|(\S+)/);
+            if (!urlMatch) return null;
+            
+            var url = urlMatch[1] || urlMatch[2];
+            if (!url.startsWith('http')) {
+                // To'liq URL ni qidiramiz
+                var fullUrlMatch = curlString.match(/https?:\/\/[^\s'"]+/);
+                if (fullUrlMatch) {
+                    url = fullUrlMatch[0];
+                } else {
+                    return null;
+                }
+            }
+            
+            try {
+                return new URL(url);
+            } catch (e) {
+                return null;
+            }
+        }
+        
+        // Path ni olish
+        function extractPath(urlObj) {
+            if (!urlObj) return '';
+            var path = urlObj.pathname;
+            return path;
+        }
+        
+        // Headers ni olish
+        function extractHeaders(curlString) {
+            var headers = {};
+            var headerRegex = /-H\s+['"]([^:]+):\s*([^'"]+)['"]/g;
+            var match;
+            
+            while ((match = headerRegex.exec(curlString)) !== null) {
+                const key = match[1].trim();
+                const value = match[2].trim();
+                
+                // Authorization va Content-Type headerlarini alohida ko'rib chiqamiz
+                if (key !== 'Authorization' && 
+                    key !== 'authorization' && 
+                    key !== 'Content-Type' && 
+                    key !== 'content-type') {
+                    headers[key] = value;
+                }
+            }
+            
+            return Object.keys(headers).length > 0 ? headers : null;
+        }
+        
+        // Authorization headerini tekshirish
+        function hasAuthorizationHeader(curlString) {
+            return curlString.includes('Authorization:') || curlString.includes('authorization:');
+        }
+
+        // Query parametrlarini olish
+        function extractQueryParams(urlObj) {
+            if (!urlObj) return null;
+            
+            const params = {};
+            for (const [key, value] of urlObj.searchParams.entries()) {
+                params[key] = value;
+            }
+            
+            return Object.keys(params).length > 0 ? params : null;
+        }
+
+        // Form parametrlarini ajratib olish (yangi va yaxshilangan)
+        function extractFormParams(curlString) {
+            var formData = {};
+            var files = {};
+            
+            // Avval backslash bilan bog'langan qatorlarni birlashtiramiz
+            var cleanedCurl = curlString.replace(/\\\s*\n/g, ' ').replace(/\s+/g, ' ');
+            
+            // Barcha --form parametrlarni topish uchun yangiroq regex
+            var formMatches = [];
+            var regex = /--form\s+([^-]+?)(?=\s+--|$)/g;
+            var match;
+            
+            while ((match = regex.exec(cleanedCurl)) !== null) {
+                var formParam = match[1].trim();
+                formMatches.push(formParam);
+            }
+            
+            // Har bir form parametrni parsing qilish
+            formMatches.forEach(function(param) {
+                // Quote'larni olib tashlash
+                param = param.replace(/^['"]|['"]$/g, '');
+                
+                // Key=value formatini ajratish
+                var equalIndex = param.indexOf('=');
+                if (equalIndex === -1) return;
+                
+                var key = param.substring(0, equalIndex).trim();
+                var value = param.substring(equalIndex + 1).trim();
+                
+                // Key dan quote'larni olib tashlash
+                key = key.replace(/^['"]|['"]$/g, '');
+                
+                // Value dan quote'larni olib tashlash
+                value = value.replace(/^['"]|['"]$/g, '');
+                
+                if (value.startsWith('@')) {
+                    // File parameter
+                    var filePath = value.substring(1);
+                    // File path dan quote'larni olib tashlash
+                    filePath = filePath.replace(/^['"]|['"]$/g, '');
+                    files[key] = filePath;
+                } else {
+                    // Regular field
+                    // Array formatini tekshirish (masalan: comments[])
+                    if (key.endsWith('[]')) {
+                        var arrayKey = key.slice(0, -2);
+                        if (!formData[arrayKey]) {
+                            formData[arrayKey] = [];
+                        }
+                        formData[arrayKey].push(value);
+                    } else {
+                        formData[key] = value;
+                    }
+                }
+            });
+            
+            return {
+                fields: formData,
+                files: files,
+                hasData: Object.keys(formData).length > 0 || Object.keys(files).length > 0
+            };
+        }
+
+        // Body ni olish va tipini aniqlash (yangilangan)
+        function extractBody(curlString) {
+            var bodyInfo = {
+                data: null,
+                type: null
+            };
+            
+            // Avval FormData ni tekshirish
+            if (curlString.includes('--form')) {
+                var formResult = extractFormParams(curlString);
+                if (formResult.hasData) {
+                    bodyInfo.data = formResult;
+                    bodyInfo.type = 'formData';
+                    return bodyInfo;
+                }
+            }
+            
+            // URL-encoded data ni tekshirish (--data-urlencode)
+            var urlEncodeMatches = [...curlString.matchAll(/--data-urlencode\s+['"]?([^=]+)=([^'"]+)['"]?/g)];
+            if (urlEncodeMatches.length > 0) {
+                var urlEncodedData = {};
+                for (const match of urlEncodeMatches) {
+                    const key = match[1].trim();
+                    const value = match[2].trim();
+                    urlEncodedData[key] = value;
+                }
+                bodyInfo.data = urlEncodedData;
+                bodyInfo.type = 'urlencoded';
+                return bodyInfo;
+            }
+            
+            // Raw JSON data ni tekshirish
+            var dataMatch = curlString.match(/(?:-d|--data|--data-raw)\s+['"]([^]*?)['"](?=\s*(?:$|\\$|\s*\\))/);
+            if (!dataMatch) {
+                // Boshqa formatda bo'lishi mumkin
+                dataMatch = curlString.match(/(?:-d|--data|--data-raw)\s+'([^]*?)'(?=\s*(?:$|\\$|\s*\\))/);
+            }
+            
+            if (dataMatch) {
+                var rawData = dataMatch[1];
+                
+                // JSON formatda ekanligini tekshirish
+                try {
+                    // Escape qilingan quote larni to'g'rilash
+                    var cleanedData = rawData.replace(/\\"/g, '"').replace(/\\'/g, "'").replace(/\\\n/g, '\n');
+                    var jsonData = JSON.parse(cleanedData);
+                    bodyInfo.data = jsonData;
+                    bodyInfo.type = 'json';
+                    return bodyInfo;
+                } catch (e) {
+                    // JSON emas, url-encoded yoki plain text bo'lishi mumkin
+                    
+                    // URL-encoded formatni tekshirish
+                    if (rawData.includes('=') && !rawData.includes('{')) {
+                        var params = {};
+                        var pairs = rawData.split('&');
+                        pairs.forEach(function(pair) {
+                            var parts = pair.split('=');
+                            if (parts.length === 2) {
+                                params[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
+                            }
+                        });
+                        if (Object.keys(params).length > 0) {
+                            bodyInfo.data = params;
+                            bodyInfo.type = 'urlencoded';
+                        } else {
+                            bodyInfo.data = rawData;
+                            bodyInfo.type = 'binary';
+                        }
+                    } else {
+                        // Plain text yoki binary
+                        bodyInfo.data = rawData;
+                        bodyInfo.type = 'binary';
+                    }
+                    return bodyInfo;
+                }
+            }
+            
+            // --data-binary ni tekshirish
+            var binaryMatch = curlString.match(/--data-binary\s+['"]?@([^'"]+)['"]?/);
+            if (binaryMatch) {
+                bodyInfo.data = binaryMatch[1];
+                bodyInfo.type = 'binary';
+                return bodyInfo;
+            }
+            
+            return bodyInfo;
+        }
+
+        // Argumentlar qatorini yaratish
+        function buildArgumentsString(enabledCache) {
+            // Faqat Cache parametri
+            if (enabledCache) {
+                return '({\n    Duration cacheDuration = const Duration(hours: 1)\n  })';
+            }
+            
+            return '()';
+        }
+        
+        // Kod generatsiya funksiyasi
+        function generateCode() {
+            var curlInput = document.getElementById('curl-input').value;
+            var modelName = document.getElementById('model-name').value;
+            var returnType = document.getElementById('return-type').value;
+            var functionName = document.getElementById('function-name').value || 'getData';
+            var enabledCache = document.getElementById('enabled-cache').checked;
+            
+            // cURL ni tahlil qilish
+            var httpMethod = extractHttpMethod(curlInput);
+            var urlObj = extractUrl(curlInput);
+            var path = extractPath(urlObj);
+            var headers = extractHeaders(curlInput);
+            var requiresToken = hasAuthorizationHeader(curlInput);
+            var queryParams = extractQueryParams(urlObj);
+            var bodyInfo = extractBody(curlInput);
+            
+            // Datasource kodi generatsiyasi
+            var code = generateDatasourceFunction(
+                modelName, 
+                returnType, 
+                functionName, 
+                enabledCache, 
+                httpMethod, 
+                path, 
+                headers, 
+                requiresToken, 
+                queryParams,
+                bodyInfo
+            );
+            
+            // Generatsiyalangan kodni ekranga chiqarish
+            document.getElementById('datasource-code').innerHTML = formatCodeForDisplay(code);
+        }
+
+        // Datasource funksiyasini generatsiya qilish
+        function generateDatasourceFunction(
+            modelName, 
+            returnType, 
+            functionName, 
+            enabledCache, 
+            httpMethod, 
+            path, 
+            headers, 
+            requiresToken, 
+            queryParams,
+            bodyInfo
+        ) {
+            // Return type generatsiyasi
+            var returnTypeStr = '';
+            switch(returnType) {
+                case 'dynamic':
+                    returnTypeStr = 'dynamic';
+                    break;
+                case 'model':
+                    returnTypeStr = modelName;
+                    break;
+                case 'list':
+                    returnTypeStr = `List<${modelName}>`;
+                    break;
+                case 'pagination':
+                    returnTypeStr = `Pagination<${modelName}>`;
+                    break;
+            }
+            
+            // Funksiya boshlanishi
+            var code = `@override\nFuture<Either<dynamic, ${returnTypeStr}>> ${functionName}`;
+            
+            // Argumentlar
+            if (enabledCache) {
+                code += `({\n  Duration cacheDuration = const Duration(hours: 1)\n})`;
+            } else {
+                code += '()';
+            }
+            
+            code += ' async {\n';
+            
+            // Client konfiguratsiyasi
+            if (enabledCache && requiresToken) {
+                code += '  final client = _http.client(\n    requiredToken: true,\n    cacheDuration: cacheDuration,\n  );\n';
+            } else if (enabledCache) {
+                code += '  final client = _http.client(cacheDuration: cacheDuration);\n';
+            } else if (requiresToken) {
+                code += '  final client = _http.client(requiredToken: true);\n';
+            } else {
+                code += '  final client = _http.client(requiredToken: false);\n';
+            }
+            
+            // Path
+            code += `  const path = '${path}';\n`;
+            
+            // Headers
+            if (headers) {
+                code += '  final headers = {\n';
+                for (const [key, value] of Object.entries(headers)) {
+                    code += `    '${key}': '${value}',\n`;
+                }
+                code += '  };\n';
+            }
+            
+            // Query parameters
+            if (queryParams) {
+                code += '  final queryParameters = {\n';
+                for (const [key, value] of Object.entries(queryParams)) {
+                    code += `    '${key}': '${value}',\n`;
+                }
+                code += '  };\n';
+            }
+            
+            // Body/Data
+            if (bodyInfo.data) {
+                switch(bodyInfo.type) {
+                    case 'formData':
+                        code += '  final data = FormData.fromMap({\n';
+                        
+                        // Regular fields ni birinchi qo'shamiz
+                        for (const [key, value] of Object.entries(bodyInfo.data.fields)) {
+                            if (Array.isArray(value)) {
+                                // Array field
+                                value.forEach(item => {
+                                    code += `    '${key}[]': '${item}',\n`;
+                                });
+                            } else {
+                                code += `    '${key}': '${value}',\n`;
+                            }
+                        }
+                        
+                        // Files ni keyin qo'shamiz
+                        for (const [key, path] of Object.entries(bodyInfo.data.files)) {
+                            code += `    '${key}': await MultipartFile.fromFile('${path}'),\n`;
+                        }
+                        
+                        code += '  });\n';
+                        break;
+                    case 'json':
+                        // JSON data uchun to'g'ridan-to'g'ri map sifatida ishlatamiz
+                        var jsonStr = JSON.stringify(bodyInfo.data, null, 2);
+                        // Har bir qatorni to'g'ri indentatsiya qilish
+                        var indentedJson = jsonStr.split('\n').map((line, index) => {
+                            return index === 0 ? line : '  ' + line;
+                        }).join('\n');
+                        code += '  final data = ' + indentedJson + ';\n';
+                        break;
+                    case 'urlencoded':
+                        // URL-encoded data uchun jsonEncode ishlatamiz
+                        code += '  final data = jsonEncode({\n';
+                        for (const [key, value] of Object.entries(bodyInfo.data)) {
+                            code += `    '${key}': '${value}',\n`;
+                        }
+                        code += '  });\n';
+                        break;
+                    case 'binary':
+                        // Binary data
+                        if (bodyInfo.data.startsWith('/') || bodyInfo.data.includes('\\')) {
+                            // File path
+                            code += `  final file = File('${bodyInfo.data}');\n`;
+                            code += '  final data = await file.readAsBytes();\n';
+                        } else {
+                            // Raw string
+                            code += `  final data = r'${bodyInfo.data}';\n`;
+                        }
+                        break;
+                }
+            }
+            
+            // Bo'sh qator qo'shamiz
+            code += '\n';
+            
+            // Try-catch block
+            code += '  try {\n';
+            
+            // HTTP request
+            var methodLower = httpMethod.toLowerCase();
+            code += '    final response = await client.' + methodLower + '(\n      path';
+            
+            var params = [];
+            if (headers) {
+                params.push('options: Options(headers: headers)');
+            }
+            if (queryParams) {
+                params.push('queryParameters: queryParameters');
+            }
+            if (bodyInfo.data) {
+                params.push('data: data');
+            }
+            
+            if (params.length > 0) {
+                code += ',\n      ' + params.join(',\n      ');
+            }
+            
+            code += '\n    );\n\n';
+            
+            // Result kodi
+            switch(returnType) {
+                case 'dynamic':
+                    code += '    final result = response.data;\n\n    return right(result);\n';
+                    break;
+                case 'model':
+                    code += `    final result = ${modelName}.fromJson(response.data);\n\n    return right(result);\n`;
+                    break;
+                case 'list':
+                    code += `    final result = response.data\n      .map<${modelName}>((e) => ${modelName}.fromJson(e))\n      .toList();\n\n    return right(result);\n`;
+                    break;
+                case 'pagination':
+                    code += `    final result = PaginationModel.fromJson(\n      response.data,\n      (e) => ${modelName}.fromJson(e),\n    );\n\n    return right(result);\n`;
+                    break;
+            }
+            
+            // Try-catch ni tugatish
+            code += '  } catch (e) {\n    return left(e);\n  }\n}';
+            
+            return code;
+        }
+
+        // Kodni ekranga chiqarish uchun HTML formatlash
+        function formatCodeForDisplay(code) {
+            // Syntax highlighting bilan formatlash
+            return code
+                .replace(/@override/g, '<span class="syntax-decorator">@override</span>')
+                .replace(/Future<(.*?)>/g, '<span class="syntax-keyword">Future</span>&lt;$1&gt;')
+                .replace(/Either<(.*?)>/g, '<span class="syntax-highlight">Either</span>&lt;$1&gt;')
+                .replace(/dynamic/g, '<span class="syntax-highlight">dynamic</span>')
+                .replace(/List<(.*?)>/g, '<span class="syntax-highlight">List</span>&lt;$1&gt;')
+                .replace(/Pagination<(.*?)>/g, '<span class="syntax-highlight">Pagination</span>&lt;$1&gt;')
+                .replace(/FormData/g, '<span class="syntax-highlight">FormData</span>')
+                .replace(/MultipartFile/g, '<span class="syntax-highlight">MultipartFile</span>')
+                .replace(/jsonEncode/g, '<span class="syntax-highlight">jsonEncode</span>')
+                .replace(/File/g, '<span class="syntax-highlight">File</span>')
+                .replace(/async/g, '<span class="syntax-keyword">async</span>')
+                .replace(/await/g, '<span class="syntax-keyword">await</span>')
+                .replace(/final/g, '<span class="syntax-keyword">final</span>')
+                .replace(/const/g, '<span class="syntax-keyword">const</span>')
+                .replace(/try/g, '<span class="syntax-keyword">try</span>')
+                .replace(/catch/g, '<span class="syntax-keyword">catch</span>')
+                .replace(/(return right\(.*?\))/g, '<span class="syntax-keyword">$1</span>')
+                .replace(/(return left\(.*?\))/g, '<span class="syntax-keyword">$1</span>')
+                .replace(/('.*?')/g, '<span class="syntax-string">$1</span>')
+                .replace(/\n/g, '<br>')
+                .replace(/  /g, '&nbsp;&nbsp;');
+        }
+
+        function copyCode(elementId) {
+            var element = document.getElementById(elementId);
+            // HTML taglarni olib tashlash
+            var text = element.innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                // Visual feedback
+                var btn = element.parentElement.querySelector('.copy-btn');
+                var originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.style.background = '#28a745';
+                setTimeout(function() {
+                    btn.textContent = originalText;
+                    btn.style.background = '#667eea';
+                }, 2000);
+            });
+        }
+
+        // Default kod generatsiyasi va cache holati
+        document.addEventListener('DOMContentLoaded', function() {
+            // Test cURL bilan boshlash
+            document.getElementById('curl-input').value = `curl --location --request POST 'https://test-srbisa-api.digitagro.uz/api/package?qrQcode=code' \\
+--header 'Content-Type: application/json' \\
+--header 'Authorization: Bearer token' \\
+--data '{
+    "name": "Abbos",
+    "age": 30
+}'`;
+            
+            checkCacheOption(); // Cache holatini tekshirish
+            generateCode();
+        });
+    </script>
+</body>
+</html>

@@ -7,6 +7,7 @@ skipFiles: [
   '.htm',
   '.freezed.dart',
   '.g.dart',
+  '.gr.dart',
   '.res.dart',
   '.config.dart',
 ]
