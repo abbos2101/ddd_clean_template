@@ -5,14 +5,12 @@ class App extends StatelessWidget {
   final Widget Function(List<Locale> supportedLocales) builder;
   final String localesPath;
   final List<Locale> supportedLocales;
-  final bool enabledPreview;
 
   const App({
     super.key,
     required this.builder,
     required this.localesPath,
     required this.supportedLocales,
-    this.enabledPreview = false,
   });
 
   @override

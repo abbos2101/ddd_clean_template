@@ -9,7 +9,7 @@ import 'package:ddd_clean_template/common/constants/app_env.dart';
 import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 
 import 'application/device_info/device_info_cubit.dart';
-import 'application/language/locale_cubit.dart';
+import 'application/locale/locale_cubit.dart';
 import 'application/network_info/network_info_cubit.dart';
 import 'application/theme/theme_cubit.dart';
 import 'common/theme/themes.dart';

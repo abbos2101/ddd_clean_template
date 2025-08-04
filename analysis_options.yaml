@@ -6,7 +6,10 @@ linter:
     prefer_const_literals_to_create_immutables: true
     prefer_const_declarations: true
     use_build_context_synchronously: false
+    avoid_print: false
+    constant_identifier_names: false
 
 analyzer:
   errors:
     invalid_annotation_target: ignore
+    const_constructor_param_type_mismatch: ignore

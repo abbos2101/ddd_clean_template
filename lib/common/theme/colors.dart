@@ -1,3 +1,4 @@
+import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:flutter/material.dart';
 
 // AppColors.of(context).success
@@ -17,6 +18,11 @@ class AppColors {
 
   static AppColorScheme withBrightness(Brightness brightness) {
     return brightness == Brightness.dark ? dark : light;
+  }
+
+  static AppColorScheme withoutContext() {
+    final context = router.navigatorKey.currentState!.context;
+    return Theme.of(context).brightness == Brightness.dark ? dark : light;
   }
 }
 

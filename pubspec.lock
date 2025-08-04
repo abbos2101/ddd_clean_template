@@ -325,10 +325,10 @@ packages:
     dependency: "direct main"
     description:
       name: easy_localization
-      sha256: "0f5239c7b8ab06c66440cfb0e9aa4b4640429c6668d5a42fe389c5de42220b12"
+      sha256: "2ccdf9db8fe4d9c5a75c122e6275674508fd0f0d49c827354967b8afcc56bbed"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.7+1"
+    version: "3.0.8"
   easy_logger:
     dependency: transitive
     description:
@@ -604,10 +604,10 @@ packages:
     dependency: "direct main"
     description:
       name: get_it
-      sha256: f126a3e286b7f5b578bf436d5592968706c4c1de28a228b870ce375d9f743103
+      sha256: e87cd1d108e472a0580348a543a0c49ed3d70c8a5c809c6d418583e595d0a389
       url: "https://pub.dev"
     source: hosted
-    version: "8.0.3"
+    version: "8.1.0"
   glob:
     dependency: transitive
     description:
@@ -756,10 +756,10 @@ packages:
     dependency: "direct main"
     description:
       name: injectable
-      sha256: "5e1556ea1d374fe44cbe846414d9bab346285d3d8a1da5877c01ad0774006068"
+      sha256: "1b86fab6a98c11a97e5c718afb00e628d47d183c2a2256392e995a4c561141c1"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.0"
+    version: "2.5.1"
   injectable_generator:
     dependency: "direct dev"
     description:
@@ -1100,10 +1100,10 @@ packages:
     dependency: "direct main"
     description:
       name: safe_device
-      sha256: a78baac59d3bcc2664d87da9096910cf361ed00fcbaadb49df6e871b928e939a
+      sha256: f0412cfe0847f9cd9ba33b4541021ceba3b093ae802371dcd4a1fb0e63693eb8
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.3"
+    version: "1.3.5"
   shared_preferences:
     dependency: transitive
     description:
@@ -1393,10 +1393,10 @@ packages:
     dependency: "direct main"
     description:
       name: url_launcher
-      sha256: "9d06212b1362abc2f0f0d78e6f09f726608c74e3b9462e8368bb03314aa8d603"
+      sha256: f6a7e5c4835bb4e3026a04793a4199ca2d14c739ec378fdfe23fc8075d0439f8
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.1"
+    version: "6.3.2"
   url_launcher_android:
     dependency: transitive
     description:
