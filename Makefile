@@ -56,13 +56,13 @@ fmt:
 	dart format .
 
 # APK builds
-build-apk-dev:
+build-dev:
 	flutter clean
 	flutter build apk --dart-define=ENVIRONMENT=dev --release
 	mv ./build/app/outputs/flutter-apk/app-release.apk "./build/app/outputs/flutter-apk/$(PACKAGE_NAME)_$(shell date +%d.%m.%Y).apk"
 	open ./build/app/outputs/flutter-apk/
 
-build-apk-prod:
+build-prod:
 	flutter clean
 	flutter build apk --dart-define=ENVIRONMENT=prod --release
 	mv ./build/app/outputs/flutter-apk/app-release.apk "./build/app/outputs/flutter-apk/$(PACKAGE_NAME)_$(shell date +%d.%m.%Y).apk"
@@ -92,7 +92,7 @@ add-web:
 res:
 	dart run res_generator:generate
 
-translate:
+tr:
 	dart run res_generator:translate
 
 prompt:
