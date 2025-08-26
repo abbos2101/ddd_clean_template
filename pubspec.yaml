@@ -4,38 +4,38 @@ publish_to: 'none'
 version: 1.0.0+1 # Your application version
 
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.8.1
 
 dependencies:
   flutter:
     sdk: flutter
   animated_flip_counter: ^0.3.4
-  auto_route: ^10.1.2
+  auto_route: ^10.1.0+1
   bloc: ^9.0.0
   cached_network_image: ^3.4.1
-  connectivity_plus: ^6.1.5
+  connectivity_plus: ^6.1.4
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
-  dio: ^5.9.0
+  dio: ^5.8.0+1
   dio_cache_interceptor: ^4.0.3
   easy_localization: ^3.0.8
   flutter_bloc: ^9.1.0
-  flutter_dotenv: ^6.0.0
+  flutter_dotenv: ^5.2.1
   flutter_easyloading: ^3.0.5
   flutter_image_compress: ^2.4.0
   flutter_secure_storage: ^9.2.4
   flutter_svg: ^2.2.0
   fluttertoast: ^8.2.12
   freezed_annotation: ^3.0.0
-  get_it: ^8.2.0
-  google_fonts: ^6.3.0
+  get_it: ^8.1.0
+  google_fonts: ^6.2.1
   hive_ce: ^2.11.3
   http_cache_hive_store: ^5.0.1
-  image_picker: ^1.2.0 # Should add configuration to android and ios
+  image_picker: ^1.1.2 # Should add configuration to android and ios
   injectable: ^2.5.1
   internet_connection_checker_plus: ^2.7.2
   json_annotation: ^4.9.0
-  package_info_plus: ^8.3.1
+  package_info_plus: ^8.3.0
   path: ^1.9.1
   path_provider: ^2.1.4
   pull_to_refresh: ^2.0.0
@@ -46,12 +46,12 @@ dependencies:
   widget_and_text_animator: ^1.1.5
 
 dev_dependencies:
-  auto_route_generator: ^10.2.4
-  build_runner: ^2.7.0
+  auto_route_generator: ^10.2.3
+  build_runner: ^2.5.4
   flutter_lints: ^6.0.0
-  freezed: ^3.2.0
-  json_serializable: ^6.10.0
-  injectable_generator: ^2.8.1
+  freezed: ^3.1.0
+  json_serializable: ^6.9.5
+  injectable_generator: ^2.7.0
   prompt_generator: ^1.0.1
   res_generator: ^1.0.0
 

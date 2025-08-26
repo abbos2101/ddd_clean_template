@@ -9,9 +9,9 @@ part of 'words.dart';
 abstract class Words {
   const Words._();
 
-  static const String no = 'no';
-  static const String hasInternet = 'has_internet';
   static const String appVersion = 'app_version';
+  static const String hasInternet = 'has_internet';
+  static const String no = 'no';
   static const String noInternet = 'no_internet';
   static const String soon = 'soon';
   static const String yes = 'yes';
