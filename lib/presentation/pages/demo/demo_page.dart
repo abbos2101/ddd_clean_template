@@ -1,8 +1,10 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:ddd_clean_template/application/theme/theme_cubit.dart';
 import 'package:ddd_clean_template/common/theme/themes.dart';
 import 'package:ddd_clean_template/common/widgets/app_refresh.dart';
 import 'package:ddd_clean_template/di.dart';
+import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,9 +39,9 @@ class DemoPage extends StatelessWidget {
                         const SizedBox(width: 4),
                         OutlinedButton(
                           onPressed: () {
-                            HapticFeedback.heavyImpact();
+                            context.router.push(const PostsRoute());
                           },
-                          child: const Text('Delete'),
+                          child: const Text('Posts API'),
                         ),
                         Expanded(
                           child: ElevatedButton(

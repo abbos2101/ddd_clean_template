@@ -17,4 +17,9 @@ includePaths: [
   lib/application/theme,
   lib/common/theme,
   lib/main.dart,
+  lib/di.dart,
+  lib/presentation/pages/,
+  lib/infrastructure/services/db/db_service.dart,
+  lib/infrastructure/services/http/http_service.dart,
+  lib/infrastructure/services/http/interceptors/my_log_interceptor.dart,
 ]

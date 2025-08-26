@@ -1,0 +1,40 @@
+{
+  "name": "Makefile",
+  "fileTypes": ["Makefile", "makefile", "*.mk", "*.make"],
+  "scopeName": "source.makefile",
+  "patterns": [
+    {
+      "name": "comment.line.number-sign.makefile",
+      "match": "#.*$"
+    },
+    {
+      "name": "entity.name.function.target.makefile",
+      "match": "^[a-zA-Z0-9_-]+(?=:)"
+    },
+    {
+      "name": "variable.other.makefile",
+      "begin": "\\$\\(",
+      "end": "\\)",
+      "patterns": [
+        {
+          "name": "variable.other.makefile",
+          "match": "[^)]+"
+        }
+      ]
+    },
+    {
+      "name": "keyword.control.makefile",
+      "match": "\\b(if|ifdef|ifndef|else|endif|include|export)\\b"
+    },
+    {
+      "name": "string.quoted.double.makefile",
+      "begin": "\"",
+      "end": "\""
+    },
+    {
+      "name": "string.quoted.single.makefile",
+      "begin": "'",
+      "end": "'"
+    }
+  ]
+}
