@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: AppEnv.appName,
-      debugShowCheckedModeBanner: AppEnv.debugMode,
+      debugShowCheckedModeBanner: false,
       routerConfig: router.config(),
       builder: EasyLoading.init(),
       theme: AppTheme.theme(Brightness.light),
