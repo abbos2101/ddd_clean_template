@@ -32,60 +32,66 @@ class CryptoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return BlocProvider(
       create: (context) => di<CryptoCubit>()..loadTopCryptocurrencies(),
       child: Scaffold(
-        body: Container(
-          // 🌌 Beautiful theme-aware gradient background
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: isDark
-                  ? [
-                      const Color(0xFF1A1A2E), // Dark navy
-                      const Color(0xFF16213E), // Darker blue
-                    ]
-                  : [
-                      const Color(0xFF667eea), // Beautiful blue
-                      const Color(0xFF764ba2), // Beautiful purple
-                    ],
-            ),
-          ),
-          child: SafeArea(
-            child: BlocBuilder<CryptoCubit, CryptoCubitState>(
-              builder: (context, state) {
-                return Column(
-                  children: [
-                    // 🎯 Beautiful Header
-                    _buildHeader(context),
+        body: Builder(
+          builder: (context) {
+            // 🔄 DYNAMIC - Fresh theme colors every time!
+            final colorScheme = Theme.of(context).colorScheme;
+            final isDark = Theme.of(context).brightness == Brightness.dark;
 
-                    // 🔍 Search Bar
-                    _buildSearchBar(context, state),
+            return Container(
+              // 🌌 Beautiful theme-aware gradient background
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: isDark
+                      ? [
+                          const Color(0xFF1A1A2E), // Dark navy
+                          const Color(0xFF16213E), // Darker blue
+                        ]
+                      : [
+                          const Color(0xFF667eea), // Beautiful blue
+                          const Color(0xFF764ba2), // Beautiful purple
+                        ],
+                ),
+              ),
+              child: SafeArea(
+                bottom: false,
+                child: BlocBuilder<CryptoCubit, CryptoCubitState>(
+                  builder: (context, state) {
+                    return Column(
+                      children: [
+                        // 🎯 Beautiful Header
+                        _buildHeader(context),
 
-                    // 📊 Content Area
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(top: 20),
-                        decoration: BoxDecoration(
-                          color:
-                              colorScheme.surface, // 🎨 Theme-aware background
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
+                        // 🔍 Search Bar
+                        _buildSearchBar(context, state),
+
+                        // 📊 Content Area
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            decoration: BoxDecoration(
+                              color: colorScheme
+                                  .surface, // 🎨 Theme-aware background
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                topRight: Radius.circular(30),
+                              ),
+                            ),
+                            child: _buildContent(context, state),
                           ),
                         ),
-                        child: _buildContent(context, state),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -230,31 +236,39 @@ class CryptoPage extends StatelessWidget {
 
   /// 📊 Individual stat card
   Widget _buildStatCard(String title, String value, Color color) {
-    return Container(
-      padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: color.withOpacity(0.3)),
-      ),
-      child: Column(
-        children: [
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
+    return Builder(
+      builder: (context) {
+        final colorScheme = Theme.of(context).colorScheme;
+        return Container(
+          padding: const EdgeInsets.all(15),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: color.withOpacity(0.3)),
           ),
-          const SizedBox(height: 5),
-          Text(
-            title,
-            style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-            textAlign: TextAlign.center,
+          child: Column(
+            children: [
+              Text(
+                value,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                ),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: colorScheme.onSurface.withOpacity(0.7),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -320,22 +334,30 @@ class CryptoPage extends StatelessWidget {
 
   /// 📊 Loading progress bar
   Widget _buildLoadingProgress(double progress) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 20),
-      child: Column(
-        children: [
-          LinearProgressIndicator(
-            value: progress / 100,
-            backgroundColor: Colors.grey[300],
-            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF667eea)),
+    return Builder(
+      builder: (context) {
+        final colorScheme = Theme.of(context).colorScheme;
+        return Container(
+          margin: const EdgeInsets.only(bottom: 20),
+          child: Column(
+            children: [
+              LinearProgressIndicator(
+                value: progress / 100,
+                backgroundColor: colorScheme.surfaceVariant,
+                valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Loading crypto data... ${progress.toStringAsFixed(0)}%',
+                style: TextStyle(
+                  color: colorScheme.onSurface.withOpacity(0.7),
+                  fontSize: 14,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 10),
-          Text(
-            'Loading crypto data... ${progress.toStringAsFixed(0)}%',
-            style: TextStyle(color: Colors.grey[600], fontSize: 14),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -421,7 +443,7 @@ class CryptoPage extends StatelessWidget {
                         crypto.rankDisplay,
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.grey[500],
+                          color: colorScheme.onSurface.withOpacity(0.6),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -440,12 +462,18 @@ class CryptoPage extends StatelessWidget {
                   ),
                   Text(
                     (crypto.symbol ?? '').toUpperCase(),
-                    style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: colorScheme.onSurface.withOpacity(0.7),
+                    ),
                   ),
                   const SizedBox(height: 5),
                   Text(
                     'Market Cap: ${crypto.formattedMarketCap}',
-                    style: TextStyle(fontSize: 12, color: Colors.grey[500]),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: colorScheme.onSurface.withOpacity(0.6),
+                    ),
                   ),
                 ],
               ),
@@ -492,7 +520,9 @@ class CryptoPage extends StatelessWidget {
                   context.read<CryptoCubit>().toggleFavorite(crypto),
               icon: Icon(
                 isFavorite ? Icons.star : Icons.star_border,
-                color: isFavorite ? Colors.orange : Colors.grey,
+                color: isFavorite
+                    ? Colors.orange
+                    : colorScheme.onSurface.withOpacity(0.6),
                 size: 24,
               ),
             ),
@@ -565,27 +595,36 @@ class CryptoPage extends StatelessWidget {
 
   /// 📭 Empty state
   Widget _buildEmptyState() {
-    return Container(
-      padding: const EdgeInsets.all(40),
-      child: Column(
-        children: [
-          const Icon(Icons.search_off, size: 60, color: Colors.grey),
-          const SizedBox(height: 20),
-          const Text(
-            'No cryptocurrencies found',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey,
-            ),
+    return Builder(
+      builder: (context) {
+        final colorScheme = Theme.of(context).colorScheme;
+        return Container(
+          padding: const EdgeInsets.all(40),
+          child: Column(
+            children: [
+              Icon(
+                Icons.search_off,
+                size: 60,
+                color: colorScheme.onSurface.withOpacity(0.5),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                'No cryptocurrencies found',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurface.withOpacity(0.7),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Try a different search term',
+                style: TextStyle(color: colorScheme.onSurface.withOpacity(0.6)),
+              ),
+            ],
           ),
-          const SizedBox(height: 10),
-          Text(
-            'Try a different search term',
-            style: TextStyle(color: Colors.grey[600]),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
