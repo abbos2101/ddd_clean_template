@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/users/users_cubit.dart';
+import '../../../application/var_status.dart'; // 🚦 Import VarStatus!
 import '../../../di.dart';
 
 @RoutePage()
@@ -155,29 +156,17 @@ class UsersPage extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusCard(String title, dynamic status) {
-    Color color = Colors.grey;
-    String statusText = 'Initial';
-
-    status.when(
-      initial: () {
-        color = Colors.grey;
-        statusText = 'Initial';
-      },
-      loading: () {
-        color = Colors.orange;
-        statusText = 'Loading...';
-      },
-      success: () {
-        color = Colors.green;
-        statusText = 'Success';
-      },
-      fail: (error) {
-        color = Colors.red;
-        statusText = 'Error: $error';
-      },
+  Widget _buildStatusCard(String title, VarStatus status) {
+    // 🏁 FINAL FIX: Use proper VarStatus.when() method that returns Widget!
+    return status.when(
+      initial: () => _buildCard(title, 'Initial', Colors.grey),
+      loading: () => _buildCard(title, 'Loading...', Colors.orange),
+      success: () => _buildCard(title, 'Success', Colors.green),
+      fail: (error) => _buildCard(title, 'Error: $error', Colors.red),
     );
+  }
 
+  Widget _buildCard(String title, String statusText, Color color) {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(8),

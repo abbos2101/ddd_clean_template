@@ -46,8 +46,8 @@ class PostsPage extends StatelessWidget {
           builder: (context, state) {
             return FloatingActionButton(
               onPressed: () => UserPostsDialog.show(context),
-              child: const Icon(Icons.person),
               tooltip: 'Load User Posts',
+              child: const Icon(Icons.person),
             );
           },
         ),

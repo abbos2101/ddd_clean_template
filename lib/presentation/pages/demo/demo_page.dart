@@ -43,6 +43,26 @@ class DemoPage extends StatelessWidget {
                           },
                           child: const Text('Posts API'),
                         ),
+                        OutlinedButton(
+                          onPressed: () {
+                            context.router.push(
+                              const UsersRoute(),
+                            ); // 👥 Users Store!
+                          },
+                          child: const Text('Users'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            context.router.push(
+                              const CryptoRoute(),
+                            ); // 🪙 Crypto Exchange!
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF667eea),
+                            foregroundColor: Colors.white,
+                          ),
+                          child: const Text('🪙 Crypto'),
+                        ),
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {

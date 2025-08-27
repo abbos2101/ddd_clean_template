@@ -12,6 +12,8 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: AuthRoute.page),
     AutoRoute(page: DemoRoute.page),
     AutoRoute(page: PostsRoute.page),
+    AutoRoute(page: UsersRoute.page), // 🏪 Users Store now accessible!
+    AutoRoute(page: CryptoRoute.page), // 🪙 Crypto Exchange now accessible!
   ];
 }
 
