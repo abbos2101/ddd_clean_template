@@ -5,6 +5,13 @@ import 'package:flutter/material.dart';
 /// This mode is used in Blocs to know variable's status.
 /// If you need to use to know success, loading, fail
 ///
+/// 🧠 SIMPLE EXPLANATION:
+/// Think of VarStatus like a traffic light 🚦
+/// 🔘 initial()  = "Not started yet"
+/// 🟡 loading()  = "Working... please wait"
+/// 🟢 success()  = "Done! Everything OK"
+/// 🔴 fail()     = "Error! Something wrong"
+///
 /// Examples:
 /// [in state]
 /// ```dart

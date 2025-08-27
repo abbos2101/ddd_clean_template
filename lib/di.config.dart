@@ -17,15 +17,22 @@ import 'package:ddd_clean_template/application/network_info/network_info_cubit.d
     as _i53;
 import 'package:ddd_clean_template/application/posts/posts_cubit.dart' as _i44;
 import 'package:ddd_clean_template/application/theme/theme_cubit.dart' as _i330;
+import 'package:ddd_clean_template/application/users/users_cubit.dart' as _i244;
 import 'package:ddd_clean_template/domain/facades/fake_facade.dart' as _i895;
 import 'package:ddd_clean_template/domain/repositories/posts_repository.dart'
     as _i281;
+import 'package:ddd_clean_template/domain/repositories/users_repository.dart'
+    as _i768;
 import 'package:ddd_clean_template/infrastructure/datasources/fake_datasource.dart'
     as _i727;
 import 'package:ddd_clean_template/infrastructure/datasources/posts_datasource.dart'
     as _i674;
+import 'package:ddd_clean_template/infrastructure/datasources/users_datasource.dart'
+    as _i581;
 import 'package:ddd_clean_template/infrastructure/repositories/posts_repository_impl.dart'
     as _i1024;
+import 'package:ddd_clean_template/infrastructure/repositories/users_repository_impl.dart'
+    as _i695;
 import 'package:ddd_clean_template/infrastructure/services/cache/app_cache.dart'
     as _i460;
 import 'package:ddd_clean_template/infrastructure/services/cache/cache_service.dart'
@@ -106,11 +113,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i674.PostsDataSource>(
       () => _i674.PostsDataSource(gh<_i36.HttpService>()),
     );
+    gh.factory<_i581.UsersDataSource>(
+      () => _i581.UsersDataSource(gh<_i36.HttpService>()),
+    );
     gh.factory<_i895.FakeFacade>(
       () => _i727.FakeDatasource(gh<_i36.HttpService>()),
     );
+    gh.factory<_i768.UsersRepository>(
+      () => _i695.UsersRepositoryImpl(gh<_i581.UsersDataSource>()),
+    );
     gh.factory<_i281.PostsRepository>(
       () => _i1024.PostsRepositoryImpl(gh<_i674.PostsDataSource>()),
+    );
+    gh.factory<_i244.UsersCubit>(
+      () => _i244.UsersCubit(gh<_i768.UsersRepository>()),
     );
     gh.factory<_i467.DemoCubit>(() => _i467.DemoCubit(gh<_i895.FakeFacade>()));
     gh.factory<_i44.PostsCubit>(
