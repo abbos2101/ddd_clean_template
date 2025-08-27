@@ -15,7 +15,7 @@ abstract class AppEnv {
   static String get baseUrl => dotenv.env['BASE_URL'] ?? '';
 
   static bool get debugMode =>
-      bool.tryParse(dotenv.env['DEBUG_MODE'] ?? 'false') ?? false;
+      bool.tryParse(dotenv.env['DEBUG_MODE'] ?? 'false') ?? true;
 
   static bool get onlyPortrait =>
       bool.tryParse(dotenv.env['ONLY_PORTRAIT'] ?? 'false') ?? false;

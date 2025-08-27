@@ -21,7 +21,7 @@ part 'crypto_model.g.dart';
 /// - image: Pretty coin logo 🖼️
 
 @freezed
-class CryptoModel with _$CryptoModel {
+abstract class CryptoModel with _$CryptoModel {
   const factory CryptoModel({
     // 🆔 Basic Information
     String? id, // 'bitcoin', 'ethereum'

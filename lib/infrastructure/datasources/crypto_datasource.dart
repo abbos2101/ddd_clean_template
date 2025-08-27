@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/models/crypto_model.dart';
@@ -49,11 +50,20 @@ class CryptoDataSource {
       print('🌐 Calling CoinGecko API: $endpoint');
       print('📊 Getting top 20 coins with 24h price changes');
 
-      final response = await _httpService.get(
-        endpoint,
-        queryParameters: queryParams,
+      final dio = _httpService.client(
+        requiredToken: false,
         baseUrl: 'https://api.coingecko.com', // 🌍 Real CoinGecko API
+        cacheDuration: const Duration(minutes: 5),
       );
+
+      // Add proper headers
+      dio.options.headers.addAll({
+        'User-Agent': 'Flutter App / DDD Clean Template',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      });
+
+      final response = await dio.get(endpoint, queryParameters: queryParams);
 
       // 🎉 Success! Convert API data to our beautiful models
       final List<dynamic> cryptoList = response.data as List<dynamic>;
@@ -103,11 +113,20 @@ class CryptoDataSource {
         'price_change_percentage': '24h',
       };
 
-      final response = await _httpService.get(
-        endpoint,
-        queryParameters: queryParams,
+      final dio = _httpService.client(
+        requiredToken: false,
         baseUrl: 'https://api.coingecko.com',
+        cacheDuration: const Duration(minutes: 5),
       );
+
+      // Add proper headers
+      dio.options.headers.addAll({
+        'User-Agent': 'Flutter App / DDD Clean Template',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      });
+
+      final response = await dio.get(endpoint, queryParameters: queryParams);
 
       final List<dynamic> cryptoList = response.data as List<dynamic>;
 
@@ -151,11 +170,20 @@ class CryptoDataSource {
         'sparkline': 'false',
       };
 
-      final response = await _httpService.get(
-        endpoint,
-        queryParameters: queryParams,
+      final dio = _httpService.client(
+        requiredToken: false,
         baseUrl: 'https://api.coingecko.com',
+        cacheDuration: const Duration(minutes: 10),
       );
+
+      // Add proper headers
+      dio.options.headers.addAll({
+        'User-Agent': 'Flutter App / DDD Clean Template',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      });
+
+      final response = await dio.get(endpoint, queryParameters: queryParams);
 
       // 🎨 Convert detailed API response to our model
       final Map<String, dynamic> cryptoData =

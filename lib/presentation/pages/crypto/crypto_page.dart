@@ -32,19 +32,27 @@ class CryptoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return BlocProvider(
       create: (context) => di<CryptoCubit>()..loadTopCryptocurrencies(),
       child: Scaffold(
         body: Container(
-          // 🌟 Beautiful gradient background
-          decoration: const BoxDecoration(
+          // 🌌 Beautiful theme-aware gradient background
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
-                Color(0xFF667eea), // Beautiful blue
-                Color(0xFF764ba2), // Beautiful purple
-              ],
+              colors: isDark
+                  ? [
+                      const Color(0xFF1A1A2E), // Dark navy
+                      const Color(0xFF16213E), // Darker blue
+                    ]
+                  : [
+                      const Color(0xFF667eea), // Beautiful blue
+                      const Color(0xFF764ba2), // Beautiful purple
+                    ],
             ),
           ),
           child: SafeArea(
@@ -62,9 +70,10 @@ class CryptoPage extends StatelessWidget {
                     Expanded(
                       child: Container(
                         margin: const EdgeInsets.only(top: 20),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
+                        decoration: BoxDecoration(
+                          color:
+                              colorScheme.surface, // 🎨 Theme-aware background
+                          borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(30),
                             topRight: Radius.circular(30),
                           ),
@@ -357,11 +366,12 @@ class CryptoPage extends StatelessWidget {
       (fav) => fav.id == crypto.id,
     );
     final bool isPriceUp = crypto.isPriceUp;
+    final colorScheme = Theme.of(context).colorScheme; // 🎨 Get theme colors
 
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface, // 🎨 Theme-aware card background
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
@@ -382,7 +392,7 @@ class CryptoPage extends StatelessWidget {
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
-                color: Colors.grey[100],
+                color: Theme.of(context).colorScheme.surfaceVariant,
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
@@ -494,21 +504,29 @@ class CryptoPage extends StatelessWidget {
 
   /// 📥 Loading card
   Widget _buildLoadingCard() {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 15),
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CircularProgressIndicator(),
-          SizedBox(width: 15),
-          Text('Loading cryptocurrencies...'),
-        ],
-      ),
+    return Builder(
+      builder: (context) {
+        final colorScheme = Theme.of(context).colorScheme;
+        return Container(
+          margin: const EdgeInsets.only(bottom: 15),
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: colorScheme.surface, // 🎨 Theme-aware background
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(color: colorScheme.primary),
+              const SizedBox(width: 15),
+              Text(
+                'Loading cryptocurrencies...',
+                style: TextStyle(color: colorScheme.onSurface),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 

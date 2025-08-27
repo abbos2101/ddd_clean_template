@@ -9,6 +9,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:ddd_clean_template/application/crypto/crypto_cubit.dart'
+    as _i873;
 import 'package:ddd_clean_template/application/device_info/device_info_cubit.dart'
     as _i883;
 import 'package:ddd_clean_template/application/locale/locale_cubit.dart'
@@ -141,6 +143,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i467.DemoCubit>(() => _i467.DemoCubit(gh<_i895.FakeFacade>()));
     gh.factory<_i44.PostsCubit>(
       () => _i44.PostsCubit(gh<_i281.PostsRepository>()),
+    );
+    gh.factory<_i873.CryptoCubit>(
+      () => _i873.CryptoCubit(gh<_i303.CryptoFacade>()),
     );
     return this;
   }

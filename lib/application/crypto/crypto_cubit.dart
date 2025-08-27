@@ -11,20 +11,20 @@ part 'crypto_cubit.freezed.dart';
 
 /// 🪙 CRYPTOCURRENCY STATE
 /// Think of this like a "TRADING FLOOR DASHBOARD" 📊💰
-/// 
+///
 /// 🏪 Simple Dashboard Metaphor:
 /// - This is like the BIG SCREENS on a trading floor
 /// - Shows: Current prices, loading status, search results, favorites
 /// - Updates: Every time new data comes in
 /// - Displays: All the information traders need to see
-/// 
+///
 /// 🎯 What's on our dashboard:
 /// 1. 📊 Top cryptocurrencies list
 /// 2. 🔍 Search results
-/// 3. ⭐ Favorite cryptocurrencies  
+/// 3. ⭐ Favorite cryptocurrencies
 /// 4. 🚦 Loading states (traffic lights)
 /// 5. 📈 Processing statistics
-/// 
+///
 /// 🌟 Beautiful UX features:
 /// - Loading progress bars
 /// - Real-time status updates
@@ -35,29 +35,25 @@ part 'crypto_cubit.freezed.dart';
 abstract class CryptoCubitState with _$CryptoCubitState {
   const factory CryptoCubitState({
     // 🏆 Top Cryptocurrencies Dashboard
-    @Default(VarStatus()) VarStatus topCryptosStatus,  // 🚦 Loading status
+    @Default(VarStatus()) VarStatus topCryptosStatus, // 🚦 Loading status
     @Default([]) List<CryptoModel> topCryptocurrencies, // 💰 Top 20 coins
-    
     // 🔍 Search Functionality
-    @Default(VarStatus()) VarStatus searchStatus,      // 🚦 Search loading
-    @Default([]) List<CryptoModel> searchResults,      // 🔍 Search results
-    @Default('') String searchQuery,                   // 📝 Current search
-    
+    @Default(VarStatus()) VarStatus searchStatus, // 🚦 Search loading
+    @Default([]) List<CryptoModel> searchResults, // 🔍 Search results
+    @Default('') String searchQuery, // 📝 Current search
     // ⭐ Favorites System
-    @Default([]) List<CryptoModel> favoriteCryptocurrencies, // ❤️ User favorites
-    @Default(0) int favoritesCount,                    // 📊 Count of favorites
-    
+    @Default([])
+    List<CryptoModel> favoriteCryptocurrencies, // ❤️ User favorites
+    @Default(0) int favoritesCount, // 📊 Count of favorites
     // 📊 UI Enhancement Data
-    @Default(0.0) double loadingProgress,              // 📈 Loading progress %
-    @Default(0) int processingTimeMs,                  // ⏱️ How fast was API call
-    DateTime? lastUpdated,                            // 🕐 When data was updated
-    
-    // 🎨 Additional UX Features  
-    @Default(false) bool isRefreshing,                 // 🔄 Pull-to-refresh status
-    String? selectedCryptoId,                         // 💎 Currently selected coin
+    @Default(0.0) double loadingProgress, // 📈 Loading progress %
+    @Default(0) int processingTimeMs, // ⏱️ How fast was API call
+    DateTime? lastUpdated, // 🕐 When data was updated
+    // 🎨 Additional UX Features
+    @Default(false) bool isRefreshing, // 🔄 Pull-to-refresh status
+    String? selectedCryptoId, // 💎 Currently selected coin
   }) = _CryptoCubitState;
 }
-part 'crypto_cubit_state.dart';
 
 @Injectable()
 class CryptoCubit extends Cubit<CryptoCubitState> {

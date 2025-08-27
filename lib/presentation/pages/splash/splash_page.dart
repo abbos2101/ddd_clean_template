@@ -20,8 +20,8 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Future.microtask(() {
-      // router.pushAndPopUntil(const DemoRoute(), predicate: (_) => false);
-      router.push(const DemoRoute());
+      // 🏠 Replace the entire navigation stack - user can't go back to splash!
+      router.pushAndPopUntil(const DemoRoute(), predicate: (_) => false);
     });
     super.initState();
   }
