@@ -12,9 +12,7 @@ skipFiles: [
   '.config.dart',
 ]
 includePaths: [
-  lib/application/var_status.dart,
-  lib/application/network_info,
-  lib/application/theme,
-  lib/common/theme,
-  lib/main.dart,
+  lib/infrastructure/services/di_module.dart,
+  lib/infrastructure/services/cache,
+  lib/infrastructure/services/http,
 ]
