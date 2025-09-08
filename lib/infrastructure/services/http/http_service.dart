@@ -1,3 +1,5 @@
+import 'package:alice/alice.dart';
+import 'package:alice_dio/alice_dio_adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:injectable/injectable.dart';
@@ -9,17 +11,24 @@ import 'interceptors/token_interceptor.dart';
 
 @Singleton()
 class HttpService {
+  final Alice _alice;
+  final AliceDioAdapter _aliceAdapter;
   final MyLogInterceptor _logInterceptor;
   final ConnectionCheckerInterceptor _connectionCheckerInterceptor;
   final TokenInterceptor _tokenInterceptor;
   final CacheOptions _cacheOptions;
 
   const HttpService(
+    this._alice,
+    this._aliceAdapter,
     this._logInterceptor,
     this._connectionCheckerInterceptor,
     this._tokenInterceptor,
     this._cacheOptions,
   );
+
+  @PostConstruct()
+  void init() => _alice.addAdapter(_aliceAdapter);
 
   Dio client({
     required bool requiredToken,
@@ -39,7 +48,8 @@ class HttpService {
     );
 
     final interceptors = [
-      _logInterceptor,
+      if (AppEnv.devMode) _aliceAdapter,
+      if (AppEnv.devMode) _logInterceptor,
 
       if (requiredToken) _tokenInterceptor,
 

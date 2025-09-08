@@ -1,12 +1,11 @@
 import 'dart:async';
 
+import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:ddd_clean_template/common/constants/app_env.dart';
-import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 
 import 'application/device_info/device_info_cubit.dart';
 import 'application/locale/locale_cubit.dart';
@@ -62,8 +61,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: AppEnv.appName,
-      debugShowCheckedModeBanner: AppEnv.debugMode,
+      title: context.read<DeviceInfoCubit>().state.projectInfo.appName,
+      debugShowCheckedModeBanner: false,
       routerConfig: router.config(),
       builder: EasyLoading.init(),
       theme: AppTheme.theme(Brightness.light),

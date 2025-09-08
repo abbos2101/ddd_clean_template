@@ -1,4 +1,5 @@
 import 'package:ddd_clean_template/common/theme/colors.dart';
+import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class FeedbackHelper {
     String? confirmTitle,
     String? cancelTitle,
     DialogStyle style = DialogStyle.adaptive,
-  }) => _show(context, title, message, style, true, confirmTitle, cancelTitle);
+  }) => _show(title, message, style, true, confirmTitle, cancelTitle);
 
   static Future<bool> showRequiredDialog(
     BuildContext context, {
@@ -28,10 +29,9 @@ class FeedbackHelper {
     required String message,
     String? buttonTitle,
     DialogStyle style = DialogStyle.adaptive,
-  }) => _show(context, title, message, style, false, buttonTitle, null);
+  }) => _show(title, message, style, false, buttonTitle, null);
 
   static Future<bool> _show(
-    BuildContext context,
     String title,
     String message,
     DialogStyle style,
@@ -39,6 +39,7 @@ class FeedbackHelper {
     String? btn1,
     String? btn2,
   ) async {
+    final context = router.navigatorKey.currentContext!;
     final ios =
         style == DialogStyle.cupertino ||
         (style == DialogStyle.adaptive &&
@@ -63,6 +64,7 @@ class FeedbackHelper {
                 ),
               CupertinoDialogAction(
                 isDefaultAction: true,
+                textStyle: TextStyle(color: AppColors.of(context).secondary),
                 onPressed: () => Navigator.pop(ctx, true),
                 child: Text(btn1 ?? Words.yes.str),
               ),
@@ -91,12 +93,12 @@ class FeedbackHelper {
 
   // ==================== SNACK_BAR ====================
 
-  static void showSnackBar(
-    BuildContext context, {
+  static void showSnackBar({
     required String message,
     SnackBarType type = SnackBarType.info,
     Duration duration = const Duration(seconds: 3),
   }) {
+    final context = router.navigatorKey.currentContext!;
     final colors = AppColors.of(context);
     Color backgroundColor;
     Color textColor = colors.onSurface;

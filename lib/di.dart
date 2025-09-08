@@ -40,7 +40,7 @@ Future<void> setupConfigs() async {
 @InjectableInit(initializerName: 'init')
 Future<void> setupDI() async {
   await di.init();
-  if (kDebugMode || AppEnv.debugMode) {
+  if (kDebugMode || AppEnv.devMode) {
     print('TOKEN: ${await di<SecureCache>().token}');
   }
 }

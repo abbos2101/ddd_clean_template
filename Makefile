@@ -2,16 +2,9 @@
 
 .PHONY: clean fix-ios fix-ios-clean gen-clean gen fix fmt build-apk-dev build-apk-prod run-dev run-prod res translate prompt add-all add-android add-ios add-web
 
-# Load environment variables from .env.dev file
-ifneq (,$(wildcard .env.dev))
-    include .env.dev
-    export
-endif
-
-# Variables
+# Variables from YAML
 PACKAGE_NAME = $(shell grep '^name:' pubspec.yaml | sed 's/name: *//' | tr -d '[:space:]')
-# Use ORGANIZATION_DOMAIN from .env.dev, fallback to default if not set
-ORG_NAME = $(if $(ORGANIZATION_DOMAIN),$(ORGANIZATION_DOMAIN),uz.abbos)
+ORG_NAME = $(shell grep '^organization_domain:' pubspec.yaml | sed 's/organization_domain: *//' | tr -d '[:space:]')
 
 # Basic cleanup
 clean:
@@ -99,8 +92,6 @@ prompt:
 	dart run prompt_generator:generate
 
 # Debug: Show loaded environment variables
-debug-env:
-	@echo "ORGANIZATION_DOMAIN: $(ORGANIZATION_DOMAIN)"
+print:
+	@echo "PACKAGE_NAME: $(PACKAGE_NAME)"
 	@echo "ORG_NAME: $(ORG_NAME)"
-	@echo "APP_NAME: $(APP_NAME)"
-	@echo "BASE_URL: $(BASE_URL)"

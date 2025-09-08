@@ -3,6 +3,7 @@
   "has_internet": "Aloqa mavjud",
   "no": "Yo'q",
   "no_internet": "Aloqa mavjud emas!",
+  "not_allowed_url": "Ruxsat etilmagan manzil",
   "soon": "Tez kunda",
   "yes": "Ha"
 }

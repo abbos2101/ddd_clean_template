@@ -1,4 +1,3 @@
-import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -32,11 +31,7 @@ class ErrorHelper {
   }
 
   static void showError(dynamic e) {
-    FeedbackHelper.showSnackBar(
-      router.navigatorKey.currentContext!,
-      message: errorStr(e),
-      type: SnackBarType.error,
-    );
+    FeedbackHelper.showSnackBar(message: errorStr(e), type: SnackBarType.error);
     if (kDebugMode) print(StackTrace.current);
   }
 }
