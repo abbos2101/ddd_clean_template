@@ -4,7 +4,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class AppRefresh extends StatelessWidget {
   final RefreshController controller;
-  final Widget? child;
+  final Widget Function(BuildContext context) builder;
   final WaterDropHeader? header;
   final ScrollPhysics? physics;
   final bool enabledRefresh;
@@ -15,7 +15,7 @@ class AppRefresh extends StatelessWidget {
   const AppRefresh({
     super.key,
     required this.controller,
-    this.child,
+    required this.builder,
     this.header,
     this.physics,
     this.enabledRefresh = true,
@@ -44,7 +44,7 @@ class AppRefresh extends StatelessWidget {
       enablePullUp: enabledNext,
       onRefresh: onRefresh,
       onLoading: onNext,
-      child: child,
+      child: builder(context),
     );
   }
 }
