@@ -15,8 +15,6 @@ final di = GetIt.instance;
 Future<void> setupConfigs() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await AppEnv.init();
-
   if (AppEnv.onlyPortrait) {
     await SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,

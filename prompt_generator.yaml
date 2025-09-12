@@ -1,4 +1,4 @@
-needYaml: false
+needYaml: true
 copyToClipboard: true
 savedFile: ""
 skipFiles: [
@@ -12,7 +12,6 @@ skipFiles: [
   '.config.dart',
 ]
 includePaths: [
-  lib/infrastructure/services/di_module.dart,
-  lib/infrastructure/services/cache,
-  lib/infrastructure/services/http,
+  lib/common/constants,
+  lib/di.dart,
 ]

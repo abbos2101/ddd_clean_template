@@ -23,7 +23,6 @@ dependencies:
   dio_cache_interceptor: ^4.0.3
   easy_localization: ^3.0.8
   flutter_bloc: ^9.1.0
-  flutter_dotenv: ^6.0.0
   flutter_easyloading: ^3.0.5
   flutter_image_compress: ^2.4.0
   flutter_secure_storage: ^9.2.4
@@ -66,5 +65,3 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/tr/
-    - .env.dev
-    - .env.prod

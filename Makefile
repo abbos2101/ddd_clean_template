@@ -51,22 +51,22 @@ fmt:
 # APK builds
 build-dev:
 	flutter clean
-	flutter build apk --dart-define=ENVIRONMENT=dev --release
+	flutter build apk --dart-define-from-file=.env.dev.json --release --obfuscate --split-debug-info=debug-info/
 	mv ./build/app/outputs/flutter-apk/app-release.apk "./build/app/outputs/flutter-apk/$(PACKAGE_NAME)_$(shell date +%d.%m.%Y).apk"
 	open ./build/app/outputs/flutter-apk/
 
 build-prod:
 	flutter clean
-	flutter build apk --dart-define=ENVIRONMENT=prod --release
+	flutter build apk --dart-define-from-file=.env.prod.json --release --obfuscate --split-debug-info=debug-info/
 	mv ./build/app/outputs/flutter-apk/app-release.apk "./build/app/outputs/flutter-apk/$(PACKAGE_NAME)_$(shell date +%d.%m.%Y).apk"
 	open ./build/app/outputs/flutter-apk/
 
 # Run configurations
 run-dev:
-	flutter run --dart-define=ENVIRONMENT=dev --release
+	flutter run --dart-define-from-file=.env.dev.json --release
 
 run-prod:
-	flutter run --dart-define=ENVIRONMENT=prod --release
+	flutter run --dart-define-from-file=.env.prod.json --release
 
 # Platform management
 add-all:
