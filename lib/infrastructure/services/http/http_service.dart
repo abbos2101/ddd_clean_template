@@ -1,9 +1,9 @@
 import 'package:alice/alice.dart';
 import 'package:alice_dio/alice_dio_adapter.dart';
+import 'package:ddd_clean_template/common/constants/app_env.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:injectable/injectable.dart';
-import 'package:ddd_clean_template/common/constants/app_env.dart';
 
 import 'interceptors/connection_checker_interceptor.dart';
 import 'interceptors/my_log_interceptor.dart';

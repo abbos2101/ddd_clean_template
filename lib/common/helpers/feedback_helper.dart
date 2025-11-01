@@ -1,9 +1,8 @@
 import 'package:ddd_clean_template/common/theme/colors.dart';
+import 'package:ddd_clean_template/common/words/words.dart';
 import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../words/words.dart';
 
 enum DialogStyle { material, cupertino, adaptive }
 
@@ -114,7 +113,7 @@ class FeedbackHelper {
         backgroundColor = colors.warning;
         break;
       case SnackBarType.info:
-        backgroundColor = colors.info;
+        backgroundColor = colors.divider;
         break;
     }
 
