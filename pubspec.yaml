@@ -13,7 +13,7 @@ dependencies:
   alice: ^1.0.0
   alice_dio: ^1.0.7
   animated_flip_counter: ^0.3.4
-  auto_route: ^10.2.0
+  auto_route: ^11.0.0
   bloc: ^9.1.0
   cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.8
@@ -25,16 +25,16 @@ dependencies:
   flutter_easyloading: ^3.0.5
   flutter_image_compress: ^2.4.0
   flutter_secure_storage: ^9.2.4
-  flutter_svg: ^2.2.1
+  flutter_svg: ^2.2.3
   fluttertoast: ^9.0.0
   freezed_annotation: ^3.0.0
-  get_it: ^8.2.0
-  google_fonts: ^6.3.2
+  get_it: ^9.2.0
+  google_fonts: ^6.3.3
   hive_ce: ^2.15.1
   http_cache_hive_store: ^5.0.1
-  image_picker: ^1.2.0 # Should add configuration to android and ios
-  injectable: ^2.5.2
-  internet_connection_checker_plus: ^2.9.0
+  image_picker: ^1.2.1 # Should add configuration to android and ios
+  injectable: ^2.7.1+2
+  internet_connection_checker_plus: ^2.9.1
   json_annotation: ^4.9.0
   package_info_plus: ^8.3.1
   path: ^1.9.1
@@ -48,14 +48,14 @@ dependencies:
   widget_and_text_animator: ^1.1.5
 
 dev_dependencies:
-  auto_route_generator: ^10.2.5
-  build_runner: ^2.10.1
+  auto_route_generator: ^10.4.0
+  build_runner: ^2.10.4
   flutter_lints: ^6.0.0
   freezed: ^3.2.3
-  json_serializable: ^6.11.1
-  injectable_generator: ^2.9.0
-  prompt_generator: ^1.0.1
-  res_generator: ^1.0.0
+  json_serializable: ^6.11.2
+  injectable_generator: ^2.9.1
+  prompt_generator: ^1.0.3
+  res_generator: ^1.0.4
 
 flutter:
   uses-material-design: true

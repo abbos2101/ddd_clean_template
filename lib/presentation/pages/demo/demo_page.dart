@@ -59,7 +59,7 @@ class DemoPage extends StatelessWidget {
                         enabledRefresh: true,
                         onRefresh: cbt.refresh,
                         onNext: cbt.nextQuotes,
-                        child: ListView.separated(
+                        builder: (context) => ListView.separated(
                           itemCount: state.quotes.length,
                           separatorBuilder: (_, _) => const Divider(height: 12),
                           itemBuilder: (_, i) {

@@ -40,6 +40,9 @@ gen-clean:
 gen:
 	dart run build_runner watch --delete-conflicting-outputs
 
+gen-one:
+	dart run build_runner build --delete-conflicting-outputs
+
 # Code formatting and fixes
 fix:
 	dart fix --apply
@@ -52,13 +55,13 @@ fmt:
 build-dev:
 	flutter clean
 	flutter build apk --dart-define-from-file=.env.dev.json --release --obfuscate --split-debug-info=debug-info/
-	mv ./build/app/outputs/flutter-apk/app-release.apk "./build/app/outputs/flutter-apk/$(PACKAGE_NAME)_$(shell date +%d.%m.%Y).apk"
+	mv ./build/app/outputs/flutter-apk/app-release.apk "./build/app/outputs/flutter-apk/$(PACKAGE_NAME)_dev_$(shell date +%d.%m.%Y).apk"
 	open ./build/app/outputs/flutter-apk/
 
 build-prod:
 	flutter clean
 	flutter build apk --dart-define-from-file=.env.prod.json --release --obfuscate --split-debug-info=debug-info/
-	mv ./build/app/outputs/flutter-apk/app-release.apk "./build/app/outputs/flutter-apk/$(PACKAGE_NAME)_$(shell date +%d.%m.%Y).apk"
+	mv ./build/app/outputs/flutter-apk/app-release.apk "./build/app/outputs/flutter-apk/$(PACKAGE_NAME)_prod_$(shell date +%d.%m.%Y).apk"
 	open ./build/app/outputs/flutter-apk/
 
 # Run configurations
