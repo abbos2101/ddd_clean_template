@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:ddd_clean_template/common/theme/colors.dart';
 import 'package:ddd_clean_template/common/words/words.dart';
 import 'package:ddd_clean_template/presentation/routes/app_router.dart';
@@ -8,26 +7,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
 part 'network_info_cubit.freezed.dart';
 part 'network_info_state.dart';
 
 @Injectable()
 class NetworkInfoCubit extends Cubit<NetworkInfoState> {
-  late final StreamSubscription<List<ConnectivityResult>> _subscription;
+  late final StreamSubscription<InternetStatus> _subscription;
 
   NetworkInfoCubit() : super(const NetworkInfoState.initial());
 
   void init() {
-    _subscription = Connectivity().onConnectivityChanged.listen((
-      List<ConnectivityResult> result,
-    ) {
-      final isConnected =
-          result.contains(ConnectivityResult.mobile) ||
-          result.contains(ConnectivityResult.wifi) ||
-          result.contains(ConnectivityResult.ethernet);
-      _change(isConnected);
-    });
+    _subscription = InternetConnection().onStatusChange.listen(
+      (event) => _change(event == InternetStatus.connected),
+    );
   }
 
   void _change(bool isConnected) {
