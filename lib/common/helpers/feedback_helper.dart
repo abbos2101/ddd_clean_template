@@ -13,8 +13,7 @@ class FeedbackHelper {
 
   // ==================== DIALOGS ====================
 
-  static Future<bool> showConfirmDialog(
-    BuildContext context, {
+  static Future<bool> showConfirmDialog({
     required String title,
     required String message,
     String? confirmTitle,
@@ -22,8 +21,7 @@ class FeedbackHelper {
     DialogStyle style = DialogStyle.adaptive,
   }) => _show(title, message, style, true, confirmTitle, cancelTitle);
 
-  static Future<bool> showRequiredDialog(
-    BuildContext context, {
+  static Future<bool> showRequiredDialog({
     required String title,
     required String message,
     String? buttonTitle,
