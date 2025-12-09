@@ -4,8 +4,7 @@ import 'dart:typed_data';
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
-import 'app_shimmer.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class AppImage extends StatelessWidget {
   final dynamic image; // this can be string or file
@@ -78,7 +77,7 @@ class AppImageLoading extends StatelessWidget {
       height: height,
       child: Stack(
         children: [
-          AppShimmer(
+          Skeletonizer(
             child: Container(width: width, height: height, color: Colors.white),
           ),
 
