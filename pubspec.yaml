@@ -51,9 +51,11 @@ dev_dependencies:
   auto_route_generator: ^10.4.0
   build_runner: ^2.10.4
   flutter_lints: ^6.0.0
+  flutter_native_splash: ^2.4.7 # if you want, you can remove this line and above configs
   freezed: ^3.2.3
-  json_serializable: ^6.11.2
+  icons_launcher: ^3.0.3 # if you want, you can remove this line and above configs
   injectable_generator: ^2.9.1
+  json_serializable: ^6.11.2
   prompt_generator: ^1.1.2
   res_generator: ^1.0.4
 
@@ -64,3 +66,19 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/tr/
+
+flutter_native_splash:
+  background_image: assets/images/splash.png
+  fullscreen: true
+  android_12:
+    color: "#FFFFFF"
+    image: assets/images/app_icon.png
+    icon_background_color: "#FFFFFF"
+
+icons_launcher:
+  image_path: "assets/images/app_icon.png"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true

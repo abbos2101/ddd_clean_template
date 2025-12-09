@@ -6,6 +6,28 @@
 PACKAGE_NAME = $(shell grep '^name:' pubspec.yaml | sed 's/name: *//' | tr -d '[:space:]')
 ORG_NAME = $(shell grep '^organization_domain:' pubspec.yaml | sed 's/organization_domain: *//' | tr -d '[:space:]')
 
+# Platform management
+add-all:
+	flutter create --platforms android,ios,web,windows --org $(ORG_NAME) .
+
+add-android:
+	flutter create --platforms android --org $(ORG_NAME) .
+
+add-ios:
+	flutter create --platforms ios --org $(ORG_NAME) .
+
+add-web:
+	flutter create --platforms web --org $(ORG_NAME) .
+
+splash-clean:
+	dart run flutter_native_splash:remove
+
+splash-create:
+	dart run flutter_native_splash:create
+
+icon-create:
+	dart run icons_launcher:create
+
 # Basic cleanup
 clean:
 	flutter clean
@@ -33,6 +55,14 @@ fix-ios-clean:
 	flutter clean && \
 	flutter pub get
 
+# Code formatting and fixes
+fix:
+	dart fix --apply
+	dart format .
+
+fmt:
+	dart format .
+
 # Code generation
 gen-clean:
 	dart run build_runner clean
@@ -43,13 +73,15 @@ gen:
 gen-one:
 	dart run build_runner build --delete-conflicting-outputs
 
-# Code formatting and fixes
-fix:
-	dart fix --apply
-	dart format .
+# Resource generators
+res:
+	dart run res_generator:generate
 
-fmt:
-	dart format .
+tr:
+	dart run res_generator:translate
+
+prompt:
+	dart run prompt_generator:generate
 
 # APK builds
 build-dev:
@@ -70,29 +102,6 @@ run-dev:
 
 run-prod:
 	flutter run --dart-define-from-file=.env.prod.json --release
-
-# Platform management
-add-all:
-	flutter create --platforms android,ios,web,windows --org $(ORG_NAME) .
-
-add-android:
-	flutter create --platforms android --org $(ORG_NAME) .
-
-add-ios:
-	flutter create --platforms ios --org $(ORG_NAME) .
-
-add-web:
-	flutter create --platforms web --org $(ORG_NAME) .
-
-# Resource generators
-res:
-	dart run res_generator:generate
-
-tr:
-	dart run res_generator:translate
-
-prompt:
-	dart run prompt_generator:generate
 
 # Debug: Show loaded environment variables
 print:
