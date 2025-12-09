@@ -788,10 +788,10 @@ packages:
     dependency: "direct main"
     description:
       name: internet_connection_checker_plus
-      sha256: "66dc124f9b58a630844f61c1ae6f01f100f5fe63d9410506218d81d93d86ead3"
+      sha256: "4f1817b67106349905235020d30c7387c0fbb464c8d5b1237df741f5b9bdd346"
       url: "https://pub.dev"
     source: hosted
-    version: "2.9.1"
+    version: "2.9.1+1"
   intl:
     dependency: transitive
     description:
@@ -1100,10 +1100,10 @@ packages:
     dependency: "direct dev"
     description:
       name: prompt_generator
-      sha256: "8c1e7c2e497893aab7ba6862460c206ce84064cfec66d83c4644773ef74172a9"
+      sha256: "18c8513c417bcfa9b1db43b97706f59f5156d4e5d86832973590572e6b90731d"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "1.1.2"
   provider:
     dependency: transitive
     description:
@@ -1662,5 +1662,5 @@ packages:
     source: hosted
     version: "3.1.3"
 sdks:
-  dart: ">=3.9.2 <4.0.0"
+  dart: ">=3.9.0 <4.0.0"
   flutter: ">=3.35.0"

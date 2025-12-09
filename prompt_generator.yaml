@@ -1,5 +1,6 @@
 needYaml: true
 copyToClipboard: true
+compressService: false
 savedFile: ""
 skipFiles: [
   '/.',
@@ -10,8 +11,13 @@ skipFiles: [
   '.gr.dart',
   '.res.dart',
   '.config.dart',
+  'firebase_options.dart',
+]
+doNotCompressPaths: [
+  'lib/domain',
+  '_state.dart',
+  '_event.dart',
 ]
 includePaths: [
-  lib/common/constants,
-  lib/di.dart,
+  lib/
 ]

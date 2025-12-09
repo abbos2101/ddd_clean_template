@@ -5,7 +5,7 @@ publish_to: 'none'
 version: 1.0.0+1 # Your application version
 
 environment:
-  sdk: ^3.9.2
+  sdk: ^3.9.0
 
 dependencies:
   flutter:
@@ -34,7 +34,7 @@ dependencies:
   http_cache_hive_store: ^5.0.1
   image_picker: ^1.2.1 # Should add configuration to android and ios
   injectable: ^2.7.1+2
-  internet_connection_checker_plus: ^2.9.1
+  internet_connection_checker_plus: ^2.9.1+1
   json_annotation: ^4.9.0
   package_info_plus: ^8.3.1
   path: ^1.9.1
@@ -54,7 +54,7 @@ dev_dependencies:
   freezed: ^3.2.3
   json_serializable: ^6.11.2
   injectable_generator: ^2.9.1
-  prompt_generator: ^1.0.3
+  prompt_generator: ^1.1.2
   res_generator: ^1.0.4
 
 flutter:
