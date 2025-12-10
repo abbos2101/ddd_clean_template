@@ -1,8 +1,8 @@
-name: ddd_clean_template # Your application name
-organization_domain: uz.digitagro # Your organization domain
-description: "A new Flutter project." # Your application description
+name: ddd_clean_template # Your application name, remove comment
+organization_domain: uz.digitagro # Your organization domain, remove comment
+description: "A new Flutter project." # Your application description, remove comment
 publish_to: 'none'
-version: 1.0.0+1 # Your application version
+version: 1.0.0+1 # Your application version, remove comment
 
 environment:
   sdk: ^3.9.0
@@ -32,7 +32,7 @@ dependencies:
   google_fonts: ^6.3.3
   hive_ce: ^2.15.1
   http_cache_hive_store: ^5.0.1
-  image_picker: ^1.2.1 # Should add configuration to android and ios
+  image_picker: ^1.2.1 # Should add configuration to android and ios, remove comment
   injectable: ^2.7.1+2
   internet_connection_checker_plus: ^2.9.1+1
   json_annotation: ^4.9.0
@@ -43,7 +43,7 @@ dependencies:
   safe_device: ^1.3.8
   skeletonizer: ^2.1.0+1
   sqflite: ^2.4.2
-  url_launcher: ^6.3.2 # Should add configuration to android and ios
+  url_launcher: ^6.3.2 # Should add configuration to android and ios, remove comment
   webview_flutter: ^4.13.0
   widget_and_text_animator: ^1.1.5
 
