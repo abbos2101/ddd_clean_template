@@ -86,7 +86,6 @@ linter:
     # Style - Expressions
     # ─────────────────────────────────────────────────────────────────────────
     cascade_invocations: true
-    prefer_expression_function_bodies: true
     unnecessary_parenthesis: true
 
     # ─────────────────────────────────────────────────────────────────────────
