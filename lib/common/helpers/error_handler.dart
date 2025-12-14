@@ -17,7 +17,7 @@ class ErrorHelper {
         if (e.response!.data is Map && e.response!.data['message'] != null) {
           return e.response!.data['message'];
         }
-        return "${e.response!.statusCode}: ${e.response!.statusMessage}\n${e.response!.data}";
+        return '${e.response!.statusCode}: ${e.response!.statusMessage}\n${e.response!.data}';
       }
 
       switch (e.type) {

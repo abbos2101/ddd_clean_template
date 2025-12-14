@@ -48,9 +48,8 @@ class AppTheme {
     );
   }
 
-  static AppBarTheme _appBarTheme(AppColorScheme colorScheme) {
-    return const AppBarTheme(surfaceTintColor: Colors.transparent);
-  }
+  static AppBarTheme _appBarTheme(AppColorScheme colorScheme) =>
+      const AppBarTheme(surfaceTintColor: Colors.transparent);
 }
 
 extension AppThemeExtension on BuildContext {

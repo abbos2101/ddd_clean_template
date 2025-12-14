@@ -27,61 +27,57 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        alignment: Alignment.bottomCenter,
-        padding: const EdgeInsets.only(
-          left: 16,
-          right: 16,
-          bottom: kToolbarHeight,
-        ),
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(AppImages.splash.path),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: BlocBuilder<DeviceInfoCubit, DeviceInfoState>(
-          buildWhen: (old, e) => old.projectInfo != e.projectInfo,
-          builder: (context, state) {
-            return Column(
-              spacing: 12,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Spacer(flex: 3),
-
-                // App name
-                Expanded(
-                  flex: 2,
-                  child: Center(
-                    child: TextAnimator(
-                      key: UniqueKey(),
-                      state.projectInfo.appName,
-                      textAlign: TextAlign.center,
-                      atRestEffect: WidgetRestingEffects.wave(),
-                      style: const TextStyle(
-                        fontSize: 56,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-
-                const CupertinoActivityIndicator(color: Colors.white),
-
-                Text(
-                  "${Words.appVersion.str}: ${state.projectInfo.version}",
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
-            );
-          },
+  Widget build(BuildContext context) => Scaffold(
+    body: Container(
+      width: double.infinity,
+      height: double.infinity,
+      alignment: Alignment.bottomCenter,
+      padding: const EdgeInsets.only(
+        left: 16,
+        right: 16,
+        bottom: kToolbarHeight,
+      ),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(AppImages.splash.path),
+          fit: BoxFit.cover,
         ),
       ),
-    );
-  }
+      child: BlocBuilder<DeviceInfoCubit, DeviceInfoState>(
+        buildWhen: (old, e) => old.projectInfo != e.projectInfo,
+        builder: (context, state) => Column(
+          spacing: 12,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Spacer(flex: 3),
+
+            // App name
+            Expanded(
+              flex: 2,
+              child: Center(
+                child: TextAnimator(
+                  key: UniqueKey(),
+                  state.projectInfo.appName,
+                  textAlign: TextAlign.center,
+                  atRestEffect: WidgetRestingEffects.wave(),
+                  style: const TextStyle(
+                    fontSize: 56,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+
+            const CupertinoActivityIndicator(color: Colors.white),
+
+            Text(
+              '${Words.appVersion.str}: ${state.projectInfo.version}',
+              style: const TextStyle(color: Colors.white),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }

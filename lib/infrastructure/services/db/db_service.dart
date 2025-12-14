@@ -69,7 +69,7 @@ class DBService {
         dbPath,
         version: 1,
         onCreate: (db, version) async {
-          for (String sql in sqls) {
+          for (var sql in sqls) {
             await db.execute(sql);
           }
         },

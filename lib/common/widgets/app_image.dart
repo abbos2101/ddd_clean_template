@@ -48,13 +48,12 @@ class AppImage extends StatelessWidget {
       width: width,
       height: height,
       fit: fit,
-      progressIndicatorBuilder: (context, url, downloadProgress) {
-        return AppImageLoading(
-          width: width,
-          height: height,
-          progress: downloadProgress.progress,
-        );
-      },
+      progressIndicatorBuilder: (context, url, downloadProgress) =>
+          AppImageLoading(
+            width: width,
+            height: height,
+            progress: downloadProgress.progress,
+          ),
       errorWidget: (context, url, error) =>
           AppImageError(width: width, height: height, error: '$error'),
     );
@@ -95,7 +94,7 @@ class AppImageLoading extends StatelessWidget {
               child: AnimatedFlipCounter(
                 value: progress! * 100,
                 fractionDigits: 0,
-                suffix: "%",
+                suffix: '%',
                 textStyle: TextStyle(
                   color: colorScheme.onSurfaceVariant,
                   fontSize: 12,

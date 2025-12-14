@@ -6,7 +6,7 @@ extension Convert on int {
     final numStr = toString();
     final buffer = StringBuffer();
 
-    for (int i = 0; i < numStr.length; i++) {
+    for (var i = 0; i < numStr.length; i++) {
       if (i > 0 && (numStr.length - i) % 3 == 0) {
         buffer.write(',');
       }

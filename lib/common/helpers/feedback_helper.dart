@@ -98,7 +98,7 @@ class FeedbackHelper {
     final context = router.navigatorKey.currentContext!;
     final colors = AppColors.of(context);
     Color backgroundColor;
-    Color textColor = colors.onSurface;
+    final Color textColor = colors.onSurface;
 
     switch (type) {
       case SnackBarType.success:

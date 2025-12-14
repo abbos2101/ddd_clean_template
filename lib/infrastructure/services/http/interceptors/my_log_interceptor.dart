@@ -10,10 +10,10 @@ class MyLogInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     if (kDebugMode) {
       var log =
-          "Request | ${options.method}"
-          " | ${options.path}";
+          'Request | ${options.method}'
+          ' | ${options.path}';
       if (options.queryParameters.isNotEmpty) {
-        log += " | ${options.queryParameters}";
+        log += ' | ${options.queryParameters}';
       }
       print(log);
     }
@@ -25,10 +25,10 @@ class MyLogInterceptor extends Interceptor {
     if (kDebugMode) {
       var log =
           "${response.extra['@fromNetwork@'] != false ? response.statusCode : 304}"
-          " | ${response.requestOptions.method}"
-          " | ${response.requestOptions.path}";
+          ' | ${response.requestOptions.method}'
+          ' | ${response.requestOptions.path}';
       if (response.requestOptions.queryParameters.isNotEmpty) {
-        log += " | ${response.requestOptions.queryParameters}";
+        log += ' | ${response.requestOptions.queryParameters}';
       }
       print(log);
     }
@@ -39,10 +39,10 @@ class MyLogInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (kDebugMode) {
       print(
-        "${err.response?.requestOptions.method} "
-        "${err.response?.statusCode} "
-        "${err.response?.requestOptions.path} "
-        "${err.response?.statusMessage}",
+        '${err.response?.requestOptions.method} '
+        '${err.response?.statusCode} '
+        '${err.response?.requestOptions.path} '
+        '${err.response?.statusMessage}',
       );
     }
     super.onError(err, handler);

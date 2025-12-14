@@ -157,13 +157,11 @@ class DBCrud<T> {
     Database db, {
     required T model,
     ConflictAlgorithm conflictAlgorithm = ConflictAlgorithm.abort,
-  }) async {
-    return await db.insert(
-      T.tableName,
-      (model as dynamic).toJson(),
-      conflictAlgorithm: conflictAlgorithm,
-    );
-  }
+  }) async => await db.insert(
+    T.tableName,
+    (model as dynamic).toJson(),
+    conflictAlgorithm: conflictAlgorithm,
+  );
 
   /// Inserts multiple records in a single transaction.
   ///
@@ -231,15 +229,13 @@ class DBCrud<T> {
     String? where,
     List<Object?>? whereArgs,
     ConflictAlgorithm conflictAlgorithm = ConflictAlgorithm.abort,
-  }) async {
-    return await db.update(
-      T.tableName,
-      values,
-      where: where,
-      whereArgs: whereArgs,
-      conflictAlgorithm: conflictAlgorithm,
-    );
-  }
+  }) async => await db.update(
+    T.tableName,
+    values,
+    where: where,
+    whereArgs: whereArgs,
+    conflictAlgorithm: conflictAlgorithm,
+  );
 
   /// Inserts or updates a record (upsert operation).
   ///
@@ -270,9 +266,8 @@ class DBCrud<T> {
   /// [id] - Record identifier
   ///
   /// Returns number of affected rows.
-  Future<int> delete(Database db, {required dynamic id}) async {
-    return await db.delete(T.tableName, where: 'id = ?', whereArgs: [id]);
-  }
+  Future<int> delete(Database db, {required dynamic id}) async =>
+      await db.delete(T.tableName, where: 'id = ?', whereArgs: [id]);
 
   /// Deletes records matching the specified condition.
   ///
@@ -286,9 +281,7 @@ class DBCrud<T> {
     Database db, {
     String? where,
     List<Object?>? whereArgs,
-  }) async {
-    return await db.delete(T.tableName, where: where, whereArgs: whereArgs);
-  }
+  }) async => await db.delete(T.tableName, where: where, whereArgs: whereArgs);
 
   /// Deletes all records from the table.
   ///
@@ -296,9 +289,7 @@ class DBCrud<T> {
   /// [db] - Database instance
   ///
   /// Returns number of affected rows.
-  Future<int> deleteAll(Database db) async {
-    return await db.delete(T.tableName);
-  }
+  Future<int> deleteAll(Database db) async => await db.delete(T.tableName);
 
   /// Executes a raw SQL query and returns results.
   ///
@@ -311,9 +302,7 @@ class DBCrud<T> {
     Database db,
     String sql, [
     List<Object?>? arguments,
-  ]) async {
-    return await db.rawQuery(sql, arguments);
-  }
+  ]) async => await db.rawQuery(sql, arguments);
 
   /// Executes a raw SQL statement.
   ///
@@ -326,9 +315,7 @@ class DBCrud<T> {
     Database db,
     String sql, [
     List<Object?>? arguments,
-  ]) async {
-    return await db.rawUpdate(sql, arguments);
-  }
+  ]) async => await db.rawUpdate(sql, arguments);
 
   /// Retrieves the table structure as CREATE TABLE statement.
   ///

@@ -12,13 +12,11 @@ class AppColors {
   static const AppColorScheme light = LightColorScheme._();
   static const AppColorScheme dark = DarkColorScheme._();
 
-  static AppColorScheme of(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.dark ? dark : light;
-  }
+  static AppColorScheme of(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? dark : light;
 
-  static AppColorScheme withBrightness(Brightness brightness) {
-    return brightness == Brightness.dark ? dark : light;
-  }
+  static AppColorScheme withBrightness(Brightness brightness) =>
+      brightness == Brightness.dark ? dark : light;
 
   static AppColorScheme withoutContext() {
     final context = router.navigatorKey.currentState!.context;

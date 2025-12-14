@@ -14,19 +14,17 @@ class App extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(), // hide keyboard
-      behavior: HitTestBehavior.translucent,
-      child: EasyLocalization(
-        supportedLocales: supportedLocales,
-        path: localesPath,
-        fallbackLocale: supportedLocales.first,
-        startLocale: supportedLocales.first,
-        useOnlyLangCode: supportedLocales.first.countryCode == null,
-        saveLocale: true,
-        child: builder(supportedLocales),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => GestureDetector(
+    onTap: () => FocusScope.of(context).unfocus(), // hide keyboard
+    behavior: HitTestBehavior.translucent,
+    child: EasyLocalization(
+      supportedLocales: supportedLocales,
+      path: localesPath,
+      fallbackLocale: supportedLocales.first,
+      startLocale: supportedLocales.first,
+      useOnlyLangCode: supportedLocales.first.countryCode == null,
+      saveLocale: true,
+      child: builder(supportedLocales),
+    ),
+  );
 }

@@ -8,8 +8,6 @@ environment:
   sdk: ^3.9.0
 
 dependencies:
-  flutter:
-    sdk: flutter
   alice: ^1.0.0
   alice_dio: ^1.0.7
   animated_flip_counter: ^0.3.4
@@ -21,6 +19,8 @@ dependencies:
   dio: ^5.9.0
   dio_cache_interceptor: ^4.0.5
   easy_localization: ^3.0.8
+  flutter:
+    sdk: flutter
   flutter_bloc: ^9.1.0
   flutter_easyloading: ^3.0.5
   flutter_image_compress: ^2.4.0

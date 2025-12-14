@@ -67,11 +67,11 @@ class VarStatus {
   String toString() => jsonEncode(toJson());
 
   Map<String, dynamic> toJson() => {
-    "isInitial": isInitial,
-    "isSuccess": isSuccess,
-    "isLoading": isLoading,
-    "isFail": isFail,
-    "error": error,
+    'isInitial': isInitial,
+    'isSuccess': isSuccess,
+    'isLoading': isLoading,
+    'isFail': isFail,
+    'error': error,
   };
 
   String get status {
@@ -94,11 +94,10 @@ class VarStatus {
   }
 
   @override
-  int get hashCode {
-    return isInitial.hashCode ^
-        isSuccess.hashCode ^
-        isLoading.hashCode ^
-        isFail.hashCode ^
-        error.hashCode;
-  }
+  int get hashCode =>
+      isInitial.hashCode ^
+      isSuccess.hashCode ^
+      isLoading.hashCode ^
+      isFail.hashCode ^
+      error.hashCode;
 }

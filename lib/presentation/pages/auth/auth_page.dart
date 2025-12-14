@@ -6,7 +6,6 @@ class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text('$this')));
-  }
+  Widget build(BuildContext context) =>
+      Scaffold(appBar: AppBar(title: Text('$this')));
 }

@@ -9,7 +9,7 @@ class ConnectionCheckerInterceptor extends Interceptor {
   const ConnectionCheckerInterceptor(this._connectionChecker);
 
   @override
-  void onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {

@@ -73,24 +73,22 @@ class _OneIdPageState extends State<OneIdPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () => router.pop(),
-          behavior: HitTestBehavior.opaque,
-          child: const Icon(Icons.close),
-        ),
-        flexibleSpace: Align(
-          alignment: Alignment.bottomCenter,
-          child: progress == 1
-              ? const SizedBox()
-              : LinearProgressIndicator(value: progress),
-        ),
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(
+      leading: GestureDetector(
+        onTap: () => router.pop(),
+        behavior: HitTestBehavior.opaque,
+        child: const Icon(Icons.close),
       ),
-      body: WebViewWidget(controller: controller),
-    );
-  }
+      flexibleSpace: Align(
+        alignment: Alignment.bottomCenter,
+        child: progress == 1
+            ? const SizedBox()
+            : LinearProgressIndicator(value: progress),
+      ),
+    ),
+    body: WebViewWidget(controller: controller),
+  );
 }
 
 extension on String? {

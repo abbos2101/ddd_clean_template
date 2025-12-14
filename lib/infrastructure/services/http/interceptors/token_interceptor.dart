@@ -9,7 +9,7 @@ class TokenInterceptor extends Interceptor {
   const TokenInterceptor(this._cache);
 
   @override
-  void onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
@@ -21,7 +21,10 @@ class TokenInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioException err, ErrorInterceptorHandler handler) async {
+  Future<void> onError(
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
     if (err.response?.statusCode == 401) {
       await _handleUnauthorized();
       handler.reject(err);

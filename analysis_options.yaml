@@ -1,15 +1,121 @@
 include: package:flutter_lints/flutter.yaml
 
-linter:
-  rules:
-    prefer_const_constructors: true
-    prefer_const_literals_to_create_immutables: true
-    prefer_const_declarations: true
-    use_build_context_synchronously: false
-    avoid_print: false
-    constant_identifier_names: false
+# ═══════════════════════════════════════════════════════════════════════════════
+# ANALYZER CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
 
 analyzer:
+  exclude:
+    - '**/*.g.dart'
+    - '**/*.freezed.dart'
+    - '**/*.res.dart'
+    - '**/*.gr.dart'
+    - '**/*.config.dart'
+    - '**/*.gen.dart'
+    - '**/*.graphql.dart'
+    - '**/*.mapper.dart'
+    - '**/*.mocks.dart'
+
   errors:
+    # Ignored
     invalid_annotation_target: ignore
     const_constructor_param_type_mismatch: ignore
+
+    # Warnings
+    no_logic_in_create_state: warning
+    empty_catches: warning
+
+    # Errors - Type Safety
+    avoid_types_as_parameter_names: error
+    unrelated_type_equality_checks: error
+
+    # Errors - Code Quality
+    always_declare_return_types: error
+    camel_case_types: error
+    non_constant_identifier_names: error
+    valid_regexps: error
+
+    # Errors - Resource Management
+    cancel_subscriptions: error
+    close_sinks: error
+
+    # Errors - Performance
+    avoid_slow_async_io: error
+
+    # Errors - Pub
+    sort_pub_dependencies: error
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# LINTER RULES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+linter:
+  rules:
+    # ─────────────────────────────────────────────────────────────────────────
+    # Disabled Rules
+    # ─────────────────────────────────────────────────────────────────────────
+    avoid_print: false
+    constant_identifier_names: false
+    prefer_double_quotes: false
+    use_build_context_synchronously: false
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Style - Strings
+    # ─────────────────────────────────────────────────────────────────────────
+    prefer_single_quotes: true
+    prefer_interpolation_to_compose_strings: true
+    unnecessary_string_interpolations: true
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Style - Types & Variables
+    # ─────────────────────────────────────────────────────────────────────────
+    always_declare_return_types: true
+    omit_obvious_local_variable_types: true
+    omit_obvious_property_types: true
+    prefer_collection_literals: true
+    prefer_final_locals: true
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Style - Const
+    # ─────────────────────────────────────────────────────────────────────────
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    prefer_const_literals_to_create_immutables: true
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Style - Expressions
+    # ─────────────────────────────────────────────────────────────────────────
+    cascade_invocations: true
+    prefer_expression_function_bodies: true
+    unnecessary_parenthesis: true
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Flutter - Widgets
+    # ─────────────────────────────────────────────────────────────────────────
+    avoid_unnecessary_containers: true
+    no_logic_in_create_state: true
+    sized_box_for_whitespace: true
+    sort_child_properties_last: true
+    use_full_hex_values_for_flutter_colors: true
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Async
+    # ─────────────────────────────────────────────────────────────────────────
+    avoid_void_async: true
+    cancel_subscriptions: true
+    close_sinks: true
+    unawaited_futures: true
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Error Handling
+    # ─────────────────────────────────────────────────────────────────────────
+    avoid_empty_else: true
+    literal_only_boolean_expressions: true
+    only_throw_errors: true
+    throw_in_finally: true
+    unrelated_type_equality_checks: true
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Pub
+    # ─────────────────────────────────────────────────────────────────────────
+    sort_pub_dependencies: true

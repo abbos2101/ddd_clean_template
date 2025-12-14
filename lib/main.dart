@@ -23,24 +23,20 @@ void main() {
 
       runApp(
         App(
-          localesPath: "assets/tr",
+          localesPath: 'assets/tr',
           supportedLocales: const [Locale('uz', 'UZ')],
-          builder: (locales) {
-            return MultiBlocProvider(
-              providers: [
-                BlocProvider(create: (_) => di<LocaleCubit>()..init(locales)),
-                BlocProvider(create: (_) => di<ThemeCubit>()..init()),
-                BlocProvider(
-                  create: (_) => di<DeviceInfoCubit>()..projectInfo(),
-                ),
-                BlocProvider(
-                  lazy: false,
-                  create: (_) => di<NetworkInfoCubit>()..init(),
-                ),
-              ],
-              child: const MyApp(),
-            );
-          },
+          builder: (locales) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => di<LocaleCubit>()..init(locales)),
+              BlocProvider(create: (_) => di<ThemeCubit>()..init()),
+              BlocProvider(create: (_) => di<DeviceInfoCubit>()..projectInfo()),
+              BlocProvider(
+                lazy: false,
+                create: (_) => di<NetworkInfoCubit>()..init(),
+              ),
+            ],
+            child: const MyApp(),
+          ),
         ),
       );
     },
@@ -59,18 +55,16 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: context.read<DeviceInfoCubit>().state.projectInfo.appName,
-      debugShowCheckedModeBanner: false,
-      routerConfig: router.config(),
-      builder: EasyLoading.init(),
-      theme: AppTheme.theme(Brightness.light),
-      darkTheme: AppTheme.theme(Brightness.dark),
-      themeMode: context.watch<ThemeCubit>().state.themeMode,
-      supportedLocales: context.supportedLocales,
-      localizationsDelegates: context.localizationDelegates,
-      locale: context.watch<LocaleCubit>().state.locale,
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp.router(
+    title: context.read<DeviceInfoCubit>().state.projectInfo.appName,
+    debugShowCheckedModeBanner: false,
+    routerConfig: router.config(),
+    builder: EasyLoading.init(),
+    theme: AppTheme.theme(Brightness.light),
+    darkTheme: AppTheme.theme(Brightness.dark),
+    themeMode: context.watch<ThemeCubit>().state.themeMode,
+    supportedLocales: context.supportedLocales,
+    localizationsDelegates: context.localizationDelegates,
+    locale: context.watch<LocaleCubit>().state.locale,
+  );
 }
