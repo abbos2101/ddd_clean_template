@@ -46,30 +46,31 @@ class _OneIdPageState extends State<OneIdPage> {
   }
 
   void loadData({required Function(String code) onCode}) {
-    controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-    controller.setNavigationDelegate(
-      NavigationDelegate(
-        onProgress: (int p) {
-          if (mounted) {
-            setState(() => progress = p / 100);
-          }
-        },
-        onUrlChange: (change) {
-          final code = change.url.code;
-          if (code != null) {
-            onCode(code);
-          }
-        },
-        onNavigationRequest: (NavigationRequest request) {
-          if (request.url.hasAccess(widget.oneIdUrl.redirectHost)) {
-            return NavigationDecision.navigate;
-          } else {
-            return NavigationDecision.prevent;
-          }
-        },
-      ),
-    );
-    controller.loadRequest(Uri.parse(widget.oneIdUrl));
+    controller
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int p) {
+            if (mounted) {
+              setState(() => progress = p / 100);
+            }
+          },
+          onUrlChange: (change) {
+            final code = change.url.code;
+            if (code != null) {
+              onCode(code);
+            }
+          },
+          onNavigationRequest: (NavigationRequest request) {
+            if (request.url.hasAccess(widget.oneIdUrl.redirectHost)) {
+              return NavigationDecision.navigate;
+            } else {
+              return NavigationDecision.prevent;
+            }
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(widget.oneIdUrl));
   }
 
   @override

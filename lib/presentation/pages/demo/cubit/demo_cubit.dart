@@ -35,8 +35,9 @@ class DemoCubit extends Cubit<DemoState> {
       (l) {
         emit(state.copyWith(quotesStatus: VarStatus.fail(l.errorStr)));
         ErrorHelper.showError(l);
-        refreshController.refreshFailed();
-        refreshController.loadFailed();
+        refreshController
+          ..refreshFailed()
+          ..loadFailed();
       },
       (r) {
         emit(
@@ -47,8 +48,9 @@ class DemoCubit extends Cubit<DemoState> {
             skip: state.skip + r.length,
           ),
         );
-        refreshController.refreshCompleted();
-        refreshController.loadComplete();
+        refreshController
+          ..refreshCompleted()
+          ..loadComplete();
       },
     );
   }
