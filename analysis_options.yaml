@@ -64,7 +64,6 @@ linter:
     # ─────────────────────────────────────────────────────────────────────────
     prefer_single_quotes: true
     prefer_interpolation_to_compose_strings: true
-    unnecessary_string_interpolations: true
 
     # ─────────────────────────────────────────────────────────────────────────
     # Style - Types & Variables
@@ -86,7 +85,9 @@ linter:
     # Style - Expressions
     # ─────────────────────────────────────────────────────────────────────────
     cascade_invocations: true
-    unnecessary_parenthesis: true
+    unnecessary_parenthesis: false
+    always_put_control_body_on_new_line: true
+    directives_ordering: true
 
     # ─────────────────────────────────────────────────────────────────────────
     # Flutter - Widgets
@@ -103,7 +104,7 @@ linter:
     avoid_void_async: true
     cancel_subscriptions: true
     close_sinks: true
-    unawaited_futures: true
+    #    unawaited_futures: true
 
     # ─────────────────────────────────────────────────────────────────────────
     # Error Handling

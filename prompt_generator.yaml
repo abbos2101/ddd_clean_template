@@ -1,4 +1,4 @@
-needYaml: true
+needYaml: false
 copyToClipboard: true
 compressService: false
 savedFile: ""
@@ -19,5 +19,5 @@ doNotCompressPaths: [
   '_event.dart',
 ]
 includePaths: [
-  lib/
+  ai_rules/,
 ]
