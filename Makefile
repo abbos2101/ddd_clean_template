@@ -68,10 +68,10 @@ gen-clean:
 	dart run build_runner clean
 
 gen:
-	dart run build_runner watch --delete-conflicting-outputs
+	dart run build_runner watch
 
 gen-one:
-	dart run build_runner build --delete-conflicting-outputs
+	dart run build_runner build
 
 # Resource generators
 res:
