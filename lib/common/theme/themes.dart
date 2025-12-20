@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ddd_clean_template/common/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,7 +14,7 @@ class AppTheme {
 
     return ThemeData(
       useMaterial3: true,
-      fontFamily: GoogleFonts.inter().fontFamily,
+      fontFamily: GoogleFonts.inter().fontFamily?.toTitleCase(),
 
       colorScheme: ColorScheme(
         brightness: brightness,
