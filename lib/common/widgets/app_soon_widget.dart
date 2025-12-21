@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
 import 'package:ddd_clean_template/common/words/words.dart';
+import 'package:flutter/material.dart';
 
 class AppSoonWidget extends StatelessWidget {
   final bool showBanner;

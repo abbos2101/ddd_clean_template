@@ -1,6 +1,6 @@
+import 'package:ddd_clean_template/infrastructure/services/cache/secure_cache.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:ddd_clean_template/infrastructure/services/cache/secure_cache.dart';
 
 @Singleton()
 class TokenInterceptor extends Interceptor {

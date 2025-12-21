@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:ddd_clean_template/infrastructure/services/cache/app_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:ddd_clean_template/infrastructure/services/cache/app_cache.dart';
 
 part 'theme_cubit.freezed.dart';
-
 part 'theme_state.dart';
 
 @Injectable()

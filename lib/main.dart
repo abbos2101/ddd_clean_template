@@ -59,7 +59,12 @@ class MyApp extends StatelessWidget {
     title: context.read<DeviceInfoCubit>().state.projectInfo.appName,
     debugShowCheckedModeBanner: false,
     routerConfig: router.config(),
-    builder: EasyLoading.init(),
+    builder: (context, child) => GestureDetector(
+      // hide keyboard
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      behavior: HitTestBehavior.translucent,
+      child: EasyLoading.init()(context, child),
+    ),
     theme: AppTheme.theme(Brightness.light),
     darkTheme: AppTheme.theme(Brightness.dark),
     themeMode: context.watch<ThemeCubit>().state.themeMode,

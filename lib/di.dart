@@ -1,3 +1,4 @@
+import 'package:ddd_clean_template/infrastructure/services/cache/secure_cache.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:ddd_clean_template/infrastructure/services/cache/secure_cache.dart';
 
 import 'common/constants/app_env.dart';
 import 'di.config.dart';
