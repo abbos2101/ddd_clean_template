@@ -16,7 +16,9 @@ class SecureCache {
   }
 
   Future<String> get token async {
-    if (_token.isNotEmpty) return _token;
+    if (_token.isNotEmpty) {
+      return _token;
+    }
     if (_box.get('has_token', defaultValue: false)) {
       _token = await _secureStorage.read(key: 'token') ?? '';
     }

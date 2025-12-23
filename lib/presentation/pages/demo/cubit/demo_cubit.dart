@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:ddd_clean_template/application/var_status.dart';
-import 'package:ddd_clean_template/common/helpers/error_handler.dart';
 import 'package:ddd_clean_template/domain/facades/fake_facade.dart';
 import 'package:ddd_clean_template/domain/models/quote_model.dart';
 import 'package:flutter/material.dart';

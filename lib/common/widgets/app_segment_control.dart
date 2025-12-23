@@ -37,7 +37,9 @@ class AppSegmentControl extends StatelessWidget {
           (i) => Text(children[i], style: TextStyle(fontSize: fontSize)),
         ).asMap(),
         onValueChanged: (value) {
-          if (value != null) onChanged?.call(value);
+          if (value != null) {
+            onChanged?.call(value);
+          }
         },
       ),
     );

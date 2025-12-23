@@ -33,7 +33,9 @@ class NetworkInfoCubit extends Cubit<NetworkInfoState> {
 
   void _showMessage(bool isConnected) {
     final context = router.navigatorKey.currentState?.context;
-    if (context == null) return;
+    if (context == null) {
+      return;
+    }
 
     final colors = AppColors.of(context);
 

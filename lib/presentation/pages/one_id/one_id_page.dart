@@ -103,8 +103,9 @@ extension on String? {
   bool hasAccess(String host) {
     if (this != null) {
       final host = Uri.parse(this!).host;
-      if (host.contains('egov.uz')) return true;
-      if (host.contains(host)) return true;
+      if (host.contains('egov.uz') || host.contains(host)) {
+        return true;
+      }
     }
     FeedbackHelper.showSnackBar(
       message: Words.notAllowedUrl.str,
@@ -114,12 +115,16 @@ extension on String? {
   }
 
   String get redirectHost {
-    if (this == null) return '';
+    if (this == null) {
+      return '';
+    }
 
     final uri = Uri.parse(this!);
     final redirectUrl = uri.queryParameters['redirect_uri'];
 
-    if (redirectUrl != null) return Uri.parse(redirectUrl).host;
+    if (redirectUrl != null) {
+      return Uri.parse(redirectUrl).host;
+    }
     return '';
   }
 }

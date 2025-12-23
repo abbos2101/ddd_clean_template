@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
@@ -11,6 +13,7 @@ class ImageHelper {
 
   static Future<String?> pickImage({
     ImageSource source = ImageSource.camera,
+    bool withCrop = false,
   }) async {
     try {
       final file = await ImagePicker().pickImage(
@@ -18,19 +21,86 @@ class ImageHelper {
         imageQuality: 85,
       );
 
-      if (file == null) return null;
+      if (file == null) {
+        return null;
+      }
 
       final originalFile = File(file.path);
-      if (!await originalFile.exists()) return null;
+      if (!await originalFile.exists()) {
+        return null;
+      }
 
-      final fixedAndCompressedPath = await _fixAndCompressImage(originalFile);
+      String? processedPath = file.path;
+
+      if (withCrop) {
+        final croppedFile = await ImageCropper().cropImage(
+          sourcePath: originalFile.path,
+          uiSettings: [
+            AndroidUiSettings(
+              toolbarTitle: 'Crop',
+              toolbarColor: Colors.black,
+              toolbarWidgetColor: Colors.white,
+              lockAspectRatio: false,
+            ),
+            IOSUiSettings(title: 'Crop'),
+          ],
+        );
+
+        if (croppedFile == null) {
+          return null;
+        }
+
+        processedPath = croppedFile.path;
+      }
+
+      final fileToCompress = File(processedPath);
+      final fixedAndCompressedPath =
+          await _ImageHelperImpl._fixAndCompressImage(fileToCompress);
       return fixedAndCompressedPath;
     } catch (e) {
-      if (kDebugMode) print('Error picking image: $e');
+      if (kDebugMode) {
+        print('Error picking image: $e');
+      }
       return null;
     }
   }
 
+  static Future<String?> pickMultipleImages({
+    ImageSource source = ImageSource.gallery,
+  }) async {
+    try {
+      if (source == ImageSource.camera) {
+        return await pickImage(source: source);
+      }
+
+      final files = await ImagePicker().pickMultiImage(imageQuality: 85);
+
+      if (files.isEmpty) {
+        return null;
+      }
+
+      final processedPaths = <String>[];
+
+      for (final file in files) {
+        final originalFile = File(file.path);
+        if (await originalFile.exists()) {
+          final fixedPath = await _ImageHelperImpl._fixAndCompressImage(
+            originalFile,
+          );
+          if (fixedPath != null) {
+            processedPaths.add(fixedPath);
+          }
+        }
+      }
+
+      return processedPaths.isNotEmpty ? processedPaths.first : null;
+    } catch (_) {
+      return null;
+    }
+  }
+}
+
+class _ImageHelperImpl {
   static Future<String?> _fixAndCompressImage(File originalFile) async {
     try {
       final directory = await getTemporaryDirectory();
@@ -128,35 +198,5 @@ class ImageHelper {
         await file.delete();
       }
     } catch (_) {}
-  }
-
-  static Future<String?> pickMultipleImages({
-    ImageSource source = ImageSource.gallery,
-  }) async {
-    try {
-      if (source == ImageSource.camera) {
-        return await pickImage(source: source);
-      }
-
-      final files = await ImagePicker().pickMultiImage(imageQuality: 85);
-
-      if (files.isEmpty) return null;
-
-      final List<String> processedPaths = [];
-
-      for (final file in files) {
-        final originalFile = File(file.path);
-        if (await originalFile.exists()) {
-          final fixedPath = await _fixAndCompressImage(originalFile);
-          if (fixedPath != null) {
-            processedPaths.add(fixedPath);
-          }
-        }
-      }
-
-      return processedPaths.isNotEmpty ? processedPaths.first : null;
-    } catch (_) {
-      return null;
-    }
   }
 }

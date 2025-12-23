@@ -23,7 +23,9 @@ class AppSoonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!showBanner) return child;
+    if (!showBanner) {
+      return child;
+    }
 
     return IgnorePointer(
       child: Stack(

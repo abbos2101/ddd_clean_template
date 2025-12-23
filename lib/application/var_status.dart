@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+export '../common/helpers/error_handler.dart';
 
 /// This mode is used in Blocs to know variable's status.
 /// If you need to use to know success, loading, fail
@@ -50,19 +50,6 @@ class VarStatus {
   factory VarStatus.success() =>
       const VarStatus(isInitial: false, isSuccess: true);
 
-  Widget when({
-    Widget Function()? initial,
-    required Widget Function() loading,
-    required Widget Function(dynamic error) fail,
-    required Widget Function() success,
-  }) {
-    if (isLoading) return loading();
-    if (isSuccess) return success();
-    if (isFail) return fail(error);
-    if (initial != null) return initial();
-    return const SizedBox();
-  }
-
   @override
   String toString() => jsonEncode(toJson());
 
@@ -75,15 +62,23 @@ class VarStatus {
   };
 
   String get status {
-    if (isFail) return 'fail';
-    if (isLoading) return 'loading';
-    if (isSuccess) return 'success';
+    if (isFail) {
+      return 'fail';
+    }
+    if (isLoading) {
+      return 'loading';
+    }
+    if (isSuccess) {
+      return 'success';
+    }
     return 'initial';
   }
 
   @override
   bool operator ==(Object other) {
-    if (identical(this, other)) return true;
+    if (identical(this, other)) {
+      return true;
+    }
 
     return other is VarStatus &&
         other.isInitial == isInitial &&

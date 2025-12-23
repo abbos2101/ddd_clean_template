@@ -14,9 +14,8 @@ import 'package:path_provider/path_provider.dart';
 @module
 abstract class DIModule {
   @Singleton()
-  FlutterSecureStorage get secureStorage => const FlutterSecureStorage(
-    aOptions: AndroidOptions(encryptedSharedPreferences: true),
-  );
+  FlutterSecureStorage get secureStorage =>
+      const FlutterSecureStorage(aOptions: AndroidOptions());
 
   @Singleton()
   InternetConnection get connectionChecker => InternetConnection();

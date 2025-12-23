@@ -11,10 +11,14 @@ extension StringCaseExtension on String {
   ///
   /// Example: "hello_world" -> "helloWorld"
   String toCamelCase() {
-    if (isEmpty) return this;
+    if (isEmpty) {
+      return this;
+    }
 
     final words = _splitIntoWords();
-    if (words.isEmpty) return this;
+    if (words.isEmpty) {
+      return this;
+    }
 
     final first = words.first.toLowerCase();
     final rest = words.skip(1).map((word) => _capitalize(word.toLowerCase()));
@@ -26,7 +30,9 @@ extension StringCaseExtension on String {
   ///
   /// Example: "hello_world" -> "HelloWorld"
   String toPascalCase() {
-    if (isEmpty) return this;
+    if (isEmpty) {
+      return this;
+    }
 
     final words = _splitIntoWords();
     return words.map((word) => _capitalize(word.toLowerCase())).join();
@@ -36,7 +42,9 @@ extension StringCaseExtension on String {
   ///
   /// Example: "HelloWorld" -> "hello_world"
   String toSnakeCase() {
-    if (isEmpty) return this;
+    if (isEmpty) {
+      return this;
+    }
 
     final words = _splitIntoWords();
     return words.map((word) => word.toLowerCase()).join('_');
@@ -46,7 +54,9 @@ extension StringCaseExtension on String {
   ///
   /// Example: "HelloWorld" -> "hello-world"
   String toKebabCase() {
-    if (isEmpty) return this;
+    if (isEmpty) {
+      return this;
+    }
 
     final words = _splitIntoWords();
     return words.map((word) => word.toLowerCase()).join('-');
@@ -56,7 +66,9 @@ extension StringCaseExtension on String {
   ///
   /// Example: "HelloWorld" -> "HELLO_WORLD"
   String toScreamingSnakeCase() {
-    if (isEmpty) return this;
+    if (isEmpty) {
+      return this;
+    }
 
     final words = _splitIntoWords();
     return words.map((word) => word.toUpperCase()).join('_');
@@ -66,7 +78,9 @@ extension StringCaseExtension on String {
   ///
   /// Example: "hello world" -> "Hello World"
   String toTitleCase() {
-    if (isEmpty) return this;
+    if (isEmpty) {
+      return this;
+    }
 
     final words = _splitIntoWords();
     return words.map((word) => _capitalize(word.toLowerCase())).join(' ');
@@ -76,7 +90,9 @@ extension StringCaseExtension on String {
   ///
   /// Example: "HelloWorld" -> "hello.world"
   String toDotCase() {
-    if (isEmpty) return this;
+    if (isEmpty) {
+      return this;
+    }
 
     final words = _splitIntoWords();
     return words.map((word) => word.toLowerCase()).join('.');
@@ -84,10 +100,12 @@ extension StringCaseExtension on String {
 
   /// Helper method to split string into words
   List<String> _splitIntoWords() {
-    if (isEmpty) return [];
+    if (isEmpty) {
+      return [];
+    }
 
     // Handle different separators: spaces, underscores, hyphens, dots
-    String normalized = replaceAll(RegExp(r'[-_.\s]+'), ' ');
+    var normalized = replaceAll(RegExp(r'[-_.\s]+'), ' ');
 
     // Split camelCase and PascalCase
     normalized = normalized.replaceAllMapped(
@@ -110,38 +128,50 @@ extension StringCaseExtension on String {
 
   /// Helper method to capitalize first letter
   String _capitalize(String word) {
-    if (word.isEmpty) return word;
+    if (word.isEmpty) {
+      return word;
+    }
     return word[0].toUpperCase() + word.substring(1);
   }
 
   /// Checks if string is in camelCase format
   bool get isCamelCase {
-    if (isEmpty) return false;
+    if (isEmpty) {
+      return false;
+    }
     return RegExp(r'^[a-z][a-zA-Z0-9]*$').hasMatch(this) &&
         contains(RegExp(r'[A-Z]'));
   }
 
   /// Checks if string is in PascalCase format
   bool get isPascalCase {
-    if (isEmpty) return false;
+    if (isEmpty) {
+      return false;
+    }
     return RegExp(r'^[A-Z][a-zA-Z0-9]*$').hasMatch(this);
   }
 
   /// Checks if string is in snake_case format
   bool get isSnakeCase {
-    if (isEmpty) return false;
+    if (isEmpty) {
+      return false;
+    }
     return RegExp(r'^[a-z0-9]+(_[a-z0-9]+)*$').hasMatch(this);
   }
 
   /// Checks if string is in kebab-case format
   bool get isKebabCase {
-    if (isEmpty) return false;
+    if (isEmpty) {
+      return false;
+    }
     return RegExp(r'^[a-z0-9]+(-[a-z0-9]+)*$').hasMatch(this);
   }
 
   /// Checks if string is in SCREAMING_SNAKE_CASE format
   bool get isScreamingSnakeCase {
-    if (isEmpty) return false;
+    if (isEmpty) {
+      return false;
+    }
     return RegExp(r'^[A-Z0-9]+(_[A-Z0-9]+)*$').hasMatch(this);
   }
 }

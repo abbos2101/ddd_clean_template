@@ -18,7 +18,9 @@ extension DateTimeParsingExtension on String {
 
   DateTime? get toDateOnly {
     final date = DateTime.tryParse(this);
-    if (date == null) return null;
+    if (date == null) {
+      return null;
+    }
     return DateTime(date.year, date.month, date.day);
   }
 }

@@ -46,7 +46,9 @@ class DBCrud<T> {
       whereArgs: [id],
       limit: 1,
     );
-    if (list.isEmpty) return null;
+    if (list.isEmpty) {
+      return null;
+    }
     return fromJson(list.first);
   }
 
@@ -106,7 +108,9 @@ class DBCrud<T> {
       orderBy: orderBy,
       limit: 1,
     );
-    if (list.isEmpty) return null;
+    if (list.isEmpty) {
+      return null;
+    }
     return fromJson(list.first);
   }
 
@@ -329,7 +333,9 @@ class DBCrud<T> {
       [T.tableName],
     );
 
-    if (result.isEmpty) return null;
+    if (result.isEmpty) {
+      return null;
+    }
     return result.first['sql'] as String?;
   }
 
