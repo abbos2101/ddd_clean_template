@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:ddd_clean_template/common/widgets/app_image.dart';
+import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -10,6 +12,39 @@ import 'package:path_provider/path_provider.dart';
 
 class ImageHelper {
   const ImageHelper._();
+
+  static Future<void> showImage(dynamic image) async {
+    await showDialog(
+      context: router.navigatorKey.currentContext!,
+      builder: (context) {
+        return GestureDetector(
+          onTap: () => Navigator.pop(context),
+          behavior: HitTestBehavior.opaque,
+          child: Column(
+            children: [
+              const Row(
+                children: [
+                  Spacer(),
+                  Icon(Icons.close, color: Colors.white, size: 36),
+                  SizedBox(width: 12),
+                ],
+              ),
+
+              Expanded(
+                child: InteractiveViewer(
+                  child: AppImage(
+                    image,
+                    width: double.infinity,
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   static Future<String?> pickImage({
     ImageSource source = ImageSource.camera,
