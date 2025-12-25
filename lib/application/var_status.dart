@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../common/helpers/error_handler.dart';
 export '../common/helpers/error_handler.dart';
 
 /// This mode is used in Blocs to know variable's status.
@@ -29,7 +30,7 @@ class VarStatus {
   final bool isSuccess;
   final bool isLoading;
   final bool isFail;
-  final dynamic error;
+  final String error;
 
   const VarStatus({
     this.isInitial = true,
@@ -44,8 +45,11 @@ class VarStatus {
   factory VarStatus.loading() =>
       const VarStatus(isInitial: false, isLoading: true);
 
-  factory VarStatus.fail([dynamic error]) =>
-      VarStatus(isInitial: false, isFail: true, error: error);
+  factory VarStatus.fail(dynamic l) => VarStatus(
+    isInitial: false,
+    isFail: true,
+    error: ErrorHelper.getErrorStr(l),
+  );
 
   factory VarStatus.success() =>
       const VarStatus(isInitial: false, isSuccess: true);
