@@ -98,6 +98,35 @@ lib/
     └── routes/                  # AutoRoute
 ```
 
+## ⚙️ Konfiguratsiya Fayllari
+
+### analysis_options.yaml
+
+Static analysis va linter qoidalari. Asosiy xususiyatlari:
+
+| Kategoriya | Qoidalar |
+|------------|----------|
+| **Exclude** | `*.g.dart`, `*.freezed.dart`, `*.gr.dart` va boshqa generatsiya fayllar |
+| **Error** | `cancel_subscriptions`, `close_sinks`, `always_declare_return_types` |
+| **Style** | `prefer_single_quotes`, `prefer_const_constructors`, `cascade_invocations` |
+| **Flutter** | `sort_child_properties_last`, `avoid_unnecessary_containers` |
+
+### build.yaml
+
+Build runner konfiguratsiyasi - qaysi fayllar uchun kod generatsiya qilinishini belgilaydi:
+
+| Builder | Pattern | Maqsad |
+|---------|---------|--------|
+| `freezed` | `*_model.dart`, `*_state.dart`, `*_event.dart` | Immutable classlar |
+| `json_serializable` | `*_model.dart`, `*_state.dart` | JSON serialization |
+| `auto_route_generator` | `*_page.dart` | Route generatsiya |
+| `injectable_generator` | `*_cubit.dart`, `*_bloc.dart`, `infrastructure/**` | DI registration |
+
+**Naming convention ahamiyati:**
+- Model yaratayotganda fayl nomi `_model.dart` bilan tugashi shart
+- Page yaratayotganda `_page.dart` bilan tugashi shart
+- Aks holda kod generatsiya ishlamaydi
+
 ## 🛠 Makefile Buyruqlari
 
 | Buyruq | Tavsif |
@@ -207,6 +236,7 @@ Bu buyruq `prompt_generator.yaml` konfiguratsiyasi bo'yicha loyiha kodini AI uch
 | Fayl | Maqsad |
 |------|--------|
 | `models_rule.md` | Freezed model yaratish qoidalari |
+| `datasources_rule.md` | DataSource yaratish qoidalari |
 | `update_packages.md` | Packagelarni yangilash |
 
 ## 📱 Build

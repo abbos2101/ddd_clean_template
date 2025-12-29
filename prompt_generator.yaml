@@ -19,5 +19,8 @@ doNotCompressPaths: [
   '_event.dart',
 ]
 includePaths: [
-  ai_rules/,
+  analysis_options.yaml,
+  build.yaml,
+  ai_rules,
+  README.md,
 ]
