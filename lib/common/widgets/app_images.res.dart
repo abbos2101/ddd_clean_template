@@ -9,9 +9,13 @@ part of 'app_images.dart';
 abstract class AppImages {
   const AppImages._();
 
+  static final appIcon = Image.asset('assets/images/app_icon.png');
   static final splash = Image.asset('assets/images/splash.png');
 
-  static const list = <String>['assets/images/splash.png'];
+  static const list = <String>[
+    'assets/images/app_icon.png',
+    'assets/images/splash.png',
+  ];
 }
 
 extension ExtensionAppImages on Image {
