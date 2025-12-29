@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:ddd_clean_template/common/widgets/app_image.dart';
 import 'package:ddd_clean_template/presentation/routes/app_router.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -9,6 +10,9 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+
+import '../theme/themes.dart';
+import '../words/words.dart';
 
 class ImageHelper {
   const ImageHelper._();
@@ -44,6 +48,10 @@ class ImageHelper {
         );
       },
     );
+  }
+
+  static Future<ImageSource?> getImageSource() {
+    return _ImageHelperImpl._getImageSource();
   }
 
   static Future<String?> pickImage({
@@ -136,6 +144,73 @@ class ImageHelper {
 }
 
 class _ImageHelperImpl {
+  const _ImageHelperImpl._();
+
+  static Future<ImageSource?> _getImageSource() async {
+    final context = router.navigatorKey.currentContext!;
+    final colors = context.appColors;
+
+    return await showModalBottomSheet<ImageSource>(
+      context: context,
+      builder: (context) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              spacing: 16,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 50,
+                  height: 6,
+                  decoration: ShapeDecoration(
+                    color: colors.border,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                Text(
+                  Words.uploadImage.str,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                CupertinoButton(
+                  color: colors.border,
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      Words.openCamera.str,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16, color: colors.onSurface),
+                    ),
+                  ),
+                  onPressed: () => Navigator.pop(context, ImageSource.camera),
+                ),
+                CupertinoButton(
+                  color: colors.border,
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      Words.openGallery.str,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16, color: colors.onSurface),
+                    ),
+                  ),
+                  onPressed: () => Navigator.pop(context, ImageSource.gallery),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   static Future<String?> _fixAndCompressImage(File originalFile) async {
     try {
       final directory = await getTemporaryDirectory();

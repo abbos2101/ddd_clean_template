@@ -1,0 +1,30 @@
+targets:
+  $default:
+    builders:
+      freezed:
+        generate_for:
+          - lib/**/*_model.dart
+          - lib/**/*_state.dart
+          - lib/**/*_event.dart
+          - lib/**/*_cubit.dart
+          - lib/**/*_bloc.dart
+
+      json_serializable:
+        generate_for:
+          - lib/**/*_model.dart
+          - lib/**/*_state.dart
+          - lib/**/*_event.dart
+
+      auto_route_generator:
+        generate_for:
+          - lib/**/*_page.dart
+
+      injectable_generator:injectable_builder:
+        generate_for:
+          - lib/**/*_cubit.dart
+          - lib/**/*_bloc.dart
+          - lib/infrastructure/**/*.dart
+
+      injectable_generator:injectable_config_builder:
+        generate_for:
+          - lib/di.dart
