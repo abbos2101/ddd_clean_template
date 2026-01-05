@@ -1,0 +1,21 @@
+needYaml: false
+copyToClipboard: true
+compressService: false
+savedFile: ""
+skipFiles: [
+  '/.',
+  '.html',
+  '.htm',
+  '.freezed.dart',
+  '.g.dart',
+  '.gr.dart',
+  '.config.dart',
+  'firebase_options.dart',
+]
+doNotCompressPaths: [
+  'lib/domain',
+  '_state.dart',
+  '_event.dart',
+]
+includePaths: [
+]
