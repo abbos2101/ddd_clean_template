@@ -6,6 +6,9 @@ skipFiles: [
   '/.',
   '.html',
   '.htm',
+  '.png',
+  '.jpg',
+  '.jpeg',
   '.freezed.dart',
   '.g.dart',
   '.gr.dart',
@@ -18,4 +21,7 @@ doNotCompressPaths: [
   '_event.dart',
 ]
 includePaths: [
+  lib/common/widgets/app.dart,
+  lib/di.dart,
+  lib/main.dart,
 ]
