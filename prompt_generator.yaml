@@ -21,7 +21,10 @@ doNotCompressPaths: [
   '_event.dart',
 ]
 includePaths: [
-  lib/common/widgets/app.dart,
   lib/di.dart,
   lib/main.dart,
+  lib/infrastructure,
+  lib/domain,
+  lib/common,
+  lib/application,
 ]

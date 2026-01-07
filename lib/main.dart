@@ -13,7 +13,6 @@ import 'application/network_info/network_info_cubit.dart';
 import 'application/theme/theme_cubit.dart';
 import 'common/theme/themes.dart';
 import 'common/widgets/app.dart';
-import 'common/widgets/app_error_widget.dart';
 import 'di.dart';
 
 void main() {
@@ -21,7 +20,6 @@ void main() {
     () async {
       await setupConfigs();
       await setupDI();
-      ErrorWidget.builder = (details) => AppErrorWidget(details: details);
 
       runApp(
         App(

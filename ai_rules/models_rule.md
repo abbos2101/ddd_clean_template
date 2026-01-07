@@ -6,13 +6,13 @@ STRUCTURE:
 - const factory + fromJson factory
 
 FIELDS:
-- @JsonKey(name:'snake_case') before @Default when API name differs from camelCase
 - Always @Default: String='', int=0, double=0.0, bool=false, List=[], enum=ENUM.UNKNOWN
 - Enums: first value UNKNOWN, use @JsonKey(unknownEnumValue: Enum.UNKNOWN)
 
-NAMING:
-- API: user_name → Dart: @JsonKey(name:'user_name') @Default('') String userName
-- API: status → Dart: @Default('') String status (no JsonKey needed)
+@JsonKey RULE:
+- ONLY when API name ≠ Dart name (snake_case → camelCase)
+- user_name → @JsonKey(name:'user_name') @Default('') String userName ✓
+- userId → @Default(0) int userId ✓ (no @JsonKey - already camelCase)
 
 REUSE:
 - Identical JSON structures = single class

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../constants/app_env.dart';
 import '../words/words.dart';
 
 class AppErrorWidget extends StatelessWidget {
-  final FlutterErrorDetails details;
+  final FlutterErrorDetails? details;
+  final String? message;
 
-  const AppErrorWidget({super.key, required this.details});
+  const AppErrorWidget({super.key, this.details, this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +28,18 @@ class AppErrorWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              if (AppEnv.devMode) ...{
+              if (details != null) ...{
                 const SizedBox(height: 8),
                 Text(
-                  details.exceptionAsString(),
+                  details!.exceptionAsString(),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.grey),
+                ),
+              },
+              if (details == null && message != null) ...{
+                const SizedBox(height: 8),
+                Text(
+                  message!,
                   textAlign: TextAlign.center,
                   style: const TextStyle(color: Colors.grey),
                 ),

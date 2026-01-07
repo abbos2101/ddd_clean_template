@@ -8,6 +8,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 import 'common/constants/app_env.dart';
+import 'common/widgets/app_error_widget.dart';
 import 'di.config.dart';
 
 final di = GetIt.instance;
@@ -33,6 +34,10 @@ Future<void> setupConfigs() async {
     ..radius = 10.0
     ..userInteractions = false
     ..dismissOnTap = false;
+
+  if (AppEnv.devMode) {
+    ErrorWidget.builder = (details) => AppErrorWidget(details: details);
+  }
 }
 
 @InjectableInit(initializerName: 'init')
