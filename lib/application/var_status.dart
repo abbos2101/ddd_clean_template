@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import '../common/helpers/error_handler.dart';
-export '../common/helpers/error_handler.dart';
+import '../common/helpers/error_helper.dart';
+export '../common/helpers/error_helper.dart';
 
 /// This mode is used in Blocs to know variable's status.
 /// If you need to use to know success, loading, fail
