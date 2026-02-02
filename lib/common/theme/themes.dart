@@ -14,6 +14,7 @@ class AppTheme {
 
     return ThemeData(
       useMaterial3: true,
+      textTheme: GoogleFonts.interTextTheme(), // fontFamily doesn't work in web
       fontFamily: GoogleFonts.inter().fontFamily?.toTitleCase(),
 
       colorScheme: ColorScheme(
