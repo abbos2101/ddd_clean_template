@@ -31,7 +31,7 @@ class AppSoonWidget extends StatelessWidget {
       child: Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: .circular(8),
             child: ImageFiltered(
               imageFilter: ImageFilter.blur(
                 sigmaX: blurSigma,
@@ -45,12 +45,12 @@ class AppSoonWidget extends StatelessWidget {
             top: 0,
             right: 0,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding: const .symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
                 color: bannerColor ?? Colors.blue,
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(8),
-                  bottomLeft: Radius.circular(8),
+                borderRadius: const .only(
+                  topRight: .circular(8),
+                  bottomLeft: .circular(8),
                 ),
               ),
               child: Text(

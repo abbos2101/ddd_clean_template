@@ -22,7 +22,7 @@ class AppShimmerText extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(radius),
+          borderRadius: .circular(radius),
         ),
       ),
     );

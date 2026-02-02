@@ -20,6 +20,7 @@ analyzer:
     # Ignored
     invalid_annotation_target: ignore
     const_constructor_param_type_mismatch: ignore
+    unintended_html_in_doc_comment: ignore
 
     # Warnings
     no_logic_in_create_state: warning

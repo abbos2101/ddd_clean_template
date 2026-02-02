@@ -173,10 +173,10 @@ class _ErrorPageState extends State<_ErrorPage>
             child: FadeTransition(
               opacity: _fadeAnimation,
               child: Container(
-                padding: const EdgeInsets.all(16),
+                padding: const .all(16),
                 decoration: BoxDecoration(
                   color: colors.error.withAlpha(210),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: .circular(12),
                 ),
                 child: Row(
                   children: [

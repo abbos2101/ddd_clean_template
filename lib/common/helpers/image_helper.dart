@@ -155,19 +155,17 @@ class _ImageHelperImpl {
       builder: (context) {
         return SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const .all(16),
             child: Column(
               spacing: 16,
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: .min,
               children: [
                 Container(
                   width: 50,
                   height: 6,
                   decoration: ShapeDecoration(
                     color: colors.border,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: .circular(12)),
                   ),
                 ),
                 Text(

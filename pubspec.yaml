@@ -5,7 +5,7 @@ publish_to: 'none'
 version: 1.0.0+1 # Your application version, remove comment
 
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.10.8
 
 dependencies:
   alice: ^1.0.0
@@ -16,7 +16,7 @@ dependencies:
   cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
-  dio: ^5.9.0
+  dio: ^5.9.1
   dio_cache_interceptor: ^4.0.5
   easy_localization: ^3.0.8
   flutter:
@@ -29,14 +29,14 @@ dependencies:
   fluttertoast: ^9.0.0
   freezed_annotation: ^3.0.0
   get_it: ^9.2.0
-  google_fonts: ^7.0.2
-  hive_ce: ^2.18.0
-  http_cache_hive_store: ^5.0.1
+  google_fonts: ^8.0.0
+  hive_ce: ^2.19.1
+  http_cache_hive_store: ^5.0.2
   image_cropper: ^11.0.0 # Should add configuration to android and ios, remove comment
   image_picker: ^1.2.1 # Should add configuration to android and ios, remove comment
   injectable: ^2.7.1+4
   internet_connection_checker_plus: ^2.9.1+2
-  json_annotation: ^4.9.0
+  json_annotation: ^4.10.0
   package_info_plus: ^8.3.1
   path: ^1.9.1
   path_provider: ^2.1.4
@@ -57,7 +57,7 @@ dev_dependencies:
   freezed: ^3.2.4
   icons_launcher: ^3.0.3 # if you want, you can remove this line and above configs
   injectable_generator: ^2.12.0
-  json_serializable: ^6.11.4
+  json_serializable: ^6.12.0
   prompt_generator: ^1.1.3
   res_generator: ^1.0.4
 

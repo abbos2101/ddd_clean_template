@@ -15,9 +15,9 @@ class AppErrorWidget extends StatelessWidget {
         color: Colors.white,
         alignment: Alignment.center,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
+          padding: const .all(20),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               const Icon(Icons.error_outline, size: 48, color: Colors.red),
               const SizedBox(height: 16),

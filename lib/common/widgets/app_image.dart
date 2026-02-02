@@ -125,12 +125,12 @@ class AppImageError extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: colorScheme.surface.withAlpha(120),
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: colorScheme.outlineVariant, width: 1),
+          borderRadius: .circular(8),
+          border: .all(color: colorScheme.outlineVariant, width: 1),
         ),
         child: Column(
           spacing: 4,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: .center,
           children: [
             Icon(
               Icons.broken_image_outlined,

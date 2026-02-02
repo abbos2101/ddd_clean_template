@@ -32,11 +32,7 @@ class _SplashPageState extends State<SplashPage> {
       width: double.infinity,
       height: double.infinity,
       alignment: Alignment.bottomCenter,
-      padding: const EdgeInsets.only(
-        left: 16,
-        right: 16,
-        bottom: kToolbarHeight,
-      ),
+      padding: const .only(left: 16, right: 16, bottom: kToolbarHeight),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(AppImages.splash.path),
@@ -47,7 +43,7 @@ class _SplashPageState extends State<SplashPage> {
         buildWhen: (old, e) => old.projectInfo != e.projectInfo,
         builder: (context, state) => Column(
           spacing: 12,
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: .min,
           children: [
             const Spacer(flex: 3),
 

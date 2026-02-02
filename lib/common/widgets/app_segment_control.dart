@@ -23,14 +23,14 @@ class AppSegmentControl extends StatelessWidget {
 
     return Container(
       width: width,
-      padding: EdgeInsets.all(fontSize * 0.3),
+      padding: .all(fontSize * 0.3),
       decoration: ShapeDecoration(
         color: colorScheme.surfaceContainerHighest.withAlpha(120),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(borderRadius: .circular(10)),
       ),
       child: CupertinoSlidingSegmentedControl<int>(
         groupValue: index,
-        padding: const EdgeInsets.symmetric(horizontal: 5),
+        padding: const .symmetric(horizontal: 5),
         backgroundColor: Colors.transparent,
         children: List<Widget>.generate(
           children.length,
