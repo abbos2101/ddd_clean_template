@@ -15,19 +15,22 @@ class ThemeCubit extends Cubit<ThemeState> {
 
   void init() {
     final themeMode =
-        .values.where((e) => e.name == _cache.theme).firstOrNull ?? .system;
+        ThemeMode.values.where((e) => e.name == _cache.theme).firstOrNull ??
+        .system;
     emit(state.copyWith(themeMode: themeMode));
   }
 
   Future<void> change(ThemeMode themeMode) async {
     emit(state.copyWith(themeMode: themeMode));
-    await _cache.setTheme(.name);
+    await _cache.setTheme(themeMode.name);
   }
 
   Future<void> toggle() async {
-    final themeMode = state.themeMode == .light ? .dark : .light;
+    final themeMode = state.themeMode == .light
+        ? ThemeMode.dark
+        : ThemeMode.light;
 
     emit(state.copyWith(themeMode: themeMode));
-    await _cache.setTheme(.name);
+    await _cache.setTheme(themeMode.name);
   }
 }
