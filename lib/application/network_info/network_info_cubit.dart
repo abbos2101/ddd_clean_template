@@ -16,7 +16,7 @@ part 'network_info_state.dart';
 class NetworkInfoCubit extends Cubit<NetworkInfoState> {
   late final StreamSubscription<InternetStatus> _subscription;
 
-  NetworkInfoCubit() : super(const NetworkInfoState.initial());
+  NetworkInfoCubit() : super(const .initial());
 
   void init() {
     _subscription = InternetConnection().onStatusChange.listen(

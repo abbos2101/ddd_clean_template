@@ -1,8 +1,5 @@
 import 'dart:convert';
 
-import '../common/helpers/error_helper.dart';
-export '../common/helpers/error_helper.dart';
-
 /// This mode is used in Blocs to know variable's status.
 /// If you need to use to know success, loading, fail
 ///
@@ -20,9 +17,10 @@ export '../common/helpers/error_helper.dart';
 /// [To emit in bloc]
 /// ```dart
 /// emit(state.copyWith(statusPosition: VarStatus())); // initial
-/// emit(state.copyWith(statusPosition: VarStatus.loading()));
-/// emit(state.copyWith(statusPosition: VarStatus.success()));
-/// emit(state.copyWith(statusPosition: VarStatus.fail()));
+/// emit(state.copyWith(statusPosition: .initial())); // initial
+/// emit(state.copyWith(statusPosition: .loading()));
+/// emit(state.copyWith(statusPosition: .success()));
+/// emit(state.copyWith(statusPosition: .fail()));
 /// ```
 
 class VarStatus {
@@ -30,7 +28,7 @@ class VarStatus {
   final bool isSuccess;
   final bool isLoading;
   final bool isFail;
-  final String error;
+  final dynamic error;
 
   const VarStatus({
     this.isInitial = true,
@@ -45,11 +43,8 @@ class VarStatus {
   factory VarStatus.loading() =>
       const VarStatus(isInitial: false, isLoading: true);
 
-  factory VarStatus.fail(dynamic l) => VarStatus(
-    isInitial: false,
-    isFail: true,
-    error: ErrorHelper.getErrorStr(l),
-  );
+  factory VarStatus.fail([dynamic error]) =>
+      VarStatus(isInitial: false, isFail: true, error: error);
 
   factory VarStatus.success() =>
       const VarStatus(isInitial: false, isSuccess: true);
@@ -93,10 +88,11 @@ class VarStatus {
   }
 
   @override
-  int get hashCode =>
-      isInitial.hashCode ^
-      isSuccess.hashCode ^
-      isLoading.hashCode ^
-      isFail.hashCode ^
-      error.hashCode;
+  int get hashCode {
+    return isInitial.hashCode ^
+        isSuccess.hashCode ^
+        isLoading.hashCode ^
+        isFail.hashCode ^
+        error.hashCode;
+  }
 }

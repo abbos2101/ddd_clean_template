@@ -11,7 +11,7 @@ part 'theme_state.dart';
 class ThemeCubit extends Cubit<ThemeState> {
   final AppCache _cache;
 
-  ThemeCubit(this._cache) : super(const ThemeState.initial());
+  ThemeCubit(this._cache) : super(const .initial());
 
   void init() {
     final themeMode =

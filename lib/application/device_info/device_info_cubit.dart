@@ -25,49 +25,44 @@ class DeviceInfoCubit extends Cubit<DeviceInfoState> {
       );
 
   Future<void> checkNotJailBroken() async {
-    emit(state.copyWith(checkNotJailBrokenStatus: VarStatus.loading()));
+    emit(state.copyWith(checkNotJailBrokenStatus: .loading()));
     final value = await SafeDevice.isJailBroken;
     emit(
       state.copyWith(
         checkNotJailBrokenStatus: value
-            ? VarStatus.fail('JailBroken found')
-            : VarStatus.success(),
+            ? .fail('JailBroken found')
+            : .success(),
       ),
     );
   }
 
   Future<void> checkRealDevice() async {
-    emit(state.copyWith(checkRealDeviceStatus: VarStatus.loading()));
+    emit(state.copyWith(checkRealDeviceStatus: .loading()));
     final value = await SafeDevice.isRealDevice;
     emit(
       state.copyWith(
         checkRealDeviceStatus: value
-            ? VarStatus.success()
-            : VarStatus.fail('This is not real device!'),
+            ? .success()
+            : .fail('This is not real device!'),
       ),
     );
   }
 
   Future<void> checkRealLocation() async {
-    emit(state.copyWith(checkRealLocationStatus: VarStatus.loading()));
+    emit(state.copyWith(checkRealLocationStatus: .loading()));
     final value = await SafeDevice.isMockLocation;
     emit(
       state.copyWith(
         checkRealLocationStatus: value
-            ? VarStatus.fail('Location is not real!')
-            : VarStatus.success(),
+            ? .fail('Location is not real!')
+            : .success(),
       ),
     );
   }
 
   Future<void> projectInfo() async {
-    emit(state.copyWith(projectInfoStatus: VarStatus.loading()));
+    emit(state.copyWith(projectInfoStatus: .loading()));
     final value = await PackageInfo.fromPlatform();
-    emit(
-      state.copyWith(
-        projectInfoStatus: VarStatus.success(),
-        projectInfo: value,
-      ),
-    );
+    emit(state.copyWith(projectInfoStatus: .success(), projectInfo: value));
   }
 }

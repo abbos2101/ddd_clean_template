@@ -13,7 +13,7 @@ part 'locale_state.dart';
 class LocaleCubit extends Cubit<LocaleState> {
   final AppCache _cache;
 
-  LocaleCubit(this._cache) : super(const LocaleState.initial());
+  LocaleCubit(this._cache) : super(const .initial());
 
   void init(List<Locale> supportedLocales) {
     emit(
