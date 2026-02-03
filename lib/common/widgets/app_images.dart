@@ -23,7 +23,7 @@ class _MyApp extends StatelessWidget {
             Image.asset(
               AppImages.list[i],
               width: double.infinity,
-              fit: BoxFit.fitWidth,
+              fit: .fitWidth,
             ),
             Text(AppImages.list[i], style: const TextStyle(fontSize: 18)),
           ],

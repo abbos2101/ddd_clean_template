@@ -39,7 +39,7 @@ class ImageHelper {
                   child: AppImage(
                     image,
                     width: double.infinity,
-                    fit: BoxFit.fitWidth,
+                    fit: .fitWidth,
                   ),
                 ),
               ),
@@ -170,10 +170,7 @@ class _ImageHelperImpl {
                 ),
                 Text(
                   Words.uploadImage.str,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: const TextStyle(fontSize: 18, fontWeight: .bold),
                 ),
                 CupertinoButton(
                   color: colors.border,

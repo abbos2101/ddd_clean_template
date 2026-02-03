@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // AppColors.of(context).success
 // AppColors.light.border
-// AppColors.withBrightness(Brightness.light).error
+// AppColors.withBrightness(.light).error
 
 // Global access
 class AppColors {
@@ -13,14 +13,14 @@ class AppColors {
   static const AppColorScheme dark = DarkColorScheme._();
 
   static AppColorScheme of(BuildContext context) =>
-      Theme.of(context).brightness == Brightness.dark ? dark : light;
+      Theme.of(context).brightness == .dark ? dark : light;
 
   static AppColorScheme withBrightness(Brightness brightness) =>
-      brightness == Brightness.dark ? dark : light;
+      brightness == .dark ? dark : light;
 
   static AppColorScheme withoutContext() {
     final context = router.navigatorKey.currentState!.context;
-    return Theme.of(context).brightness == Brightness.dark ? dark : light;
+    return Theme.of(context).brightness == .dark ? dark : light;
   }
 }
 

@@ -98,7 +98,7 @@ class AppImageLoading extends StatelessWidget {
                 textStyle: TextStyle(
                   color: colorScheme.onSurfaceVariant,
                   fontSize: 12,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: .w600,
                 ),
               ),
             ),

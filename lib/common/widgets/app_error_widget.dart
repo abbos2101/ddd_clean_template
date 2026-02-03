@@ -23,10 +23,7 @@ class AppErrorWidget extends StatelessWidget {
               const SizedBox(height: 16),
               Text(
                 Words.happenError.str,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: const TextStyle(fontSize: 18, fontWeight: .bold),
               ),
               if (details != null) ...{
                 const SizedBox(height: 8),

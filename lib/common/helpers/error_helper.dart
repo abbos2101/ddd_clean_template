@@ -139,7 +139,7 @@ class _ErrorPageState extends State<_ErrorPage>
 
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, -1),
-      end: Offset.zero,
+      end: .zero,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
 
     widget.onControllerReady(_controller);
@@ -187,7 +187,7 @@ class _ErrorPageState extends State<_ErrorPage>
                         style: TextStyle(
                           color: colors.onError,
                           fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: .w500,
                         ),
                       ),
                     ),

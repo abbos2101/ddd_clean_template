@@ -36,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(AppImages.splash.path),
-          fit: BoxFit.cover,
+          fit: .cover,
         ),
       ),
       child: BlocBuilder<DeviceInfoCubit, DeviceInfoState>(
@@ -58,7 +58,7 @@ class _SplashPageState extends State<SplashPage> {
                   atRestEffect: WidgetRestingEffects.wave(),
                   style: const TextStyle(
                     fontSize: 56,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: .w600,
                     color: Colors.white,
                   ),
                 ),

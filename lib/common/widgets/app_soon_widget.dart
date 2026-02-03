@@ -57,7 +57,7 @@ class AppSoonWidget extends StatelessWidget {
                 bannerText ?? Words.soon.str,
                 style: TextStyle(
                   color: textColor,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: .bold,
                   fontSize: 12,
                 ),
               ),
