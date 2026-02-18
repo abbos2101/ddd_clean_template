@@ -3,8 +3,8 @@ import 'dart:typed_data';
 
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'app_shimmer_text.dart';
 import 'package:flutter/material.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class AppImage extends StatelessWidget {
   final dynamic image; // this can be string or file
@@ -19,6 +19,7 @@ class AppImage extends StatelessWidget {
     if (image is File) {
       return Image.file(image, width: width, height: height, fit: fit);
     }
+
     if (image is Uint8List) {
       return Image.memory(image, width: width, height: height, fit: fit);
     }
@@ -76,9 +77,7 @@ class AppImageLoading extends StatelessWidget {
       height: height,
       child: Stack(
         children: [
-          Skeletonizer(
-            child: Container(width: width, height: height, color: Colors.white),
-          ),
+          AppShimmerText(width: width, height: height),
 
           if (progress != null && progress! >= 0.0)
             Center(

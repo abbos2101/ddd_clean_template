@@ -1,7 +1,5 @@
-needYaml: false
-copyToClipboard: true
-compressService: false
-savedFile: ""
+server: true
+port: 2101
 skipFiles: [
   '/.',
   '.html',
@@ -14,11 +12,6 @@ skipFiles: [
   '.gr.dart',
   '.config.dart',
   'firebase_options.dart',
-]
-doNotCompressPaths: [
-  'lib/domain',
-  '_state.dart',
-  '_event.dart',
 ]
 includePaths: [
   lib/di.dart,

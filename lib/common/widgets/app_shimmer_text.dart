@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'app_shimmer.dart';
 
 class AppShimmerText extends StatelessWidget {
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final double radius;
 
   const AppShimmerText({
