@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:ddd_clean_template/common/helpers/error_helper.dart';
 import 'package:ddd_clean_template/common/helpers/feedback_helper.dart';
 import 'package:ddd_clean_template/common/words/words.dart';
 import 'package:ddd_clean_template/presentation/routes/app_router.dart';
@@ -74,22 +75,24 @@ class _OneIdPageState extends State<OneIdPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      leading: GestureDetector(
-        onTap: () => router.pop(),
-        behavior: HitTestBehavior.opaque,
-        child: const Icon(Icons.close),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () => router.pop(),
+          behavior: HitTestBehavior.opaque,
+          child: const Icon(Icons.close),
+        ),
+        flexibleSpace: Align(
+          alignment: .bottomCenter,
+          child: progress == 1
+              ? const SizedBox()
+              : LinearProgressIndicator(value: progress),
+        ),
       ),
-      flexibleSpace: Align(
-        alignment: Alignment.bottomCenter,
-        child: progress == 1
-            ? const SizedBox()
-            : LinearProgressIndicator(value: progress),
-      ),
-    ),
-    body: WebViewWidget(controller: controller),
-  );
+      body: WebViewWidget(controller: controller),
+    );
+  }
 }
 
 extension on String? {
@@ -100,17 +103,17 @@ extension on String? {
     return null;
   }
 
-  bool hasAccess(String host) {
+  bool hasAccess(String redirectHost) {
     if (this != null) {
-      final host = Uri.parse(this!).host;
-      if (host.contains('egov.uz') || host.contains(host)) {
+      final urlHost = Uri.parse(this!).host;
+      if (urlHost.contains('egov.uz')) {
+        return true;
+      }
+      if (urlHost.contains(redirectHost)) {
         return true;
       }
     }
-    FeedbackHelper.showSnackBar(
-      message: Words.notAllowedUrl.str,
-      type: SnackBarType.error,
-    );
+    ErrorHelper.showError(Words.notAllowedUrl.str);
     return false;
   }
 
