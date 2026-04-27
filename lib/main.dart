@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'application/device_info/device_info_cubit.dart';
-import 'application/locale/locale_cubit.dart';
 import 'application/network_info/network_info_cubit.dart';
 import 'application/theme/theme_cubit.dart';
 import 'common/theme/themes.dart';
@@ -24,10 +23,9 @@ void main() {
       runApp(
         App(
           localesPath: 'assets/tr',
-          supportedLocales: const [Locale('uz', 'UZ')],
+          supportedLocales: const [Locale('uz', 'UZ'), Locale('ru', 'RU')],
           builder: (locales) => MultiBlocProvider(
             providers: [
-              BlocProvider(create: (_) => di<LocaleCubit>()..init(locales)),
               BlocProvider(create: (_) => di<ThemeCubit>()..init()),
               BlocProvider(create: (_) => di<DeviceInfoCubit>()..projectInfo()),
               BlocProvider(
@@ -55,21 +53,23 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => MaterialApp.router(
-    title: context.read<DeviceInfoCubit>().state.projectInfo.appName,
-    debugShowCheckedModeBanner: false,
-    routerConfig: router.config(),
-    builder: (context, child) => GestureDetector(
-      // hide keyboard
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      behavior: HitTestBehavior.translucent,
-      child: EasyLoading.init()(context, child),
-    ),
-    theme: AppTheme.theme(.light),
-    darkTheme: AppTheme.theme(.dark),
-    themeMode: context.watch<ThemeCubit>().state.themeMode,
-    supportedLocales: context.supportedLocales,
-    localizationsDelegates: context.localizationDelegates,
-    locale: context.watch<LocaleCubit>().state.locale,
-  );
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      title: context.read<DeviceInfoCubit>().state.projectInfo.appName,
+      debugShowCheckedModeBanner: false,
+      routerConfig: router.config(),
+      builder: (context, child) => GestureDetector(
+        // hide keyboard
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        behavior: HitTestBehavior.translucent,
+        child: EasyLoading.init()(context, child),
+      ),
+      theme: AppTheme.theme(.light),
+      darkTheme: AppTheme.theme(.dark),
+      themeMode: context.watch<ThemeCubit>().state.themeMode,
+      supportedLocales: context.supportedLocales,
+      localizationsDelegates: context.localizationDelegates,
+      locale: context.locale,
+    );
+  }
 }

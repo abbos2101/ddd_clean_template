@@ -1,6 +1,5 @@
 import 'package:auto_route/annotations.dart';
 import 'package:ddd_clean_template/common/helpers/error_helper.dart';
-import 'package:ddd_clean_template/common/helpers/feedback_helper.dart';
 import 'package:ddd_clean_template/common/words/words.dart';
 import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:flutter/material.dart';

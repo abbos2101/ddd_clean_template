@@ -1,6 +1,5 @@
+import 'package:ddd_clean_template/common/words/words.dart';
 import 'package:flutter/material.dart';
-
-import '../words/words.dart';
 
 class AppErrorWidget extends StatelessWidget {
   final FlutterErrorDetails? details;

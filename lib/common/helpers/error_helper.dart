@@ -1,10 +1,9 @@
+import 'package:ddd_clean_template/common/theme/themes.dart';
+import 'package:ddd_clean_template/common/words/words.dart';
 import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import '../theme/themes.dart';
-import '../words/words.dart';
 
 class ErrorHelper {
   const ErrorHelper._();

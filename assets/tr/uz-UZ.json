@@ -7,7 +7,13 @@
   "not_allowed_url": "Ruxsat etilmagan manzil",
   "open_camera": "Kamerani ochish",
   "open_gallery": "Gallereyani ochish",
+  "retry": "Qayta urinish",
+  "ru": "Русский язык",
+  "select_from_camera": "Kameradan tanlash",
+  "select_from_gallery": "Galereyadan tanlash",
+  "server_error": "Kechirasiz, serverga ulanishda muammo yuz berdi.",
   "soon": "Tez kunda",
   "upload_image": "Rasm yuklash",
+  "uz": "O'zbek tili",
   "yes": "Ha"
 }

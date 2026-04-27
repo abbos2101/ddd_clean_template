@@ -12,10 +12,6 @@ class AppCache {
     _box = _cacheService.appBox;
   }
 
-  String get locale => _box.get('locale') ?? '';
-
-  Future<void> setLocale(String locale) => _box.put('locale', locale);
-
   String get theme => _box.get('theme') ?? '';
 
   Future<void> setTheme(String theme) => _box.put('theme', theme);

@@ -15,12 +15,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => EasyLocalization(
-    supportedLocales: supportedLocales,
-    path: localesPath,
-    fallbackLocale: supportedLocales.first,
-    startLocale: supportedLocales.first,
-    useOnlyLangCode: supportedLocales.first.countryCode == null,
     saveLocale: true,
+    path: localesPath,
+    supportedLocales: supportedLocales,
+    startLocale: supportedLocales.first,
+    fallbackLocale: supportedLocales.first,
+    useOnlyLangCode: supportedLocales.first.countryCode == null,
     child: builder(supportedLocales),
   );
 }
