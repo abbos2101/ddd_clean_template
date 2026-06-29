@@ -1,8 +1,6 @@
 enum UpdateType { none, small, middle, large }
 
-class UpdateHelper {
-  const UpdateHelper._();
-
+abstract final class UpdateHelper {
   static UpdateType updateType(String local, String remote) {
     try {
       final localParts = local.trim().split('.');

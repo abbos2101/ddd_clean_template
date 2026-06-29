@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:injectable/injectable.dart';
 
+import '../cache/dio_cache_store.dart';
 import 'interceptors/connection_checker_interceptor.dart';
 import 'interceptors/my_log_interceptor.dart';
 import 'interceptors/token_interceptor.dart';
@@ -71,5 +72,12 @@ class HttpService {
     return dio;
   }
 
-  Future<void> clearCache() async => await _cacheOptions.store?.clean();
+  DioCacheStore? get _store => _cacheOptions.store as DioCacheStore?;
+
+  Future<void> clearAll() async => await _store?.clearAll();
+
+  Future<void> clearExpiredCache() async => await _store?.clearExpiredCache();
+
+  Future<void> clearOlderThan(Duration duration) async =>
+      await _store?.clearOlderThan(duration);
 }

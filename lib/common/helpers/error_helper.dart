@@ -1,13 +1,12 @@
-import 'package:ddd_clean_template/common/theme/themes.dart';
 import 'package:ddd_clean_template/common/words/words.dart';
 import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class ErrorHelper {
-  const ErrorHelper._();
+import '../theme/core/functions.dart';
 
+abstract final class ErrorHelper {
   static String getErrorStr(dynamic e) {
     if (kDebugMode) {
       print(StackTrace.current);
@@ -40,9 +39,7 @@ class ErrorHelper {
   }
 }
 
-class _ErrorNotificationService {
-  const _ErrorNotificationService._();
-
+abstract final class _ErrorNotificationService {
   static final List<_ErrorDataModel> _notifications = [];
   static const _maxVisible = 3;
 
@@ -182,7 +179,7 @@ class _ErrorPageState extends State<_ErrorPage>
                     Expanded(
                       child: Text(
                         widget.message,
-                        textAlign: TextAlign.center,
+                        textAlign: .center,
                         style: TextStyle(
                           color: colors.onError,
                           fontSize: 14,

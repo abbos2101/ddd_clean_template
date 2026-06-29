@@ -1,16 +1,15 @@
-import 'package:ddd_clean_template/common/theme/colors.dart';
 import 'package:ddd_clean_template/common/words/words.dart';
 import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../theme/core/functions.dart';
+
 enum DialogStyle { material, cupertino, adaptive }
 
-enum SnackBarType { success, error, warning, info }
+enum SnackBarType { success, error, info }
 
-class FeedbackHelper {
-  const FeedbackHelper._();
-
+abstract final class FeedbackHelper {
   // ==================== DIALOGS ====================
 
   static Future<bool> showConfirmDialog({
@@ -101,16 +100,13 @@ class FeedbackHelper {
     final Color textColor = colors.onSurface;
 
     switch (type) {
-      case SnackBarType.success:
+      case .success:
         backgroundColor = colors.success;
         break;
-      case SnackBarType.error:
+      case .error:
         backgroundColor = colors.error;
         break;
-      case SnackBarType.warning:
-        backgroundColor = colors.warning;
-        break;
-      case SnackBarType.info:
+      case .info:
         backgroundColor = colors.divider;
         break;
     }
@@ -120,7 +116,7 @@ class FeedbackHelper {
         content: Text(message, style: TextStyle(color: textColor)),
         backgroundColor: backgroundColor,
         duration: duration,
-        behavior: SnackBarBehavior.floating,
+        behavior: .floating,
         shape: RoundedRectangleBorder(borderRadius: .circular(12)),
       ),
     );

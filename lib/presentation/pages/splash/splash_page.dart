@@ -21,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
     body: Container(
       width: double.infinity,
       height: double.infinity,
-      alignment: Alignment.bottomCenter,
+      alignment: .bottomCenter,
       padding: const .only(left: 16, right: 16, bottom: kToolbarHeight),
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -44,7 +44,7 @@ class _SplashPageState extends State<SplashPage> {
                 child: TextAnimator(
                   key: UniqueKey(),
                   state.projectInfo.appName,
-                  textAlign: TextAlign.center,
+                  textAlign: .center,
                   atRestEffect: WidgetRestingEffects.wave(),
                   style: const TextStyle(
                     fontSize: 56,

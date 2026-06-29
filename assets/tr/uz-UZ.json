@@ -1,5 +1,8 @@
 {
   "app_version": "Ilova versiyasi",
+  "cancel": "Bekor qilish",
+  "crop_image": "Rasmni kesish",
+  "empty": "Mavjud emas",
   "happen_error": "Xatolik yuz berdi",
   "has_internet": "Aloqa mavjud",
   "no": "Yo'q",
@@ -7,6 +10,7 @@
   "not_allowed_url": "Ruxsat etilmagan manzil",
   "open_camera": "Kamerani ochish",
   "open_gallery": "Gallereyani ochish",
+  "ready": "Tayyor",
   "retry": "Qayta urinish",
   "ru": "Русский язык",
   "select_from_camera": "Kameradan tanlash",

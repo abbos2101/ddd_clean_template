@@ -1,26 +1,26 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:ddd_clean_template/common/widgets/app_image.dart';
-import 'package:ddd_clean_template/common/words/words.dart';
 import 'package:ddd_clean_template/presentation/dialogs/select_item_dialog.dart';
 import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
-class ImageHelper {
-  const ImageHelper._();
+import '../widgets/app_image.dart';
+import '../words/words.dart';
 
+abstract final class ImageHelper {
   static Future<void> showImage(dynamic image) async {
     await showDialog(
       context: router.navigatorKey.currentContext!,
       builder: (context) => GestureDetector(
         onTap: () => Navigator.pop(context),
-        behavior: HitTestBehavior.opaque,
+        behavior: .opaque,
         child: Column(
           children: [
             const Row(
@@ -31,11 +31,7 @@ class ImageHelper {
             ),
             Expanded(
               child: InteractiveViewer(
-                child: AppImage(
-                  image,
-                  width: double.infinity,
-                  fit: BoxFit.fitWidth,
-                ),
+                child: AppImage(image, width: .infinity, fit: .fitWidth),
               ),
             ),
           ],
@@ -46,6 +42,7 @@ class ImageHelper {
 
   static Future<String?> pickImage({
     List<ImageSource> sources = const [.camera, .gallery],
+    bool crop = false,
     bool compress = true,
   }) async {
     try {
@@ -57,9 +54,8 @@ class ImageHelper {
       if (sources.length == 1) {
         source = sources.first;
       } else {
-        final context = router.navigatorKey.currentContext!;
         source = await SelectItemDialog<ImageSource>(
-          mode: SelectItemMode.wrap,
+          mode: .wrap,
           fetchItems: () => sources,
           labelFrom: (e) => 'select_from_${e.name}'.str,
           itemBuilder: (e, isSelected) {
@@ -68,7 +64,7 @@ class ImageHelper {
               style: const TextStyle(fontSize: 20),
             );
           },
-        ).show(context);
+        ).show();
         if (source == null) return null;
       }
 
@@ -81,9 +77,18 @@ class ImageHelper {
       final originalFile = File(file.path);
       if (!await originalFile.exists()) return null;
 
-      if (!compress) return originalFile.path;
+      if (!compress && !crop) return originalFile.path;
 
-      return await _enqueue(() => _compress(originalFile));
+      String? filePath = originalFile.path;
+
+      if (crop) {
+        filePath = await _crop(File(filePath));
+        if (filePath == null) return null;
+      }
+
+      if (!compress) return filePath;
+
+      return await _enqueue(() => _compress(File(filePath!)));
     } catch (e) {
       if (kDebugMode) print('pickImage error: $e');
       return null;
@@ -123,6 +128,26 @@ class ImageHelper {
       _queue = null;
       c?.complete();
     }
+  }
+
+  static Future<String?> _crop(File file) async {
+    final cropped = await ImageCropper().cropImage(
+      sourcePath: file.absolute.path,
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: Words.cropImage.str,
+          lockAspectRatio: false,
+        ),
+        IOSUiSettings(
+          title: Words.cropImage.str,
+          doneButtonTitle: Words.ready.str,
+          cancelButtonTitle: Words.cancel.str,
+        ),
+      ],
+    );
+    if (cropped == null) return null;
+    _safeDelete(file);
+    return cropped.path;
   }
 
   static Future<String?> _compress(File originalFile) async {

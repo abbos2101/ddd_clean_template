@@ -168,12 +168,12 @@ class AppVideoError extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: colorScheme.surface.withAlpha(120),
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: colorScheme.outlineVariant, width: 1),
+          borderRadius: .circular(8),
+          border: .all(color: colorScheme.outlineVariant, width: 1),
         ),
         child: Column(
           spacing: 4,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: .center,
           children: [
             Icon(
               Icons.videocam_off_outlined,
@@ -182,10 +182,10 @@ class AppVideoError extends StatelessWidget {
             ),
             if (error != null)
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+                padding: const .symmetric(horizontal: 12),
                 child: Text(
                   error!,
-                  textAlign: TextAlign.center,
+                  textAlign: .center,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(

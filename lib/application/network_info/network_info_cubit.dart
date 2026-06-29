@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ddd_clean_template/common/theme/colors.dart';
+import 'package:ddd_clean_template/common/theme/core/functions.dart';
 import 'package:ddd_clean_template/common/words/words.dart';
 import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

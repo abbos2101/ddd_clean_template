@@ -12,7 +12,7 @@ class AppErrorWidget extends StatelessWidget {
     return Material(
       child: Container(
         color: Colors.white,
-        alignment: Alignment.center,
+        alignment: .center,
         child: SingleChildScrollView(
           padding: const .all(20),
           child: Column(
@@ -28,7 +28,7 @@ class AppErrorWidget extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   details!.exceptionAsString(),
-                  textAlign: TextAlign.center,
+                  textAlign: .center,
                   style: const TextStyle(color: Colors.grey),
                 ),
               },
@@ -36,7 +36,7 @@ class AppErrorWidget extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   message!,
-                  textAlign: TextAlign.center,
+                  textAlign: .center,
                   style: const TextStyle(color: Colors.grey),
                 ),
               },

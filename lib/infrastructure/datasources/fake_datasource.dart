@@ -42,5 +42,5 @@ class FakeDatasource implements FakeFacade {
   }
 
   @override
-  Future<void> clearAllCache() async => await _http.clearCache();
+  Future<void> clearAllCache() async => await _http.clearAll();
 }

@@ -1,63 +1,81 @@
-import 'dart:io';
-
-import 'package:ddd_clean_template/common/extensions/string_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import 'colors.dart';
+import 'core/functions.dart';
 
-class AppTheme {
-  const AppTheme._();
-
+abstract final class AppTheme {
   static ThemeData theme(Brightness brightness) {
-    final colorScheme = AppColors.withBrightness(brightness);
+    final colors = AppColors.withBrightness(brightness);
 
-    return ThemeData(
-      useMaterial3: true,
-      textTheme: GoogleFonts.interTextTheme(), // fontFamily doesn't work in web
-      fontFamily: GoogleFonts.inter().fontFamily?.toTitleCase(),
+    return AppColors.theme(brightness).copyWith(
+      appBarTheme: _appBarTheme(colors),
+      floatingActionButtonTheme: _floatingActionButtonTheme(colors),
+      inputDecorationTheme: _inputDecorationTheme(colors),
+      textTheme: _textTheme(colors),
+    );
+  }
 
-      colorScheme: ColorScheme(
-        brightness: brightness,
-        primary: colorScheme.primary,
-        secondary: colorScheme.secondary,
-        error: colorScheme.error,
-        surface: colorScheme.surface,
-        onPrimary: colorScheme.onPrimary,
-        onSecondary: colorScheme.onSecondary,
-        onError: colorScheme.onError,
-        onSurface: colorScheme.onSurface,
-        outline: colorScheme.border,
-        shadow: colorScheme.shadow,
-        onSurfaceVariant: colorScheme.hint,
-        outlineVariant: colorScheme.divider,
+  static AppBarTheme _appBarTheme(AppColorSchema colors) {
+    return AppBarTheme(
+      centerTitle: false,
+      surfaceTintColor: Colors.transparent,
+      backgroundColor: colors.surface,
+      actionsIconTheme: IconThemeData(color: colors.onSecondary),
+      iconTheme: IconThemeData(color: colors.textPrimary),
+      titleTextStyle: TextStyle(
+        fontSize: 15,
+        fontWeight: .w500,
+        color: colors.textPrimary,
       ),
-      scaffoldBackgroundColor: colorScheme.scaffoldBackground,
-      shadowColor: colorScheme.shadow,
-      hintColor: colorScheme.hint,
-      dividerColor: colorScheme.divider,
-      disabledColor: colorScheme.disabled,
+      toolbarTextStyle: TextStyle(color: colors.onSecondary, fontWeight: .w500),
+    );
+  }
 
-      appBarTheme: _appBarTheme(colorScheme),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: colorScheme.primary,
-          foregroundColor: colorScheme.onPrimary,
-          overlayColor: Platform.isAndroid ? null : Colors.transparent,
-          elevation: 2,
-        ),
+  static FloatingActionButtonThemeData _floatingActionButtonTheme(
+    AppColorSchema colors,
+  ) {
+    return FloatingActionButtonThemeData(
+      backgroundColor: colors.primary,
+      shape: RoundedRectangleBorder(borderRadius: .circular(16)),
+    );
+  }
+
+  static InputDecorationTheme _inputDecorationTheme(AppColorSchema colors) {
+    return InputDecorationTheme(
+      filled: true,
+      isDense: true,
+      fillColor: colors.surface,
+      contentPadding: const .symmetric(vertical: 10, horizontal: 12),
+      prefixIconConstraints: const BoxConstraints(maxHeight: 20),
+      hintStyle: TextStyle(fontSize: 14, fontWeight: .w400, color: colors.hint),
+      border: OutlineInputBorder(
+        borderRadius: .circular(12),
+        borderSide: BorderSide(color: colors.border, width: 1),
+      ),
+      disabledBorder: OutlineInputBorder(
+        borderRadius: .circular(12),
+        borderSide: BorderSide(color: colors.border, width: 1),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: .circular(12),
+        borderSide: BorderSide(color: colors.border, width: 1),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: .circular(12),
+        borderSide: BorderSide(color: colors.primary, width: 1),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: .circular(12),
+        borderSide: BorderSide(color: colors.error, width: 1),
       ),
     );
   }
 
-  static AppBarTheme _appBarTheme(AppColorScheme colorScheme) =>
-      const AppBarTheme(surfaceTintColor: Colors.transparent);
-}
-
-extension AppThemeExtension on BuildContext {
-  ThemeData get theme => Theme.of(this);
-
-  AppColorScheme get appColors => AppColors.of(this);
-
-  bool get isDark => Theme.of(this).brightness == .dark;
+  static TextTheme _textTheme(AppColorSchema colors) {
+    return TextTheme(
+      // for TextField
+      bodyLarge: TextStyle(color: colors.textPrimary, fontWeight: .w400),
+      // for Text
+      bodyMedium: TextStyle(color: colors.textPrimary, fontWeight: .w500),
+    );
+  }
 }

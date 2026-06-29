@@ -7,9 +7,7 @@ enum ToastType { success, error, warning, info }
 
 // ─── Public API ──────────────────────────────────────────────────────────────
 
-class AppToast {
-  const AppToast._();
-
+abstract final class AppToast {
   static void show(
     String message, {
     ToastType type = ToastType.info,
@@ -41,9 +39,7 @@ class AppToast {
 
 // ─── Internal Service ─────────────────────────────────────────────────────────
 
-class _ToastService {
-  const _ToastService._();
-
+abstract final class _ToastService {
   static final List<_ToastDataModel> _toasts = [];
   static const _maxVisible = 3;
 
@@ -239,13 +235,10 @@ class _ToastWidgetState extends State<_ToastWidget>
               child: Material(
                 color: Colors.transparent,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 16,
-                  ),
+                  padding: const .symmetric(horizontal: 12, vertical: 16),
                   decoration: BoxDecoration(
                     color: bg,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: .circular(12),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withAlpha(60),
@@ -264,7 +257,7 @@ class _ToastWidgetState extends State<_ToastWidget>
                           style: TextStyle(
                             color: fg,
                             fontSize: 14,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: .w500,
                             height: 1.3,
                           ),
                         ),

@@ -1,22 +1,21 @@
 import 'dart:io';
 
-import 'package:ddd_clean_template/common/widgets/app_video.dart';
-import 'package:ddd_clean_template/common/words/words.dart';
 import 'package:ddd_clean_template/presentation/dialogs/select_item_dialog.dart';
 import 'package:ddd_clean_template/presentation/routes/app_router.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class VideoHelper {
-  const VideoHelper._();
+import '../widgets/app_video.dart';
+import '../words/words.dart';
 
+abstract final class VideoHelper {
   static Future<void> showVideo(dynamic video) async {
     await showDialog(
       context: router.navigatorKey.currentContext!,
       builder: (context) => GestureDetector(
         onTap: () => Navigator.pop(context),
-        behavior: HitTestBehavior.opaque,
+        behavior: .opaque,
         child: Column(
           children: [
             const Row(
@@ -29,7 +28,7 @@ class VideoHelper {
               child: Center(
                 child: AppVideo(
                   video,
-                  width: double.infinity,
+                  width: .infinity,
                   autoPlay: true,
                   muted: false,
                   showControls: true,
@@ -57,9 +56,8 @@ class VideoHelper {
       if (sources.length == 1) {
         source = sources.first;
       } else {
-        final context = router.navigatorKey.currentContext!;
         source = await SelectItemDialog<ImageSource>(
-          mode: SelectItemMode.wrap,
+          mode: .wrap,
           fetchItems: () => sources,
           labelFrom: (e) => 'select_from_${e.name}'.str,
           itemBuilder: (e, isSelected) {
@@ -68,7 +66,7 @@ class VideoHelper {
               style: const TextStyle(fontSize: 20),
             );
           },
-        ).show(context);
+        ).show();
         if (source == null) return null;
       }
 

@@ -1,12 +1,13 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:ddd_clean_template/common/theme/colors.dart';
-import 'package:ddd_clean_template/common/theme/themes.dart';
-import 'package:ddd_clean_template/common/widgets/app_shimmer.dart';
+import 'package:ddd_clean_template/common/theme/core/functions.dart';
+import 'package:ddd_clean_template/common/widgets/app_shimmer_text.dart';
 import 'package:ddd_clean_template/common/words/words.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../routes/app_router.dart';
 
 enum SelectItemMode { draggable, fixed, wrap }
 
@@ -22,7 +23,7 @@ class SelectItemDialog<T> extends StatefulWidget {
   const SelectItemDialog({
     super.key,
     this.selected,
-    this.mode = SelectItemMode.draggable,
+    this.mode = .draggable,
     this.heightFactor = 0.5,
     required this.labelFrom,
     required this.fetchItems,
@@ -30,13 +31,15 @@ class SelectItemDialog<T> extends StatefulWidget {
     this.itemBuilder,
   });
 
-  Future<T?> show(BuildContext context) async {
-    return showModalBottomSheet(
+  Future<T?> show() async {
+    final context = router.navigatorKey.currentContext!;
+    return await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
       enableDrag: true,
       isDismissible: true,
+      constraints: const BoxConstraints(maxWidth: double.infinity),
       builder: (context) => this,
     );
   }
@@ -53,7 +56,7 @@ class _SelectItemDialogState<T> extends State<SelectItemDialog<T>> {
     final colors = context.appColors;
 
     switch (widget.mode) {
-      case SelectItemMode.draggable:
+      case .draggable:
         return DraggableScrollableSheet(
           snap: false,
           snapSizes: [widget.heightFactor, 1.0],
@@ -65,12 +68,12 @@ class _SelectItemDialogState<T> extends State<SelectItemDialog<T>> {
             return _buildSheet(colors, scrollController);
           },
         );
-      case SelectItemMode.fixed:
+      case .fixed:
         return FractionallySizedBox(
           heightFactor: widget.heightFactor,
           child: _buildSheet(colors, null),
         );
-      case SelectItemMode.wrap:
+      case .wrap:
         return ConstrainedBox(
           constraints: BoxConstraints(
             maxHeight: MediaQuery.of(context).size.height * widget.heightFactor,
@@ -81,7 +84,7 @@ class _SelectItemDialogState<T> extends State<SelectItemDialog<T>> {
   }
 
   Widget _buildSheet(
-    AppColorScheme colors,
+    AppColorSchema colors,
     ScrollController? scrollController, {
     bool shrinkWrap = false,
   }) {
@@ -116,7 +119,7 @@ class _SelectItemDialogState<T> extends State<SelectItemDialog<T>> {
   }
 
   Widget _buildList(
-    AppColorScheme colors,
+    AppColorSchema colors,
     ScrollController? scrollController,
     bool shrinkWrap,
   ) {
@@ -138,6 +141,12 @@ class _SelectItemDialogState<T> extends State<SelectItemDialog<T>> {
         }
 
         final items = snapshot.data ?? [];
+        if (items.isEmpty) {
+          return Center(
+            child: Text(Words.empty.str, style: const TextStyle(fontSize: 18)),
+          );
+        }
+
         return ListView.separated(
           shrinkWrap: shrinkWrap,
           physics: shrinkWrap
@@ -195,19 +204,7 @@ class _ShimmerList extends StatelessWidget {
     separatorBuilder: (_, i) {
       return separatorBuilder?.call(i) ?? const Divider();
     },
-    itemBuilder: (_, _) {
-      return const AppShimmer(
-        enabled: true,
-        child: Text(
-          '12319236121212312',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: .w500,
-            color: Colors.black,
-          ),
-        ),
-      );
-    },
+    itemBuilder: (_, _) => const AppShimmerText(height: 24),
   );
 }
 
@@ -247,7 +244,7 @@ class _ErrorView extends StatelessWidget {
               decoration: BoxDecoration(
                 color: colors.surface,
                 borderRadius: .circular(12),
-                border: Border.all(color: colors.border),
+                border: .all(color: colors.border),
               ),
               child: Text(
                 Words.retry.str,

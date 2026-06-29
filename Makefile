@@ -5,6 +5,7 @@
 # Variables from YAML
 PACKAGE_NAME = $(shell grep '^name:' pubspec.yaml | sed 's/name: *//' | tr -d '[:space:]')
 ORG_NAME = $(shell grep '^organization_domain:' pubspec.yaml | sed 's/organization_domain: *//' | tr -d '[:space:]')
+VERSION = $(shell grep '^version:' pubspec.yaml | sed 's/version: *//' | tr -d '[:space:]' | sed 's/+.*//')
 
 # Platform management
 add-all:
@@ -58,10 +59,10 @@ fix-ios-clean:
 # Code formatting and fixes
 fix:
 	dart fix --apply
-	dart format .
+	dart format lib
 
 fmt:
-	dart format .
+	dart format lib
 
 # Code generation
 gen-clean:
@@ -87,13 +88,13 @@ prompt:
 build-dev:
 	flutter clean
 	flutter build apk --dart-define-from-file=.env.dev.json --release --obfuscate --split-debug-info=debug-info/
-	mv ./build/app/outputs/flutter-apk/app-release.apk "./build/app/outputs/flutter-apk/$(PACKAGE_NAME)_dev_$(shell date +%d.%m.%Y).apk"
+	mv ./build/app/outputs/flutter-apk/app-release.apk "./build/app/outputs/flutter-apk/$(PACKAGE_NAME)_dev_$(VERSION)_$(shell date +%d.%m.%Y).apk"
 	open ./build/app/outputs/flutter-apk/
 
 build-prod:
 	flutter clean
 	flutter build apk --dart-define-from-file=.env.prod.json --release --obfuscate --split-debug-info=debug-info/
-	mv ./build/app/outputs/flutter-apk/app-release.apk "./build/app/outputs/flutter-apk/$(PACKAGE_NAME)_prod_$(shell date +%d.%m.%Y).apk"
+	mv ./build/app/outputs/flutter-apk/app-release.apk "./build/app/outputs/flutter-apk/$(PACKAGE_NAME)_$(VERSION).apk"
 	open ./build/app/outputs/flutter-apk/
 
 # Run configurations
@@ -107,3 +108,42 @@ run-prod:
 print:
 	@echo "PACKAGE_NAME: $(PACKAGE_NAME)"
 	@echo "ORG_NAME: $(ORG_NAME)"
+	@echo "VERSION: $(VERSION)"
+
+# ─── Source replacements (lib/**/*.dart) ──────────────────────────────────────
+# Format: "FIND|||REPLACE"  (FIND is a sed-compatible regex)
+# Nuqta (.) regex xususiyatini yo'qotish uchun \. bilan escape qilinadi.
+
+DART_FILES   := $(shell find lib -name "*.dart" -type f)
+REPLACEMENTS := \
+	'MapType.\.|||.'             \
+	'VarStatus.\.|||.'           \
+	'UpdateType.\.|||.'          \
+	'DialogStyle.\.|||.'         \
+	'SnackBarType.\.|||.'        \
+	'ToastType.\.|||.'           \
+	'SelectItemMode.\.|||.'      \
+	'EdgeInsets\.|||.'           \
+	'MainAxisSize\.|||.'         \
+	'MainAxisAlignment\.|||.'    \
+	'CrossAxisAlignment\.|||.'   \
+	'TextAlign\.|||.'            \
+	'FontWeight\.|||.'           \
+	'Alignment\.|||.'            \
+	'BoxFit\.|||.'               \
+	'BoxShape\.|||.'             \
+	'Axis\.|||.'                 \
+	'Clip\.|||.'                 \
+	'BorderRadius\.|||.'         \
+	'Border\.|||.'               \
+	'Radius\.|||.'
+
+replace:
+	@echo "→ $(words $(DART_FILES)) ta dart faylda replacement boshlanmoqda..."
+	@for pair in $(REPLACEMENTS); do \
+		find="$$(echo $$pair | cut -d'|' -f1)"; \
+		repl="$$(echo $$pair | cut -d'|' -f4)"; \
+		echo "  s/$$find/$$repl/g"; \
+		sed -i '' "s/$$find/$$repl/g" $(DART_FILES); \
+	done
+	@echo "✓ Tayyor."

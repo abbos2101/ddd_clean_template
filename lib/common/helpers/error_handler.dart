@@ -3,9 +3,7 @@ import 'package:ddd_clean_template/common/words/words.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-class ErrorHelper {
-  const ErrorHelper._();
-
+abstract final class ErrorHelper {
   static String getErrorStr(dynamic e) {
     if (kDebugMode) {
       print(StackTrace.current);
